@@ -171,8 +171,10 @@
             <div class="row">
               <h1>Lista de estudiantes</h1>
             </div>
-             <!--En este boton se llama al formulario de editar-->
+
+             <!--En este boton se llama al formulario de crear-->
             <a th:href="@{/estudiantes/nuevo}" class="btn btn-info">Nuevo</a>
+
             <table class="table">
               <thead class="thead-light">
                 <tr>
@@ -188,17 +190,21 @@
                   <td th:text="${estudiante.apellido}">Apellido</td>
                   <td th:text="${estudiante.email}">Email</td>
                   <td>
+
                     <!--En este boton se llama al formulario de editar-->
                     <a
                       th:href="@{/estudiantes/editar/{id}(id=${estudiante.id})}"
                       class="btn btn-info"
                       >editar</a
                     >
+                    
+                    <!--En este boton se elimina el registro-->
                     <a
                       th:href="@{/estudiantes/{id}(id=${estudiante.id})}"
                       class="btn btn-danger"
                       >eliminar</a
                     >
+                    
                   </td>
                 </tr>
               </tbody>
