@@ -11,7 +11,7 @@
         <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
           <h1 class="text-center"> Registro de Oficiales</h1>
           <div class="card-body">
-            <form th:action="@{/index}" th:object="${index}" method="POST">
+            <form th:action="@{/oficial_aduanero/index}" th:object="${oficial_aduanero/index}" method="POST">
                 <div class="form-group">
                   <label>Nombre: </label>
                   <input type="text" name="nombre del oficial" th:field="*{nombre}" class="form-control" placeholder="Ingrese su nombre: " required>
