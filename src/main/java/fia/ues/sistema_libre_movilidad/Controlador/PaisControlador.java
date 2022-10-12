@@ -29,7 +29,7 @@ public String crearPaisFormulario (Model modelo){
     modelo.addAttribute("paises",pais);
     return "crear_pais";
 }
-@GetMapping("/paises")
+@PostMapping("/paises")
 public String guardarPais(@ModelAttribute("pais") Pais pais){
     servicio.guardarPais(pais);
     return "redirect:/paises";
