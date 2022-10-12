@@ -16,45 +16,45 @@ public class OficialAduaneroControlador {
     @Autowired
     private OficialAduaneroServicio servicio;
 
-    @GetMapping({"/OficialAduanero"})
+    @GetMapping({"/oficial-aduanero"})
     public String listarOficialAduanero(Model modelo){
-        modelo.addAttribute("", servicio.listarOficialAduanero());
-        return "";
+        modelo.addAttribute("oficial-aduanero", servicio.listarOficialAduanero());
+        return "oficial_aduanero/index";
     }
 
-    @GetMapping("/empresa_transporte/nueva")
+    @GetMapping("/oficial-aduanero/nueva")
     public String crearOficialAduaneroFormulario(Model modelo){
         OficialAduanero oficialAduanero = new OficialAduanero();
-        modelo.addAttribute("empresa_transporte", oficialAduanero);
-        return "crear_empresa_transporte";
+        modelo.addAttribute("oficial-aduanero", oficialAduanero);
+        return "oficial_aduanero/create";
     }
 
-    @PostMapping("/empresas_transporte")
-    public String guardarOficialAduanero(@ModelAttribute("empresa_transporte") OficialAduanero oficialAduanero){
+    @PostMapping("/oficial-aduanero")
+    public String guardarOficialAduanero(@ModelAttribute("oficial-aduanero") OficialAduanero oficialAduanero){
         servicio.guardarOficialAduanero(oficialAduanero);
-        return "redirect:/empresas_transporte";
+        return "redirect:/oficial_aduanero/index";
     }
 
-    @GetMapping("/empresas_transporte/editar/{id}")
+    @GetMapping("/oficial-aduanero/editar/{id}")
     public String mostrarFormularioEditar(@PathVariable Long id, Model modelo){
-        modelo.addAttribute("empresa_transporte", servicio.obtenerOficialAduaneroporId(id));
-        return "editar_empresa_transporte";
+        modelo.addAttribute("oficial-aduanero", servicio.obtenerOficialAduaneroporId(id));
+        return "oficial_aduanero/edit";
     }
 
-    @PostMapping("/empresas_transporte/{id}")
-    public String actualizarEstudiante(@PathVariable Long id, @ModelAttribute("empresa_transporte") OficialAduanero oficialAduanero,
+    @PostMapping("/oficial-aduanero/{id}")
+    public String actualizarEstudiante(@PathVariable Long id, @ModelAttribute("oficial-aduanero") OficialAduanero oficialAduanero,
     Model modelo){
         OficialAduanero empresaTransporteExistente = servicio.obtenerOficialAduaneroporId(id);
         empresaTransporteExistente.setId(id);
         empresaTransporteExistente.setNombreOficialAduanero(oficialAduanero.getNombreOficialAduanero());
      
         servicio.actualizarOficialAduanero(empresaTransporteExistente);
-        return "redirect:/empresas_transporte";
+        return "redirect:/oficial-aduanero/index";
     }
 
-    @GetMapping("/empresas_transporte/{id}")
+    @GetMapping("/oficial-aduanero/{id}")
     public String eliminarOficialAduanero(@PathVariable Long id){
         servicio.eliminarOficialAduanero(id);
-        return "redirect:/empresas_transporte";
+        return "redirect:/oficial-aduanero/index";
     }
 }
