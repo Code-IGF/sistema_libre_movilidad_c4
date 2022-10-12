@@ -10,9 +10,10 @@ import fia.ues.sistema_libre_movilidad.Repositorio.MedioTransporteRepositorio;
 @Service
 
 public class MedioTransporteServicioimpl implements MedioTransporteServicio {
+    @Autowired
     private MedioTransporteRepositorio repositorio;
 
-    @Autowired
+   
     @Override
     public List<MedioTransporte> ListarMedioTransporte() {
         

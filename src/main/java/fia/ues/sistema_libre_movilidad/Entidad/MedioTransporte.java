@@ -13,16 +13,13 @@ import javax.persistence.Table;
 public class MedioTransporte {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long idMedio;
 
-    @Column(name = "Id_Medio_Transporte",nullable = false,length = 10)
-    private String idMedio;
-
-    public String getIdMedio() {
+    public Long getIdMedio() {
         return idMedio;
     }
 
-    public void setIdMedio(String idMedio) {
+    public void setIdMedio(Long idMedio) {
         this.idMedio = idMedio;
     }
 
@@ -31,17 +28,12 @@ public class MedioTransporte {
 
 
     
-    public MedioTransporte(Long id, String medio) {
-        Id = id;
+    public MedioTransporte(Long idMedio, String medio) {
+        this.idMedio = idMedio;
         this.medio = medio;
     }
-
-    public Long getId() {
-        return Id;
-    }
-
-    public void setId(Long id) {
-        Id = id;
+    public MedioTransporte(String medio) {
+        this.medio = medio;
     }
 
     public String getMedio() {
