@@ -196,13 +196,35 @@
           </a>
           <button class="btn btn-primary" type="submit">
             Guardar
-          </button>             
+          </button>  
+          <a th:href="@{/empresas_transporte/nuevo}" class="btn btn-info">Nuevo</a>           
           <table class="table">
             <thead>
               <tr>
                 <th scope="col">Nombre</th>
+                <th scope="col">Acciones</th>
               </tr>
             </thead>
+            <tbody>
+              <tr th:each="empresa_transporte: ${empresas_transporte}">
+                <td th:text="${empresa_transporte.nombre}"></td>
+                <td>
+
+                  <!--En este boton se llama al formulario de editar-->
+                  <a
+                    th:href="@{/empresas_transporte/editar/{id}(id=${empresa_transporte.id})}"
+                    class="btn btn-info"
+                    >editar</a
+                  >                
+                  <!--En este boton se elimina el registro-->
+                  <a
+                    th:href="@{/empresas_transporte/{id}(id=${empresa_transporte.id})}"
+                    class="btn btn-danger"
+                    >eliminar</a
+                  >             
+                </td>
+              </tr>
+            </tbody>
           </table>
             <!--Trabaja en este espacio-->
         </div>
