@@ -169,11 +169,11 @@
           <!--inicio area de trabajo-->
           <div class="container">
             <div class="row">
-              <h1>Lista de region</h1>
+              <h1>Lista de regiones</h1>
             </div>
 
             <!--En este boton se llama al formulario de crear-->
-            <a th:href="@{/region/nuevo}" class="btn btn-info">Nuevo</a>
+            <a th:href="@{/regiones/nuevo}" class="btn btn-info">Nuevo</a>
 
             <table class="table">
               <thead class="thead-light">
@@ -183,7 +183,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr th:each="region: ${region}">
+                <tr th:each="region: ${regiones}">
                     <td th:text="${region.id}"></td>
                   <td th:text="${region.nombre}"></td>
                  
@@ -196,7 +196,7 @@
                     
                     <!--En este boton se elimina el registro-->
                     <a
-                      th:href="@{/region/{id}(id=${regiones.id})}"
+                      th:href="@{/regiones/{id}(id=${region.id})}"
                       class="btn btn-danger"
                       >eliminar</a
                     >
