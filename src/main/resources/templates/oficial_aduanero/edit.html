@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Editar un oficial aduanero</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+          <h1 class="text-center"> Registro de Oficiales Aduaneros</h1>
+          <div class="card-body">
+            <form th:action="@{/oficial-aduanero/{id}(id=${oficial-aduanero.id})}" th:object="${oficial-aduanero}" method="POST">
+                <div class="form-group">
+                  <label>Nombre del oficial: </label>
+                  <input type="text" name="nombreDelOficial" th:field="*{nombreDelOficial}" class="form-control" placeholder="Ingrese el nombre del Oficial: " required>
+                </div>
+                
+                <div class="box-footer">
+                  <button class="btn btn-succes">Guardar</button>
+                </div>
+            </form>
+            
+          </div>
+        </div> 
+
+        </div>
+    </div>
+
+</body>
+</html>
