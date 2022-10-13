@@ -36,6 +36,9 @@ public class MedioTransporte {
         this.medio = medio;
     }
 
+    public MedioTransporte() {
+    }
+
     public String getMedio() {
         return medio;
     }
