@@ -171,33 +171,33 @@
             
           <div class="container">
             <div class="row">
-              <h1>Lista de Medios de transporte</h1>
+              <h1>Lista de Medios de Transporte</h1>
             </div>
 
             <!--En este boton se llama al formulario de crear-->
-            <a th:href="@{/fronteras/nuevo}" class="btn btn-info">Nuevo</a>
+            <a th:href="@{/medios_transporte/nuevo}" class="btn btn-info">Nuevo</a>
 
             <table class="table">
                   <thead class="thead-light">
                       <tr>
-                          <th scope="col">Nombre del oficial</th>
-                          <th scope="col">Id</th>
+                          <th scope="col">Ide de medios_transporte</th>
+                          <th scope="col">Medio</th>
                       </tr>
                   </thead>
                   <tbody>
-                      <tr th:each="frontera: ${fronteras}">
-                          <td th:text="${frontera.nombre}"></td>
+                      <tr th:each="medios_transporte: ${medios_transporte}">
+                          <td th:text=""></td>
                           <td>        
                               <!--En este boton se llama al formulario de editar-->
                               <a
-                                  th:href="@{/fronteras/editar/{id}(id=${frontera.id})}"
+                                  th:href="Editar"
                                   class="btn btn-info"
                                   >editar</a
                               >
                               
                               <!--En este boton se elimina el registro-->
                               <a
-                                  th:href="@{/fronteras/{id}(id=${frontera.id})}"
+                                  th:href="eliminar"
                                   class="btn btn-danger"
                                   >eliminar</a
                               >                            
@@ -206,7 +206,6 @@
                   </tbody>
             </table>
           </div>
-
         </div>
         <!--Fin de area de trabajo-->
       </div>
