@@ -6,4 +6,5 @@ import fia.ues.sistema_libre_movilidad.Entidad.Usuario;
 
 public interface UsuarioRepositorio extends JpaRepository<Usuario, Long> {
     
+    
 }
