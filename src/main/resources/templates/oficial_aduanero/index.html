@@ -174,7 +174,7 @@
               </div>
   
               <!--En este boton se llama al formulario de crear-->
-              <a th:href="@{/oficial-aduanero/nuevo}" class="btn btn-info">Nuevo</a>
+              <a th:href="@{/oficial_aduanero/nuevo}" class="btn btn-info">Nuevo</a>
   
               <table class="table">
                     <thead class="thead-light">
@@ -184,23 +184,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="frontera: ${fronteras}">
-                            <td th:text="${frontera.nombre}"></td>
-                            <td>        
-                                <!--En este boton se llama al formulario de editar-->
-                                <a
-                                    th:href="@{/oficial-aduanero/editar/{id}(id=${frontera.id})}"
-                                    class="btn btn-info"
-                                    >editar</a
-                                >
-                                
-                                <!--En este boton se elimina el registro-->
-                                <a
-                                    th:href="@{/oficial-aduanero/{id}(id=${oficial-aduanero.id})}"
-                                    class="btn btn-danger"
-                                    >eliminar</a
-                                >                            
-                            </td>
+                        <tr th:each="oficial_aduanero: ${oficiales_aduaneros}">
+                          <td th:text="${oficial_aduanero.nombreOficialAduanero}"></td>
+                          <td>        
+                              <!--En este boton se llama al formulario de editar-->
+                              <a
+                                  th:href="@{/oficial_aduanero/editar/{id}(id=${oficial_aduanero.id})}"
+                                  class="btn btn-info"
+                                  >editar</a
+                              >
+                              
+                              <!--En este boton se elimina el registro-->
+                              <a
+                                  th:href="@{/oficial_aduanero/{id}(id=${oficial_aduanero.id})}"
+                                  class="btn btn-danger"
+                                  >eliminar</a
+                              >                            
+                          </td>
                         </tr>
                     </tbody>
               </table>

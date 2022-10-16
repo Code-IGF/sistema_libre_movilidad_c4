@@ -18,32 +18,32 @@ public class UsuarioControlador {
     private UsuarioServicio servicio;
 
     @GetMapping({"/usuarios"})
-    public String listarUsuarios(Model modelo){
+    public String index(Model modelo){
         modelo.addAttribute("usuarios", servicio.listarUsuarios());
-        return "usuarios";
+        return "usuario/index";
     }
 
     @GetMapping("/usuarios/nuevo")
-    public String crearUsuarioFormulario(Model modelo){
+    public String create(Model modelo){
         Usuario usuario = new Usuario();
         modelo.addAttribute("usuario", usuario);
         return "crear_usuario";
     }
 
     @PostMapping("/usuarios")
-    public String guardarUsuario(@ModelAttribute("usuario") Usuario usuario){
+    public String store(@ModelAttribute("usuario") Usuario usuario){
         servicio.guardarUsuario(usuario);
         return "redirect:/usuarios";
     }
 
     @GetMapping("/usuarios/editar/{id}")
-    public String mostrarFormularioEditar(@PathVariable Long id, Model modelo){
+    public String edit(@PathVariable Long id, Model modelo){
         modelo.addAttribute("usuario", servicio.obtenerUsuarioPorId(id));
         return "editar_usuario";
     }
 
     @PostMapping("/usuarios/{id}")
-    public String actualizarUsuario(@PathVariable Long id, @ModelAttribute("usuario") Usuario usuario,
+    public String update(@PathVariable Long id, @ModelAttribute("usuario") Usuario usuario,
     Model modelo){
         Usuario usuarioExistente = servicio.obtenerUsuarioPorId(id);
         usuarioExistente.setId(id);
@@ -55,7 +55,7 @@ public class UsuarioControlador {
     }
     
     @GetMapping("/usuarios/{id}")
-    public String eliminarUsuarios(@PathVariable Long id){
+    public String destroy(@PathVariable Long id){
         servicio.eliminarUsuario(id);
         return "redirect:/usuarios";
     }

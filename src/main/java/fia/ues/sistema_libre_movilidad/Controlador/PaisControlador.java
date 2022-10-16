@@ -13,48 +13,48 @@ import fia.ues.sistema_libre_movilidad.Servicio.PaisServicio;
 
 @Controller
 public class PaisControlador {
-    
-@Autowired
-private PaisServicio servicio;
+        
+    @Autowired
+    private PaisServicio servicio;
 
-@GetMapping("/paises")
-public String listarPaises(Model modelo){
-    modelo.addAttribute("paises", servicio.listarPaises());
-    return "paises";
-}
+    @GetMapping("/paises")
+    public String index(Model modelo){
+        modelo.addAttribute("paises", servicio.listarPaises());
+        return "pais/index";
+    }
 
-@GetMapping("/paises/nuevo")
-public String crearPaisFormulario (Model modelo){
-    Pais pais = new Pais();
-    modelo.addAttribute("paises",pais);
-    return "crear_pais";
-}
-@PostMapping("/paises")
-public String guardarPais(@ModelAttribute("pais") Pais pais){
-    servicio.guardarPais(pais);
-    return "redirect:/paises";
+    @GetMapping("/paises/nuevo")
+    public String create(Model modelo){
+        Pais pais = new Pais();
+        modelo.addAttribute("paises",pais);
+        return "crear_pais";
+    }
+    @PostMapping("/paises")
+    public String store(@ModelAttribute("pais") Pais pais){
+        servicio.guardarPais(pais);
+        return "redirect:/paises";
 
-}
-@GetMapping("/paises/editar/{id}")
-public String mostrarFormularioEditar(@PathVariable Long id, Model modelo){
-    modelo.addAttribute("pais", servicio.obtenerPaisPorId(id));
-    return "editar_pais";
-}
+    }
+    @GetMapping("/paises/editar/{id}")
+    public String edit(@PathVariable Long id, Model modelo){
+        modelo.addAttribute("pais", servicio.obtenerPaisPorId(id));
+        return "editar_pais";
+    }
 
-@PostMapping("/paises/{id}")
-public String actualizarPaiS(@PathVariable Long id, @ModelAttribute("pais") Pais pais,
-Model modelo){
-    Pais paisExistente = servicio.obtenerPaisPorId(id);
-    paisExistente.setId(id);
-    paisExistente.setPais(pais.getPais());
-    
-    servicio.actualizarPais(paisExistente);
-    return "redirect:/paises";
-}
+    @PostMapping("/paises/{id}")
+    public String update(@PathVariable Long id, @ModelAttribute("pais") Pais pais,
+    Model modelo){
+        Pais paisExistente = servicio.obtenerPaisPorId(id);
+        paisExistente.setId(id);
+        paisExistente.setPais(pais.getPais());
+        
+        servicio.actualizarPais(paisExistente);
+        return "redirect:/paises";
+    }
 
-@GetMapping("/paises/{id}")
-public String eliminarPais(@PathVariable Long id){
-    servicio.eliminarPais(id);
-    return "redirect:/paises";
-}
+    @GetMapping("/paises/{id}")
+    public String destroy(@PathVariable Long id){
+        servicio.eliminarPais(id);
+        return "redirect:/paises";
+    }
 }

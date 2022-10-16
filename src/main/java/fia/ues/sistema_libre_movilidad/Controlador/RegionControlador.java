@@ -18,31 +18,31 @@ public class RegionControlador {
 private RegionServicio servicio;
 
 @GetMapping("/regiones")
-public String listarRegiones(Model modelo){
+public String index(Model modelo){
     modelo.addAttribute("regiones", servicio.listarRegiones());
-    return "regiones";
+    return "region/index";
 }
 
 @GetMapping("/regiones/nuevo")
-public String crearRegionFormulario (Model modelo){
+public String create(Model modelo){
     Region region = new Region();
     modelo.addAttribute("region",region);
     return "crear_region";
 }
 @PostMapping("/region")
-public String guardarRegion(@ModelAttribute("region") Region region){
+public String store(@ModelAttribute("region") Region region){
     servicio.guardarRegion(region);
     return "redirect:/regiones";
 
 }
 @GetMapping("/regiones/editar/{id}")
-public String mostrarFormularioEditar(@PathVariable Long id, Model modelo){
+public String edit(@PathVariable Long id, Model modelo){
     modelo.addAttribute("region", servicio.obtenerRegionPorId(id));
     return "editar_region";
 }
 
 @PostMapping("/regiones/{id}")
-public String actualizarRegion(@PathVariable Long id, @ModelAttribute("region") Region region,
+public String update(@PathVariable Long id, @ModelAttribute("region") Region region,
 Model modelo){
     Region regionExistente = servicio.obtenerRegionPorId(id);
     regionExistente.setId(id);
@@ -53,7 +53,7 @@ Model modelo){
 }
 
 @GetMapping("/regiones/{id}")
-public String eliminarRegion(@PathVariable Long id){
+public String destroy(@PathVariable Long id){
     servicio.eliminarRegion(id);
     return "redirect:/regiones";
 }

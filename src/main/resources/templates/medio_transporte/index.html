@@ -180,13 +180,13 @@
             <table class="table">
                   <thead class="thead-light">
                       <tr>
-                          <th scope="col">Ide de medios_transporte</th>
                           <th scope="col">Medio</th>
+                          <th scope="col">Acciones</th>
                       </tr>
                   </thead>
                   <tbody>
-                      <tr th:each="medios_transporte: ${medios_transporte}">
-                          <td th:text=""></td>
+                      <tr th:each="medio_transporte: ${medios_transporte}">
+                          <td th:text="${medio_transporte.medio}"></td>
                           <td>        
                               <!--En este boton se llama al formulario de editar-->
                               <a

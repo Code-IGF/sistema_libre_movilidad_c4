@@ -17,9 +17,10 @@ public class IdentificacionControlador {
     @Autowired
     private IdentificacionServicio servicio;
 
-    @GetMapping({"identificacion"})
-    public String listarIdentificacion(Model modelo){
-        modelo.addAttribute("identificacion", servicio.listarIdentificacion());
+    @GetMapping({"identificaciones"})
+    public String index(Model modelo){
+        modelo.addAttribute("identificaciones", servicio.listarIdentificacion());
         return "identificacion/index";
     } 
+
 }

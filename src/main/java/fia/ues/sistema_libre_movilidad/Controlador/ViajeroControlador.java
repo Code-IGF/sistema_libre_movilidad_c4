@@ -18,32 +18,32 @@ public class ViajeroControlador {
     private ViajeroServicio servicio;
 
     @GetMapping({"/viajeros"})
-    public String listarViajeros(Model model) {
+    public String index(Model model) {
         model.addAttribute("viajeros", servicio.listarViajeros());
-        return "viajeros"; 
+        return "viajero/index"; 
     }
 
     @GetMapping("/viajeros/nuevo")
-    public String crearViajeroFormulario(Model modelo){
+    public String create(Model modelo){
         Viajero viajero = new Viajero();
         modelo.addAttribute("viajero", viajero);
         return "crear_viajero";
     }
 
     @PostMapping("/viajeros")
-    public String guardarViajero(@ModelAttribute("viajero") Viajero viajero){
+    public String store(@ModelAttribute("viajero") Viajero viajero){
         servicio.guardarViajero(viajero);
         return "redirect:/viajeros";
     }
 
     @GetMapping("/viajeros/editar/{id}")
-    public String mostrarFormularioEditar(@PathVariable Long id, Model modelo){
+    public String edit(@PathVariable Long id, Model modelo){
         modelo.addAttribute("viajero", servicio.obtenerViajeroPorId(id));
         return "editar_viajero";
     }
 
     @PostMapping("/viajeros/{id}")
-    public String actualizarViajero(@PathVariable Long id, @ModelAttribute("viajero") Viajero viajero,
+    public String update(@PathVariable Long id, @ModelAttribute("viajero") Viajero viajero,
     Model modelo){
         Viajero viajeroExistente = servicio.obtenerViajeroPorId(id);
         viajeroExistente.setId(id);
@@ -58,7 +58,7 @@ public class ViajeroControlador {
     }
 
     @GetMapping("/viajeros/{id}")
-    public String eliminarViajero(@PathVariable Long id){
+    public String destroy(@PathVariable Long id){
         servicio.elminarViajero(id);
         return "redirect:/viajeros";
     }

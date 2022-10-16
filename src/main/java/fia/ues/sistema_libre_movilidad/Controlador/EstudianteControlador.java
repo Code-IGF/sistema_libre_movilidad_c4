@@ -20,14 +20,14 @@ public class EstudianteControlador {
     @GetMapping({"/estudiantes"})
     public String listarEstudiantes(Model modelo){
         modelo.addAttribute("estudiantes", servicio.listarEstudiantes());
-        return "estudiantes";
+        return "estudiante/estudiantes";
     }
 
     @GetMapping("/estudiantes/nuevo")
     public String crearEstudianteFormulario(Model modelo){
         Estudiante estudiante = new Estudiante();
         modelo.addAttribute("estudiante", estudiante);
-        return "crear_estudiante";
+        return "estudiante/crear_estudiante";
     }
 
     @PostMapping("/estudiantes")
@@ -39,7 +39,7 @@ public class EstudianteControlador {
     @GetMapping("/estudiantes/editar/{id}")
     public String mostrarFormularioEditar(@PathVariable Long id, Model modelo){
         modelo.addAttribute("estudiante", servicio.obtenerEstudianteporId(id));
-        return "editar_estudiante";
+        return "estudiante/editar_estudiante";
     }
 
     @PostMapping("/estudiantes/{id}")

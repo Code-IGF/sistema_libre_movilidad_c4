@@ -8,22 +8,22 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "fronteras")
+@Table(name = "frontera")
 public class Frontera {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nombre", nullable = false, length = 50)
-    private String nombre;
+    @Column(name = "nombre_frontera", nullable = false, length = 50)
+    private String nombreFrontera;
 
-    public Frontera(Long id, String nombre) {
+    public Frontera(Long id, String nombreFrontera) {
         this.id = id;
-        this.nombre = nombre;
+        this.nombreFrontera = nombreFrontera;
     }
-    public Frontera(String nombre) {
-        this.nombre = nombre;
+    public Frontera(String nombreFrontera) {
+        this.nombreFrontera = nombreFrontera;
     }
     public Frontera() {        
     }
@@ -36,11 +36,11 @@ public class Frontera {
         this.id=id;
     }
 
-    public String getNombre(){
-        return nombre;
+    public String getNombreFrontera(){
+        return nombreFrontera;
     }
 
-    public void setNombre(String nombre){
-        this.nombre=nombre;
+    public void setNombre(String nombreFrontera){
+        this.nombreFrontera=nombreFrontera;
     }
 }

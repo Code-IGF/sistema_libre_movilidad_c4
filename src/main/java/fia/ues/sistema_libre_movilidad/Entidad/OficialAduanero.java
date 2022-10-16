@@ -15,7 +15,7 @@ public class OficialAduanero {
     
     private Long id;
 
-    @Column(name = "nombreOficialAduanero", nullable = false, length = 55)
+    @Column(name = "nombre_oficial_aduanero", nullable = false, length = 55)
     private String nombreOficialAduanero;
     
     //constructor con dos parametros
