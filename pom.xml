@@ -48,11 +48,7 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/javax.persistence/persistence-api -->
-		<dependency>
-			<groupId>javax.persistence</groupId>
-			<artifactId>persistence-api</artifactId>
-			<version>1.0</version>
-		</dependency>
+
 		<dependency>
 			<groupId>org.thymeleaf</groupId>
 			<artifactId>thymeleaf</artifactId>
@@ -66,6 +62,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>CA-1</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
