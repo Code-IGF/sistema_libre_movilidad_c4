@@ -5,12 +5,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class Acceso {
-    @GetMapping({""})
+    
+    @GetMapping({"home"})
     public String start(){
-        return "vista_inicial";
+        return "home";
     }
 
-    @GetMapping("login")
+    @GetMapping("")
     public String login()
     {
         return "login";
