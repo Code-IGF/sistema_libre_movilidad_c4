@@ -62,7 +62,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>CA-1</finalName>
+		<finalName>CA-4</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
