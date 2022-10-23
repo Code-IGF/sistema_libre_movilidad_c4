@@ -15,6 +15,7 @@
         <nav th:replace="layout :: navegacion">
 
         </nav>
+        
         <div class="col py-3">
           <!--inicio area de trabajo-->
           <div class="container">
@@ -34,6 +35,7 @@
                   <th scope="col">Nombre</th>
                   <th scope="col">Apellido</th>
                   <th scope="col">Email</th>
+                  <th scope="col">Usuario</th>
                   <th scope="col">Acciones</th>
                 </tr>
               </thead>
@@ -42,6 +44,7 @@
                   <td th:text="${estudiante.nombre}">Nombre</td>
                   <td th:text="${estudiante.apellido}">Apellido</td>
                   <td th:text="${estudiante.email}">Email</td>
+                  <td th:text="${estudiante.usuario.correo}">Email</td>
                   <td>
 
                     <!--En este boton se llama al formulario de editar-->
@@ -51,7 +54,7 @@
                     
                     
                     <!--En este boton se elimina el registro-->
-                    <a class="btn btn-sm btn-danger" th:href="@{/estudiantes/{id}(id=${estudiante.id})}">
+                    <a class="btn btn-sm btn-danger" th:href="@{/estudiantes/{id}(id=${estudiante.id})}" onclick="return confirm('Estás seguro que deseas eliminar el registro?');">
                       <i class="fa fa-trash" aria-hidden="true"></i>
                     </a>
                     

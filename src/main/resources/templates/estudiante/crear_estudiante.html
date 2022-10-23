@@ -15,16 +15,39 @@
                 <div class="form-group">
                   <label>Nombre: </label>
                   <input type="text" name="nombre" th:field="*{nombre}" class="form-control" placeholder="Ingrese su nombre: " required>
+                  <div class="alert alert-warning d-flex align-items-center" role="alert" th:if="${#fields.hasErrors('nombre')}"
+                  th:errors="*{nombre}">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                    <div>
+                      An example warning alert with an icon
+                    </div>
+                  </div>
                 </div>
 
                 <div class="form-group">
                   <label>Apellido: </label>
                   <input type="text" name="apellido" th:field="*{apellido}" class="form-control" placeholder="Ingrese su apellido: " required>
+                  <div class="alert alert-warning d-flex align-items-center" role="alert" th:if="${#fields.hasErrors('apellido')}"
+                  th:errors="*{apellido}">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                    <div>
+                      An example warning alert with an icon
+                    </div>
+                  </div>
                 </div>
 
                 <div class="form-group">
                   <label>Email: </label>
                   <input type="text" name="email" th:field="*{email}" class="form-control" placeholder="Ingrese su email: " required>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-md-2" for="usuario">Usuario:</label> 
+                  <select th:field="*{usuario}" class="form-control form-control-sm col-md-6" id="usuario"> 
+                    <option th:each="usuario:${usuarios}"
+                      th:value="${usuario.id}"
+                      th:text="${usuario.correo}">					
+                  </select>
                 </div>
 
                 <div class="box-footer">
@@ -37,6 +60,5 @@
 
         </div>
     </div>
-
 </body>
 </html>
