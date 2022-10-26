@@ -23,7 +23,10 @@
               </div>
   
               <!--En este boton se llama al formulario de crear-->
-              <a th:href="@{/oficial_aduanero/nuevo}" class="btn btn-info">Nuevo</a>
+              <a th:href="@{/oficial_aduanero/nuevo}" class="btn btn-sm btn-primary">
+                <i class="fas fa-plus-circle mr-1 text-white"></i>
+                <span class="text-white">Agregar Oficial Aduanero</span>
+              </a>
   
               <table class="table">
                     <thead class="thead-light">
@@ -39,16 +42,11 @@
                               <!--En este boton se llama al formulario de editar-->
                               <a
                                   th:href="@{/oficial_aduanero/editar/{id}(id=${oficial_aduanero.id})}"
-                                  class="btn btn-info"
-                                  >editar</a
-                              >
-                              
+                                  class="btn btn-sm btn-primary"><i class="fas fa-pencil-alt"></i></a>
                               <!--En este boton se elimina el registro-->
-                              <a
-                                  th:href="@{/oficial_aduanero/{id}(id=${oficial_aduanero.id})}"
-                                  class="btn btn-danger"
-                                  >eliminar</a
-                              >                            
+                              <a class="btn btn-sm btn-danger" th:href="@{/oficial_aduanero/{id}(id=${oficial_aduanero.id})}">
+                                  <i class="fa fa-trash"></i>
+                              </a>                            
                           </td>
                         </tr>
                     </tbody>
