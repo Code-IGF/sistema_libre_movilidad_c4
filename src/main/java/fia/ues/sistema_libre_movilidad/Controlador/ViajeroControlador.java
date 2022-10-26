@@ -27,7 +27,7 @@ public class ViajeroControlador {
     public String create(Model modelo){
         Viajero viajero = new Viajero();
         modelo.addAttribute("viajero", viajero);
-        return "crear_viajero";
+        return "viajero/crear_viajero";
     }
 
     @PostMapping("/viajeros")
@@ -39,7 +39,7 @@ public class ViajeroControlador {
     @GetMapping("/viajeros/editar/{id}")
     public String edit(@PathVariable Long id, Model modelo){
         modelo.addAttribute("viajero", servicio.obtenerViajeroPorId(id));
-        return "editar_viajero";
+        return "viajero/editar_viajero";
     }
 
     @PostMapping("/viajeros/{id}")
