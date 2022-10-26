@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,15 +42,19 @@ public class OficialAduaneroControlador {
 
 
     @PostMapping("/oficial_aduanero")
-    public String store(@ModelAttribute("oficial_aduanero") OficialAduanero oficialAduanero){
+    public String store(@ModelAttribute("oficial_aduanero") OficialAduanero oficialAduanero, BindingResult result, Model model){
+        if(result.hasErrors()){
+            servicio.guardarOficialAduanero(oficialAduanero);
+            return "redirect:/oficial_aduanero";
+        }
         servicio.guardarOficialAduanero(oficialAduanero);
-        return "redirect:/oficial_aduanero/index";
+        return "redirect:/oficial_aduanero";
     }
 
     @GetMapping("/oficial_aduanero/editar/{id}")
     public String edit(@PathVariable Long id, Model modelo){
         modelo.addAttribute("oficial_aduanero", servicio.obtenerOficialAduaneroporId(id));
-        return "oficial_aduanero/edit";
+        return "edit";
     }
 
     @PostMapping("/oficial_aduanero/{id}")
@@ -60,7 +65,7 @@ public class OficialAduaneroControlador {
         empresaTransporteExistente.setNombreOficialAduanero(oficialAduanero.getNombreOficialAduanero());
      
         servicio.actualizarOficialAduanero(empresaTransporteExistente);
-        return "redirect:/oficial_aduanero/index";
+        return "redirect:/oficial_aduanero";
     }
 
     @GetMapping("/oficial_aduanero/{id}")
