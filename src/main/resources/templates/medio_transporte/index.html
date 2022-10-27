@@ -37,7 +37,12 @@
               <td th:text="${medio_transporte.medio}"></td>
               <td>
                 <!--En este boton se llama al formulario de editar-->
-                <a th:href="Editar" class="btn btn-info">editar</a>
+                <a th:href="@{/Medio-Transporte/editar}" 
+                
+                class="btn btn-sm btn-primary">
+                      <i class="fas fa-pencil-alt"></i>
+
+                <!--class="btn btn-info"-->Editar</a>
 
                 <!--En este boton se elimina el registro-->
                 <a th:href="eliminar" class="btn btn-danger">eliminar</a>
