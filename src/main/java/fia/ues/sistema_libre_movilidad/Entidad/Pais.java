@@ -5,7 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "pais")
@@ -15,30 +18,51 @@ public class Pais {
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 private long id;
 
-@Column(name = "pais", nullable = false, length = 50)
-private String pais;
+@NotEmpty
+@Column(name = "nombre", nullable = false, length = 50)
+private String nombre;
 
-public Pais(long id, String pais) {
+@OneToOne
+    @JoinColumn(name="id_usuario")
+    private Usuario usuario;
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Long getId() {
+        return id;
+    }
+    
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    public String getNombre(){
+        return nombre;
+    }
+
+    public void setNombre(String nombre){
+        this.nombre=nombre;
+    }
+
+public Pais(long id, String nombre) {
     this.id = id;
-    this.pais = pais;
-}
-public Long getId() {
-    return id;
+    this.nombre = nombre;
 }
 
-public void setId(Long id) {
-    this.id = id;
+public Pais( String nombre, Usuario usuario) {
+    this.usuario=usuario;
+    this.nombre = nombre;
 }
 
 public Pais(){
 
 }
-public String getPais(){
-    return pais;
-}
 
-public void setPais(String pais){
-    this.pais = pais;
-} 
 }
 

@@ -18,28 +18,33 @@
 
   <div class="col py-3">
     <div class="container">
-      <a class="btn btn-sm btn-primary">
-        <i class="fas fa-plus-circle mr-1 text-white"></i>
-        <span class="text-white">Agregar Empresa de Transporte</span>
-      </a>
-
+            <div class="row">
+              <h1>Lista de empresas transporte</h1>
+            </div>
+          <a  th:href="@{/empresas_transporte/nuevo}" class="btn btn-sm btn-primary">
+              <i class="fas fa-plus-circle mr-1 text-white"></i>
+              <span class="text-white">Agregar Empresa transporte</span>
+          </a>
       <table class="table">
         <thead>
           <tr>
             <th scope="col">Nombre</th>
+            
             <th scope="col">Acciones</th>
           </tr>
         </thead>
         <tbody>
           <tr th:each="empresa_transporte: ${empresas_transporte}">
-            <td th:text="${empresa_transporte.nombre}"></td>
+            <td th:text="${empresa_transporte.nombre}">Nombre</td>
             <td>
 
               <!--En este boton se llama al formulario de editar-->
               <a th:href="@{/empresas_transporte/editar/{id}(id=${empresa_transporte.id})}"
                 class="btn btn-info">editar</a>
               <!--En este boton se elimina el registro-->
-              <a th:href="@{/empresas_transporte/{id}(id=${empresa_transporte.id})}" class="btn btn-danger">eliminar</a>
+              <a th:href="@{/empresas_transporte/{id}(id=${empresa_transporte.id})}" onclick="return confirm('Estás seguro que deseas eliminar el registro?');">
+                <i class="fa fa-trash" aria-hidden="true"></i> 
+              </a>
             </td>
           </tr>
         </tbody>

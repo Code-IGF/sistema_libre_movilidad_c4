@@ -1,18 +1,29 @@
 package fia.ues.sistema_libre_movilidad.Controlador;
+import javax.validation.Valid;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
 import fia.ues.sistema_libre_movilidad.Entidad.EmpresaTransporte;
 import fia.ues.sistema_libre_movilidad.Servicio.EmpresaTransporteServicio;
+import fia.ues.sistema_libre_movilidad.Servicio.UsuarioServicio;
+import fia.ues.sistema_libre_movilidad.Entidad.Usuario;
+
 
 @Controller
 public class EmpresaTransporteControlador {
     @Autowired
     private EmpresaTransporteServicio servicio;
+
+    @Autowired
+    private UsuarioServicio usuarioServicio;
 
     @GetMapping({"/empresas_transporte"})
     public String index(Model modelo){
@@ -20,15 +31,21 @@ public class EmpresaTransporteControlador {
         return "empresa_transporte/index";
     }
 
-    @GetMapping("/empresa_transporte/nueva")
+    @GetMapping("/empresas_transporte/nuevo")
     public String create(Model modelo){
         EmpresaTransporte empresasTransporte = new EmpresaTransporte();
+        List<Usuario> listaUsuarios= usuarioServicio.listarUsuarios();
         modelo.addAttribute("empresa_transporte", empresasTransporte);
-        return "crear_empresa_transporte";
+        modelo.addAttribute("usuarios", listaUsuarios);
+        return "empresa_transporte/crear_empresa_transporte";
     }
 
     @PostMapping("/empresas_transporte")
-    public String store(@ModelAttribute("empresa_transporte") EmpresaTransporte empresaTransporte){
+    public String store(@Valid @ModelAttribute("empresa_transporte") EmpresaTransporte empresaTransporte, BindingResult result, Model model){
+        if (result.hasErrors()){
+            servicio.guardarEmpresaTransporte(empresaTransporte);
+            return "redirect:/empresas_transporte";
+        }
         servicio.guardarEmpresaTransporte(empresaTransporte);
         return "redirect:/empresas_transporte";
     }
