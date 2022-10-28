@@ -97,7 +97,7 @@ public class Identificacion {
     }
     public void setOcupacion(String ocupacion) {
         this.ocupacion = ocupacion;
-    }
+    } 
     public String getPaisEmisor() {
         return paisEmisor;
     }

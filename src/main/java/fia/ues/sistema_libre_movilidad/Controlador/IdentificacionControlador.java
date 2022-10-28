@@ -49,9 +49,9 @@ public class IdentificacionControlador {
         Identificacion identificacionExistente = servicio.obtenerIdentificacionporId(id);
         identificacionExistente.setId_identificacion(id);
         identificacionExistente.setTipo(identificacion.getTipo());
-        identificacionExistente.setNumero_unico(identificacion.getNumero_unico());
-        identificacionExistente.setPais_nacimiento(identificacion.getPais_nacimiento());
-        identificacionExistente.setPais_residencia(identificacion.getPais_residencia());
+        identificacionExistente.setNumeroUnico(identificacion.getNumeroUnico());
+        identificacionExistente.setPaisNacimiento(identificacion.getPaisNacimiento());
+        identificacionExistente.setPaisResidencia(identificacion.getPaisResidencia());
         identificacionExistente.setOcupacion(identificacion.getOcupacion());
 
         servicio.actualizarIdentificacion(identificacionExistente);
