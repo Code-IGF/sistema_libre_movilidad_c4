@@ -6,27 +6,34 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-    <div class="container mt-4">
+    <div class="container">
         <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
           <h1 class="text-center">Registro de Region</h1>
           <div class="card-body">
             <form th:action="@{/regiones}" th:object="${region}" method="POST">
                 <div class="form-group">
-                  <label>Region: </label>
-                  <input type="text" name="region" th:field="*{region}" class="form-control" placeholder="Ingrese su region: " required>
+                  <label>Nombre: </label>
+                  <input type="text" name="nombre" th:field="*{nombre}" class="form-control" placeholder="Ingrese el nombre de la region: " required>
+                  <div class="alert alert-warning d-flex align-items-center" role="alert" th:if="${#fields.hasErrors('nombre')}"
+                  th:errors="*{nombre}">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
                 </div>
-
-                <div class="box-footer">
-                  <button class="btn btn-succes">Guardar</button>
-                </div>
-            </form>
-            
+                An example warning alert with an icon
+              </div>
+            </div>
           </div>
-        </div> 
 
-        </div>
+            <div class="box-footer">
+              <button class="btn btn-succes">Guardar</button>
+            </div>
+        </form>
+        
+      </div>
+    </div> 
+
     </div>
+</div>
 
 </body>
 </html>
