@@ -8,14 +8,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "regiones")
+@Table(name = "region")
 public class Region {
 
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 private long id;
 
-@Column(name = "Region", nullable = false, length = 50)
+@Column(name = "region", nullable = false, length = 50)
 private String region;
 
 public Region(long id, String region) {

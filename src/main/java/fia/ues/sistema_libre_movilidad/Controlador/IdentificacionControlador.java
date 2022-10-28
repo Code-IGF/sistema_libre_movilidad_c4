@@ -17,6 +17,7 @@ public class IdentificacionControlador {
     @Autowired
     private IdentificacionServicio servicio;
 
+
     @GetMapping({"/identificacion"})
     public String index(Model modelo){
         modelo.addAttribute("identificacion", servicio.listarIdentificacion());
@@ -62,4 +63,5 @@ public class IdentificacionControlador {
         servicio.eliminarIdentificacion(id);
         return "redirect:/identificaciones";
     }
+
 }

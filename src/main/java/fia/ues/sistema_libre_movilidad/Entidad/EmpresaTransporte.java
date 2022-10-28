@@ -4,18 +4,32 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name = "empresas_transporte")
+@Table(name = "empresa_transporte")
 public class EmpresaTransporte {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty
     @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
 
+    @OneToOne
+    @JoinColumn(name="id_usuario")
+    private Usuario usuario;
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
     public Long getId(){
         return id;
     }
@@ -32,9 +46,14 @@ public class EmpresaTransporte {
         this.nombre=nombre;
     }
 
-    public EmpresaTransporte(Long id,String nombre) {
+    public EmpresaTransporte(Long id,String nombre,Usuario usuario) {
         this.id = id;
         this.nombre = nombre;
+        this.usuario=usuario;
+    }
+    public EmpresaTransporte(String nombre,Usuario usuario) {
+        this.nombre = nombre;
+        this.usuario=usuario;
     }
     public EmpresaTransporte(){
         

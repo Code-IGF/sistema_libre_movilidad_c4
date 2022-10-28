@@ -5,7 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "estudiantes")
@@ -15,25 +19,35 @@ public class Estudiante {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty
     @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
 
+    @NotEmpty
     @Column(name = "apellido", nullable = false, length = 50)
     private String apellido;
 
+    @NotEmpty
+    @Email
     @Column(name = "email", nullable = false, length = 50, unique = true)
     private String email;
 
-    public Estudiante(Long id, String nombre, String apellido, String email) {
+    @OneToOne
+    @JoinColumn(name="id_usuario")
+    private Usuario usuario;
+
+    public Estudiante(Long id, String nombre, String apellido, String email, Usuario usuario) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
+        this.usuario=usuario;
     }
-    public Estudiante(String nombre, String apellido, String email) {
+    public Estudiante(String nombre, String apellido, String email, Usuario usuario) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
+        this.usuario=usuario;
     }
     public Estudiante() {
 
@@ -71,5 +85,11 @@ public class Estudiante {
         this.email=email;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 
 }

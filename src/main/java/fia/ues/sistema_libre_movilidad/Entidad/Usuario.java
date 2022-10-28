@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "usuarios")
@@ -15,11 +16,16 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty
     @Column(name = "correo", nullable = false, length = 50)
     private String correo;
 
+    @NotEmpty
     @Column(name = "contrasenia", nullable = false, length = 50)
     private String contrasenia;
+
+    public Usuario() {        
+    }
 
     public Usuario(Long id, String correo, String contrasenia) {
         this.id = id;
@@ -29,8 +35,7 @@ public class Usuario {
     public Usuario(String correo) {
         this.correo = correo;
     }
-    public Usuario() {        
-    }
+
 
     public Long getId(){
         return id;

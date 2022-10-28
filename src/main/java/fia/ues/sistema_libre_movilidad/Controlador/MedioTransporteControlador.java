@@ -20,27 +20,27 @@ public class MedioTransporteControlador {
     @Autowired
     private MedioTransporteServicio servicio;
 
-    @GetMapping({"/Medio-Transporte"})
-    public String ListarMediosTransporte(Model modelo){
-        modelo.addAttribute("Medio-Transporte",servicio.ListarMedioTransporte());
-        return "Medio-Transporte/index";
+    @GetMapping({"/medios_transporte"})
+    public String index(Model modelo){
+        modelo.addAttribute("medios_transporte",servicio.ListarMedioTransporte());
+        return "medio_transporte/index";
     }
 
     @GetMapping("/Medio-Transporte/nueva")
-    public String crearMedioTransporteFormulario(Model modelo){
+    public String create(Model modelo){
         MedioTransporte medioTransporte = new MedioTransporte();
         modelo.addAttribute("Medio.Transporte", medioTransporte);
         return "Medio-Transporte/create";
     }
 
         @PostMapping("/Medio-Transporte")
-    public String guardarMedioTransporteString(@ModelAttribute("Medio-Transporte") MedioTransporte medioTransporte){
+    public String store(@ModelAttribute("Medio-Transporte") MedioTransporte medioTransporte){
         servicio.guardarMedioTransporte(medioTransporte);
         return "redirect:/Medio-Transporte/index";
     }
 
     @GetMapping("/Medio-Transporte/editar/{id}")
-    public String mostrarFormu(@PathVariable Long id, Model modelo){
+    public String edit(@PathVariable Long id, Model modelo){
         modelo.addAttribute("Medio-Transporte", servicio.obtenerMedioTransporteporId(id));
         return "MedioTransporte/edit";
     }
@@ -49,7 +49,7 @@ public class MedioTransporteControlador {
     
 
     @GetMapping("/Medio-Transporte/{id}")
-    public String eliminarMedioTransporte(@PathVariable Long id){
+    public String destroy(@PathVariable Long id){
         servicio.eliminarMedioTransporte(id);
         return "redirect:/Medio-Transporte/index";
     }

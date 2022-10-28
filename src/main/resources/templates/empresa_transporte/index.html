@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: header">
+  <meta charset="utf-8" />
+  <title>Base</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+
+<d>
+  <nav th:replace="layout :: navegacion">
+    <!--Herencia de navbar-->
+  </nav>
+  <!--Inicio de area de trabajo-->
+
+  <div class="col py-3">
+    <div class="container">
+            <div class="row">
+              <h1>Lista de empresas transporte</h1>
+            </div>
+          <a  th:href="@{/empresas_transporte/nuevo}" class="btn btn-sm btn-primary">
+              <i class="fas fa-plus-circle mr-1 text-white"></i>
+              <span class="text-white">Agregar Empresa transporte</span>
+          </a>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="empresa_transporte: ${empresas_transporte}">
+            <td th:text="${empresa_transporte.nombre}">Nombre</td>
+            <td>
+
+              <!--En este boton se llama al formulario de editar-->
+              <a th:href="@{/empresas_transporte/editar/{id}(id=${empresa_transporte.id})}"
+                class="btn btn-info">editar</a>
+              <!--En este boton se elimina el registro-->
+              <a th:href="@{/empresas_transporte/{id}(id=${empresa_transporte.id})}" onclick="return confirm('Estás seguro que deseas eliminar el registro?');">
+                <i class="fa fa-trash" aria-hidden="true"></i> 
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!--Trabaja en este espacio-->
+    </div>
+    <!--Fin de area de trabajo-->
+  </div>
+  </body>
+
+</html>

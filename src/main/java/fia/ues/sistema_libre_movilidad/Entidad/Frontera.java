@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "fronteras")
@@ -15,6 +16,7 @@ public class Frontera {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty
     @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
 
@@ -35,7 +37,7 @@ public class Frontera {
     public void setId(Long id){
         this.id=id;
     }
-
+    
     public String getNombre(){
         return nombre;
     }

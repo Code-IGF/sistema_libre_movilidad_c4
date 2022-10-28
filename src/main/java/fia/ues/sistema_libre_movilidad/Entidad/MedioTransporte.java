@@ -9,8 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Medio-Transporte")
+@Table(name = "medio_transporte")
 public class MedioTransporte {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idMedio;
