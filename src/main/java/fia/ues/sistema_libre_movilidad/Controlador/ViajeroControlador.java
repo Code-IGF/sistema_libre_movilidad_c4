@@ -39,7 +39,7 @@ public class ViajeroControlador {
         List<Usuario> listaUsuarios = usuarioServicio.listarUsuarios();
         modelo.addAttribute("viajero", viajero);
         modelo.addAttribute("usuarios", listaUsuarios);
-        return "viajero/crear_viajero";
+        return "viajero/create";
     }
 
     @PostMapping("/viajeros")
@@ -49,7 +49,7 @@ public class ViajeroControlador {
             List<Usuario> listaUsuarios = usuarioServicio.listarUsuarios();
             model.addAttribute("viajero", viajero);
             model.addAttribute("usuarios", listaUsuarios);
-            return "viajero/crear_viajero";
+            return "viajero/create";
         }
         
         viajeroServicio.guardarViajero(viajero);
@@ -59,7 +59,7 @@ public class ViajeroControlador {
     @GetMapping("/viajeros/editar/{id}")
     public String edit(@PathVariable Long id, Model modelo){
         modelo.addAttribute("viajero", viajeroServicio.obtenerViajeroPorId(id));
-        return "viajero/editar_viajero";
+        return "viajero/edit";
     }
 
     @PostMapping("/viajeros/{id}")
