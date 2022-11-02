@@ -28,13 +28,13 @@ public class EstudianteControlador {
     private UsuarioServicio usuarioServicio;
 
     @GetMapping({"/estudiantes"})
-    public String listarEstudiantes(Model modelo){
+    public String index(Model modelo){
         modelo.addAttribute("estudiantes", servicio.listarEstudiantes());
         return "estudiante/estudiantes";
     }
 
     @GetMapping("/estudiantes/nuevo")
-    public String crearEstudianteFormulario(Model modelo){
+    public String create(Model modelo){
         Estudiante estudiante = new Estudiante();
         List<Usuario> listaUsuarios=usuarioServicio.listarUsuarios();
         modelo.addAttribute("estudiante", estudiante);
@@ -43,7 +43,7 @@ public class EstudianteControlador {
     }
 
     @PostMapping("/estudiantes")
-    public String guardarEstudiante(@Valid @ModelAttribute("estudiante") Estudiante estudiante, BindingResult result, Model model){
+    public String store(@Valid @ModelAttribute("estudiante") Estudiante estudiante, BindingResult result, Model model){
         
         if (result.hasErrors()){
                 model.addAttribute("estudiante", estudiante);
@@ -54,13 +54,13 @@ public class EstudianteControlador {
     }
 
     @GetMapping("/estudiantes/editar/{id}")
-    public String mostrarFormularioEditar(@PathVariable Long id, Model modelo){
+    public String edit(@PathVariable Long id, Model modelo){
         modelo.addAttribute("estudiante", servicio.obtenerEstudianteporId(id));
         return "estudiante/editar_estudiante";
     }
 
     @PostMapping("/estudiantes/{id}")
-    public String actualizarEstudiante(@PathVariable Long id, @ModelAttribute("estudiante") Estudiante estudiante,
+    public String update(@PathVariable Long id, @ModelAttribute("estudiante") Estudiante estudiante,
     Model modelo){
         Estudiante estudianteExistente = servicio.obtenerEstudianteporId(id);
         estudianteExistente.setId(id);
@@ -73,7 +73,7 @@ public class EstudianteControlador {
     }
 
     @GetMapping("/estudiantes/{id}")
-    public String eliminarEstudiante(@PathVariable Long id){
+    public String destroy(@PathVariable Long id){
         servicio.eliminarEstudiante(id);
         return "redirect:/estudiantes";
     }
