@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head th:replace="layout :: header">
   <meta charset="utf-8" />
   <title>Base</title>
@@ -9,56 +8,64 @@
 </head>
 
 <body>
+  
   <nav th:replace="layout :: navegacion">
     <!--Herencia de navbar-->
   </nav>
 
-  <!--Inicio de area de trabajo-->
-  <div class="container">
-    <div class="row">
-      <h1>Lista de identificaciones</h1>
-    </div>
-
-    <!--En este boton se llama al formulario de crear-->
-    <a class="btn btn-info">Nuevo</a>
-
-    <table class="table">
-      <thead class="thead-light">
-        <tr>
-          <th scope="col">Tipo</th>
-          <th scope="col">Numero Unico</th>
-          <th scope="col">Pais nacimiento</th>
-          <th scope="col">Pais residencia</th>
-          <th scope="col">Ocupacion</th>
-          <th scope="col">Pais Emisor</th>
-          <th scope="col">Fecha vencimiento</th>
-          <th scope="col">Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr th:each="identificacion: ${identificaciones}">
-          <td th:text="${identificacion.tipo}">Tipo</td>
-          <td th:text="${identificacion.numeroUnico}">Numero Unico</td>
-          <td th:text="${identificacion.paisNacimiento}">Pais Nacimiento</td>
-          <td th:text="${identificacion.paisResidencia}">Pais Residencia</td>
-          <td th:text="${identificacion.ocupacion}">Ocupacion</td>
-          <td th:text="${identificacion.paisEmisor}">Pais Emisor</td>
-          <td th:text="${identificacion.fechaVencimiento}">Fecha vencimiento</td>
-          <td>
-
-            <!--En este boton se llama al formulario de editar-->
-            <a class="btn btn-info">editar</a>
-
-            <!--En este boton se elimina el registro-->
-            <a class="btn btn-danger">eliminar</a>
-
-          </td>
-        </tr>
-      </tbody>
-    </table>
+ <!--inicio area de trabajo-->
+ <div class="container">
+  <div class="row">
+    <h1>Lista de Identificaciones</h1>
   </div>
-  </div>
-  <!--Fin de area de trabajo-->
+
+  <!--En este boton se llama al formulario de crear-->
+  <a  th:href="@{/identificacion/nuevo}" class="btn btn-sm btn-primary">
+    <i class="fas fa-plus-circle mr-1 text-white"></i>
+    <span class="text-white">Agregar Identificacion</span> </a>
+    
+
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Tipo</th>
+        <th scope="col">Numero Unico</th>
+        <th scope="col">Pais nacimiento</th>
+        <th scope="col">Pais residencia</th>
+        <th scope="col">Ocupacion</th>
+        <th scope="col">Pais Emisor</th>
+        <th scope="col">Fecha vencimiento</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="identificacion: ${identificacion}">
+        <td th:text="${identificacion.tipo}">Tipo</td>
+        <td th:text="${identificacion.numeroUnico}">Numero Unico</td>
+        <td th:text="${identificacion.paisNacimiento}">Pais nacimiento</td>
+        <td th:text="${identificacion.paisResidencia}">Pais residencia</td>
+        <td th:text="${identificacion.ocupacion}">Ocupacion</td>
+        <td th:text="${identificacion.paisEmisor}">Pais Emisor</td>
+        <td th:text="${identificacion.fechaVencimiento}">Fecha vencimiento</td>
+        <td>
+
+          <!--En este boton se llama al formulario de editar-->
+            <a th:href="@{/identificacion/editar/{id}(id=${ identificacion.id_identificacion})}" class="btn btn-sm btn-primary">
+              <i class="fas fa-pencil-alt"></i> </a>
+            
+
+          <!--En este boton se elimina el registro-->
+          <a href="#" class="btn btn-sm btn-danger" >
+            <i class="fa fa-trash" aria-hidden="true"></i>
+            </a>
+           
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
 </body>
 
 </html>

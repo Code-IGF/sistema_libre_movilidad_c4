@@ -6,24 +6,26 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name = "frontera")
+@Table(name = "fronteras")
 public class Frontera {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nombre_frontera", nullable = false, length = 50)
-    private String nombreFrontera;
+    @NotEmpty
+    @Column(name = "nombre", nullable = false, length = 50)
+    private String nombre;
 
-    public Frontera(Long id, String nombreFrontera) {
+    public Frontera(Long id, String nombre) {
         this.id = id;
-        this.nombreFrontera = nombreFrontera;
+        this.nombre = nombre;
     }
-    public Frontera(String nombreFrontera) {
-        this.nombreFrontera = nombreFrontera;
+    public Frontera(String nombre) {
+        this.nombre = nombre;
     }
     public Frontera() {        
     }
@@ -35,12 +37,12 @@ public class Frontera {
     public void setId(Long id){
         this.id=id;
     }
-
-    public String getNombreFrontera(){
-        return nombreFrontera;
+    
+    public String getNombre(){
+        return nombre;
     }
 
-    public void setNombre(String nombreFrontera){
-        this.nombreFrontera=nombreFrontera;
+    public void setNombre(String nombre){
+        this.nombre=nombre;
     }
 }

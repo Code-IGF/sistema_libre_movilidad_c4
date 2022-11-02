@@ -12,51 +12,52 @@
   </head>
 
   <body>
-      <nav th:replace="layout :: navegacion">
-        <!--Herencia de navbar-->
-      </nav>
-        <div class="col py-3">
-          <!--inicio area de trabajo-->
-          <div class="container">
-            <div class="row">
-              <h1>Lista de fronteras</h1>
-            </div>
-
-            <!--En este boton se llama al formulario de crear-->
-            <a th:href="@{/fronteras/nuevo}" class="btn btn-info">Nuevo</a>
-
-            <table class="table">
-              <thead class="thead-light">
-                <tr>
-                  <th scope="col">Nombre</th>
-                  <th scope="col">Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr th:each="frontera: ${fronteras}">
-                  <td th:text="${frontera.nombreFrontera}"></td>
-                  <td>
-
-                    <!--En este boton se llama al formulario de editar-->
-                    <a
-                      th:href="@{/fronteras/editar/{id}(id=${frontera.id})}"
-                      class="btn btn-info"
-                      >editar</a
-                    >
-                    
-                    <!--En este boton se elimina el registro-->
-                    <a
-                      th:href="@{/fronteras/{id}(id=${frontera.id})}"
-                      class="btn btn-danger"
-                      >eliminar</a
-                    >
-                    
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+    <nav th:replace="layout :: navegacion">
+      <!--Herencia de navbar-->
+    </nav>
+      <div class="col py-3">
+        <!--inicio area de trabajo-->
+        <div class="container">
+          <div class="row">
+            <h1>Lista de fronteras</h1>
           </div>
+
+          <!--En este boton se llama al formulario de crear-->
+          <a th:href="@{/fronteras/nuevo}" class="btn btn-sm btn-primary">
+            <i class="fas fa-plus-circle mr-1 text-white"></i>
+          <span class="text-white">Agregar Frontera</span>            
+          </a>
+
+          <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="frontera: ${fronteras}">
+                <td th:text="${frontera.nombre}">Nombre</td>
+                <td>
+
+                  <!--En este boton se llama al formulario de editar-->
+                  <a
+                    th:href="@{/fronteras/editar/{id}(id=${frontera.id})}" class="btn btn-sm btn-primary">
+                    <i class="fas fa-pencil-alt"></i> 
+                  </a>
+                  
+                  <!--En este boton se elimina el registro-->
+                  <a
+                    th:href="@{/fronteras/{id}(id=${frontera.id})}" class="btn btn-sm btn-danger" onclick="return confirm('Estás seguro que deseas eliminar el registro?');">
+                      <i class="fa fa-trash" aria-hidden="true"></i>                    
+                  </a>
+                  
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <!--Fin area de trabajo-->
+      </div>
+      <!--Fin area de trabajo-->
   </body>
 </html>

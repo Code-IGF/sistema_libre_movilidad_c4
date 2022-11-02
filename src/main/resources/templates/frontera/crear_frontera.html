@@ -12,10 +12,17 @@
           <h1 class="text-center">Registro de frontera</h1>
           <div class="card-body">
             <form th:action="@{/fronteras}" th:object="${frontera}" method="POST">
-                <div class="form-group">
-                  <label>Nombre: </label>
-                  <input type="text" name="nombre" th:field="*{nombre}" class="form-control" placeholder="Ingrese el nombre de la frontera: " required>
+              <div class="form-group">
+                <label>Nombre: </label>
+                <input type="text" name="nombre" th:field="*{nombre}" class="form-control" placeholder="Ingrese El nombre de la frontera: " required>
+                <div class="alert alert-warning d-flex align-items-center" role="alert" th:if="${#fields.hasErrors('nombre')}"
+                th:errors="*{nombre}">
+                  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                  <div>
+                    An example warning alert with an icon
+                  </div>
                 </div>
+              </div>
 
                 <div class="box-footer">
                   <button class="btn btn-succes">Guardar</button>

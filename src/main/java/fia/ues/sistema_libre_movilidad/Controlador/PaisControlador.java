@@ -1,8 +1,11 @@
 package fia.ues.sistema_libre_movilidad.Controlador;
+import javax.validation.Valid;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,14 +13,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import fia.ues.sistema_libre_movilidad.Entidad.Pais;
 import fia.ues.sistema_libre_movilidad.Servicio.PaisServicio;
+import fia.ues.sistema_libre_movilidad.Servicio.UsuarioServicio;
+import fia.ues.sistema_libre_movilidad.Entidad.Usuario;
 
 @Controller
 public class PaisControlador {
         
     @Autowired
     private PaisServicio servicio;
+    
+    @Autowired
+    private UsuarioServicio usuarioServicio;
 
-    @GetMapping("/paises")
+    @GetMapping({"/paises"})
     public String index(Model modelo){
         modelo.addAttribute("paises", servicio.listarPaises());
         return "pais/index";
@@ -26,19 +34,25 @@ public class PaisControlador {
     @GetMapping("/paises/nuevo")
     public String create(Model modelo){
         Pais pais = new Pais();
-        modelo.addAttribute("paises",pais);
-        return "crear_pais";
+        List<Usuario> listaUsuarios= usuarioServicio.listarUsuarios();
+        modelo.addAttribute("pais",pais);
+        modelo.addAttribute("usuarios", listaUsuarios);
+        return "pais/crear_pais";
     }
     @PostMapping("/paises")
-    public String store(@ModelAttribute("pais") Pais pais){
-        servicio.guardarPais(pais);
-        return "redirect:/paises";
-
+    public String store(@Valid@ModelAttribute("pais") Pais pais, BindingResult result, Model model){
+        if (result.hasErrors()){
+            model.addAttribute("pais", pais);
+        return "pais/crear_pais";
     }
+    servicio.guardarPais(pais);
+        return "redirect:/paises";
+    }
+
     @GetMapping("/paises/editar/{id}")
     public String edit(@PathVariable Long id, Model modelo){
         modelo.addAttribute("pais", servicio.obtenerPaisPorId(id));
-        return "editar_pais";
+        return "pais/editar_pais";
     }
 
     @PostMapping("/paises/{id}")
@@ -46,7 +60,7 @@ public class PaisControlador {
     Model modelo){
         Pais paisExistente = servicio.obtenerPaisPorId(id);
         paisExistente.setId(id);
-        paisExistente.setPais(pais.getPais());
+        paisExistente.setNombre(pais.getNombre());
         
         servicio.actualizarPais(paisExistente);
         return "redirect:/paises";

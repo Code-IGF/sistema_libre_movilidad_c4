@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-    <div class="container mt-4">
+    <div class="container">
         <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
           <h1 class="text-center">Registro de region</h1>
@@ -14,20 +14,20 @@
             <form th:action="@{/regiones/{id}(id=${region.id})}" th:object="${region}" method="POST">
               
               <div class="form-group">
-                <label>Region: </label>
-                <input type="text" name="region" th:field="*{region}" class="form-control" placeholder="Ingrese su region: " required>
+                <label>Nombre: </label>
+                <input type="text" name="nombre" th:field="*{nombre}" class="form-control" placeholder="Ingrese el nombre de la region: " required>
               </div>
 
-                <div class="box-footer">
-                  <button class="btn btn-succes">Guardar</button>
-                </div>
-            </form>
-            
-          </div>
-        </div> 
-
+              <div class="box-footer">
+                <button class="btn btn-primary" >Guardar</button>
+              </div>
+          </form>
+          
         </div>
-    </div>
+      </div> 
+
+      </div>
+  </div>
 
 </body>
 </html>
