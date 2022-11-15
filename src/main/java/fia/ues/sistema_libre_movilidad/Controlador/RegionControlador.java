@@ -33,9 +33,7 @@ public String index(Model modelo){
 @GetMapping("/regiones/nuevo")
 public String create(Model modelo){
     Region region = new Region();
-    List<Usuario> listaUsuarios=usuarioServicio.listarUsuarios();
     modelo.addAttribute("region",region);
-    modelo.addAttribute("usuarios", listaUsuarios);
     return "region/crear_region";
 }
 @PostMapping("/regiones")

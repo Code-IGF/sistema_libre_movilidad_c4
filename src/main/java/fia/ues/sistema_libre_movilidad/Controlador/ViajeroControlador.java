@@ -36,9 +36,7 @@ public class ViajeroControlador {
     @GetMapping("/viajeros/nuevo")
     public String create(Model modelo){
         Viajero viajero = new Viajero();
-        List<Usuario> listaUsuarios = usuarioServicio.listarUsuarios();
         modelo.addAttribute("viajero", viajero);
-        modelo.addAttribute("usuarios", listaUsuarios);
         return "viajero/create";
     }
 
@@ -46,14 +44,36 @@ public class ViajeroControlador {
     public String store(@Valid @ModelAttribute("viajero") Viajero viajero, BindingResult result, Model model){
         
         if(result.hasErrors()) {
-            List<Usuario> listaUsuarios = usuarioServicio.listarUsuarios();
             model.addAttribute("viajero", viajero);
-            model.addAttribute("usuarios", listaUsuarios);
             return "viajero/create";
         }
         
         viajeroServicio.guardarViajero(viajero);
         return "redirect:/viajeros";
+    }
+
+    @GetMapping("usuarioViajero/nuevo")
+    public String createViajero(Model modelo){
+        Viajero viajero = new Viajero();
+        Usuario usuario = new Usuario();
+        modelo.addAttribute("viajero", viajero);
+        modelo.addAttribute("usuario", usuario);
+        return "registro";
+    }
+
+    @PostMapping("/usuarioViajero")
+    public String storeViajero(@Valid @ModelAttribute("viajero") Viajero viajero,
+    @Valid  @ModelAttribute("usuario") Usuario usuario, BindingResult result, Model model){
+        
+        if(result.hasErrors()) {
+            model.addAttribute("usuario", usuario);
+            model.addAttribute("viajero", viajero);
+            return "registro";
+        }
+        
+        viajeroServicio.guardarViajero(viajero);
+        usuarioServicio.guardarUsuario(usuario);
+        return "redirect:/usuarioViajero/nuevo";
     }
 
     @GetMapping("/viajeros/editar/{id}")

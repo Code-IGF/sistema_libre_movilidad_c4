@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <div class="container mt-4">
+  <div class="container mt-4" th:fragment="crearViajero">
     <div class="row">
       <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
         <h1 class="text-center">Registro de viajero</h1>
@@ -68,15 +68,6 @@
                   <use xlink:href="#exclamation-triangle-fill" />
                 </svg>
               </div>
-            </div>
-
-            <div class="form-group row">
-              <label class="col-md-2" for="usuario">Usuario:</label> 
-              <select th:field="*{usuario}" class="form-control form-control-sm col-md-6" id="usuario"> 
-                <option th:each="usuario:${usuarios}"
-                  th:value="${usuario.id}"
-                  th:text="${usuario.correo}">					
-              </select>
             </div>
 
             <div class="box-footer">

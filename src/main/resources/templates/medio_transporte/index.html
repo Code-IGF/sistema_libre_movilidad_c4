@@ -23,7 +23,7 @@
         </div>
 
         <!--En este boton se llama al formulario de crear-->
-        <a th:href="@{/medios_transporte/nuevo}" class="btn btn-info">Nuevo</a>
+        <a th:href="@{/Medio-Transporte/nueva}" class="btn btn-info">Nuevo</a>
 
         <table class="table">
           <thead class="thead-light">
@@ -37,10 +37,15 @@
               <td th:text="${medio_transporte.medio}"></td>
               <td>
                 <!--En este boton se llama al formulario de editar-->
-                <a th:href="Editar" class="btn btn-info">editar</a>
-
+                <a th:href="@{/Medio-Transporte/editar/{id}(id=${medio_transporte.idMedio})}" class="btn btn-sm btn-primary">
+                  <i class="fas fa-pencil-alt"></i> 
+                </a>
+                
+                
                 <!--En este boton se elimina el registro-->
-                <a th:href="eliminar" class="btn btn-danger">eliminar</a>
+                <a class="btn btn-sm btn-danger" th:href="@{/Medio-Transporte/{id}(id=${medio_transporte.idMedio})}" onclick="return confirm('Estás seguro que deseas eliminar el registro?');">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
               </td>
             </tr>
           </tbody>

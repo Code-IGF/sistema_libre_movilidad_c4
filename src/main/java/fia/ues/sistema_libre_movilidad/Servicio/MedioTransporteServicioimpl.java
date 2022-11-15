@@ -23,29 +23,27 @@ public class MedioTransporteServicioimpl implements MedioTransporteServicio {
 
     @Override
     public MedioTransporte actualizarMedioTransporte(MedioTransporte medioTransporte) {
-        // TODO Auto-generated method stub
-        return null;
+        return repositorio.save(medioTransporte);
     }
 
 
     @Override
     public void eliminarMedioTransporte(Long Id) {
-        // TODO Auto-generated method stub
+        repositorio.deleteById(Id);
         
     }
 
 
     @Override
     public MedioTransporte guardarMedioTransporte(MedioTransporte medioTransporte) {
-        // TODO Auto-generated method stub
-        return null;
+        return repositorio.save(medioTransporte);
     }
 
 
     @Override
     public MedioTransporte obtenerMedioTransporteporId(Long Id) {
-        // TODO Auto-generated method stub
-        return null;
+        return repositorio.findById(Id).get();
+
     }
   
 }

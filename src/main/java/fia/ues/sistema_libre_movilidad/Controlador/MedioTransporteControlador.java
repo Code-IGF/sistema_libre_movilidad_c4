@@ -29,14 +29,14 @@ public class MedioTransporteControlador {
     @GetMapping("/Medio-Transporte/nueva")
     public String create(Model modelo){
         MedioTransporte medioTransporte = new MedioTransporte();
-        modelo.addAttribute("Medio.Transporte", medioTransporte);
-        return "Medio-Transporte/create";
+        modelo.addAttribute("medios_transporte", medioTransporte);
+        return "medio_transporte/create";
     }
 
-        @PostMapping("/Medio-Transporte")
-    public String store(@ModelAttribute("Medio-Transporte") MedioTransporte medioTransporte){
+    @PostMapping("/medios_transporte")
+    public String store(@ModelAttribute("medios_transporte") MedioTransporte medioTransporte){
         servicio.guardarMedioTransporte(medioTransporte);
-        return "redirect:/Medio-Transporte/index";
+        return "redirect:/medios_transporte";
     }
 
     @GetMapping("/Medio-Transporte/editar/{id}")
@@ -45,13 +45,11 @@ public class MedioTransporteControlador {
         return "MedioTransporte/edit";
     }
 
-    @PostMapping("/MedioTransporte/{id}")
-    
 
     @GetMapping("/Medio-Transporte/{id}")
     public String destroy(@PathVariable Long id){
         servicio.eliminarMedioTransporte(id);
-        return "redirect:/Medio-Transporte/index";
+        return "redirect:/medios_transporte";
     }
 
 

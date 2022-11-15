@@ -44,10 +44,41 @@ public class EstudianteControlador {
 
     @PostMapping("/estudiantes")
     public String store(@Valid @ModelAttribute("estudiante") Estudiante estudiante, BindingResult result, Model model){
-        
+        List<Estudiante> estudiantesLista = servicio.listarEstudiantes();
+        List<Usuario> listaUsuarios=usuarioServicio.listarUsuarios();
+        //String error="";*/
+        String error="";
+        String errorEmail="";
         if (result.hasErrors()){
                 model.addAttribute("estudiante", estudiante);
+                model.addAttribute("usuarios", listaUsuarios);
                 return "estudiante/crear_estudiante";
+        }
+        /*for (Estudiante e : estudiante1) {
+            if(e.getUsuario().getId()==estudiante.getUsuario().getId() || e.getEmail()==estudiante.getEmail()){
+                error="Usuario ya usado";
+                model.addAttribute("estudiante", estudiante);
+                model.addAttribute("error", error);
+                model.addAttribute("usuarios", listaUsuarios);
+                return "estudiante/crear_estudiante";
+            }
+        }*/
+        
+        for (Estudiante e : estudiantesLista) {
+            if(e.getUsuario().getCorreo()==estudiante.getUsuario().getCorreo()){
+                model.addAttribute("estudiante", estudiante);
+                model.addAttribute("usuarios", listaUsuarios);
+                error="Usuario ya asignado";
+                model.addAttribute("error", error);
+                return "estudiante/crear_estudiante";
+            }
+            if(e.getEmail().equals(estudiante.getEmail())){
+                model.addAttribute("estudiante", estudiante);
+                model.addAttribute("usuarios", listaUsuarios);
+                errorEmail="Email ocupado";
+                model.addAttribute("errorEmail", errorEmail);
+                return "estudiante/crear_estudiante";
+            }
         }
         servicio.guardarEstudiante(estudiante);
         return "redirect:/estudiantes";

@@ -40,6 +40,7 @@
                   <label>Email: </label>
                   <input type="text" name="email" th:field="*{email}" class="form-control" placeholder="Ingrese su email: " required>
                 </div>
+                <label style="color:#FF0000"  th:text="${errorEmail}" class="col-md-10"></label>
 
                 <div class="form-group row">
                   <label class="col-md-2" for="usuario">Usuario:</label> 
@@ -49,11 +50,14 @@
                       th:text="${usuario.correo}">					
                   </select>
                 </div>
+                <label style="color:#FF0000"  th:text="${error}" class="col-md-10"></label>
 
                 <div class="box-footer">
                   <button class="btn btn-succes">Guardar</button>
                 </div>
             </form>
+            
+
             
           </div>
         </div> 
