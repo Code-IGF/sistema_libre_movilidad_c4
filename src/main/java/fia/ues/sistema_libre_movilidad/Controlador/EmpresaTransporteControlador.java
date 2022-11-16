@@ -34,9 +34,7 @@ public class EmpresaTransporteControlador {
     @GetMapping("/empresas_transporte/nuevo")
     public String create(Model modelo){
         EmpresaTransporte empresasTransporte = new EmpresaTransporte();
-        List<Usuario> listaUsuarios= usuarioServicio.listarUsuarios();
         modelo.addAttribute("empresa_transporte", empresasTransporte);
-        modelo.addAttribute("usuarios", listaUsuarios);
         return "empresa_transporte/crear_empresa_transporte";
     }
 
@@ -53,7 +51,7 @@ public class EmpresaTransporteControlador {
     @GetMapping("/empresas_transporte/editar/{id}")
     public String edit(@PathVariable Long id, Model modelo){
         modelo.addAttribute("empresa_transporte", servicio.obtenerEmpresaTransporteporId(id));
-        return "editar_empresa_transporte";
+        return "/empresa_transporte/editar_empresa_transporte";
     }
 
     @PostMapping("/empresas_transporte/{id}")

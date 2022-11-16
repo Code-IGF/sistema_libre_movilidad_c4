@@ -39,12 +39,22 @@ public class MedioTransporteControlador {
         return "redirect:/medios_transporte";
     }
 
-    @GetMapping("/Medio-Transporte/editar/{id}")
+    @GetMapping("/medios_transporte/editar/{id}")
     public String edit(@PathVariable Long id, Model modelo){
-        modelo.addAttribute("Medio-Transporte", servicio.obtenerMedioTransporteporId(id));
-        return "MedioTransporte/edit";
+        modelo.addAttribute("medio_transporte", servicio.obtenerMedioTransporteporId(id));
+        return "medio_transporte/edit";
     }
 
+    @PostMapping("/medios_transporte/{id}")
+    public String update(@PathVariable Long id, @ModelAttribute("medio_transporte") MedioTransporte medioTransporte,
+    Model modelo){
+        MedioTransporte medioExistente = servicio.obtenerMedioTransporteporId(id);
+        medioExistente.setIdMedio(id);
+        medioExistente.setMedio(medioTransporte.getMedio());
+
+        servicio.actualizarMedioTransporte(medioTransporte);
+        return "redirect:/medios_transporte";
+    }
 
     @GetMapping("/Medio-Transporte/{id}")
     public String destroy(@PathVariable Long id){

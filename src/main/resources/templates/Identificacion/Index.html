@@ -54,9 +54,9 @@
             
 
           <!--En este boton se elimina el registro-->
-          <a href="#" class="btn btn-sm btn-danger" >
+          <a class="btn btn-sm btn-danger" th:href="@{/identificacion/{id}(id=${identificacion.id_identificacion})}" onclick="return confirm('Estás seguro que deseas eliminar el registro?');">
             <i class="fa fa-trash" aria-hidden="true"></i>
-            </a>
+          </a>
            
 
         </td>

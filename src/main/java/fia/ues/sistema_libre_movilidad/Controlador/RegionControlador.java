@@ -37,12 +37,12 @@ public String create(Model modelo){
     return "region/crear_region";
 }
 @PostMapping("/regiones")
-public String store(@Valid@ModelAttribute("region") Region region, BindingResult result, Model model){
+public String store(@Valid @ModelAttribute("region") Region region, BindingResult result, Model model){
     if (result.hasErrors()){
         model.addAttribute("region", region);
-    return "region/crear_region";
-}
-servicio.guardarRegion(region);
+        return "region/crear_region";
+    }
+    servicio.guardarRegion(region);
     return "redirect:/regiones";
     
 }

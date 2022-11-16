@@ -39,11 +39,13 @@
             <td>
 
               <!--En este boton se llama al formulario de editar-->
-              <a th:href="@{/empresas_transporte/editar/{id}(id=${empresa_transporte.id})}"
-                class="btn btn-info">editar</a>
+                <a th:href="@{/empresas_transporte/editar/{id}(id=${empresa_transporte.id})}" class="btn btn-sm btn-primary">
+                  <i class="fas fa-pencil-alt"></i> 
+                </a>
               <!--En este boton se elimina el registro-->
-              <a th:href="@{/empresas_transporte/{id}(id=${empresa_transporte.id})}" onclick="return confirm('Estás seguro que deseas eliminar el registro?');">
-                <i class="fa fa-trash" aria-hidden="true"></i> 
+
+              <a class="btn btn-sm btn-danger" th:href="@{/empresas_transporte/{id}(id=${empresa_transporte.id})}"onclick="return confirm('Estás seguro que deseas eliminar el registro?');">
+                <i class="fa fa-trash" aria-hidden="true"></i>
               </a>
             </td>
           </tr>

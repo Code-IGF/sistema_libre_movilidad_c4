@@ -54,7 +54,7 @@ public class OficialAduaneroControlador {
     @GetMapping("/oficial_aduanero/editar/{id}")
     public String edit(@PathVariable Long id, Model modelo){
         modelo.addAttribute("oficial_aduanero", servicio.obtenerOficialAduaneroporId(id));
-        return "edit";
+        return "oficial_aduanero/edit";
     }
 
     @PostMapping("/oficial_aduanero/{id}")

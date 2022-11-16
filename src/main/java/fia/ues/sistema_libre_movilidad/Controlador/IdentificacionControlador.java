@@ -61,7 +61,7 @@ public class IdentificacionControlador {
     @GetMapping("/identificacion/{id}")
     public String destroy(@PathVariable Long id){
         servicio.eliminarIdentificacion(id);
-        return "redirect:/identificaciones";
+        return "redirect:/identificacion";
     }
 
 }

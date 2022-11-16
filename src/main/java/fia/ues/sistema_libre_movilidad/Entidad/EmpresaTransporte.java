@@ -20,16 +20,6 @@ public class EmpresaTransporte {
     @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
 
-    @OneToOne
-    @JoinColumn(name="id_usuario")
-    private Usuario usuario;
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
     public Long getId(){
         return id;
     }
@@ -49,11 +39,9 @@ public class EmpresaTransporte {
     public EmpresaTransporte(Long id,String nombre,Usuario usuario) {
         this.id = id;
         this.nombre = nombre;
-        this.usuario=usuario;
     }
     public EmpresaTransporte(String nombre,Usuario usuario) {
         this.nombre = nombre;
-        this.usuario=usuario;
     }
     public EmpresaTransporte(){
         
