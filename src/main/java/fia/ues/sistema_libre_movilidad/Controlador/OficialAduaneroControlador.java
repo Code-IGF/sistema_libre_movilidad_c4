@@ -2,6 +2,8 @@ package fia.ues.sistema_libre_movilidad.Controlador;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,7 +36,7 @@ public class OficialAduaneroControlador {
     @GetMapping("/oficial_aduanero/nuevo")
     public String create(Model modelo){
         OficialAduanero oficialAduanero = new OficialAduanero();
-        List<Usuario> listaUsuarios= usuarioServicio.listarUsuarios();
+        List<Usuario> listaUsuarios = usuarioServicio.listarUsuarios();
         modelo.addAttribute("oficial_aduanero", oficialAduanero);
         modelo.addAttribute("usuarios", listaUsuarios);
         return "oficial_aduanero/create";
@@ -42,11 +44,25 @@ public class OficialAduaneroControlador {
 
 
     @PostMapping("/oficial_aduanero")
-    public String store(@ModelAttribute("oficial_aduanero") OficialAduanero oficialAduanero, BindingResult result, Model model){
+    public String store(@Valid @ModelAttribute("oficial_aduanero") OficialAduanero oficialAduanero, BindingResult result, Model model){
+        //List<OficialAduanero> oficialAduanerosLista = servicio.listarOficialAduanero();
+        //List<Usuario> listaUsuarios=usuarioServicio.listarUsuarios();
+        //String error="";
+
         if(result.hasErrors()){
-            servicio.guardarOficialAduanero(oficialAduanero);
+            model.addAttribute("oficial_aduanero", oficialAduanero);
             return "redirect:/oficial_aduanero";
         }
+
+        /*for (OficialAduanero e : oficialAduanerosLista) {
+            if(e.getNombreOficialAduanero()==""||e.getNombreOficialAduanero()==" "){
+                model.addAttribute("oficial_aduanero", oficialAduanero);
+                error="El campo del nombre esta siendo enviado vacio";
+                model.addAttribute("error", error);
+                return "redirect:/oficial_aduanero";
+            }
+        }*/
+
         servicio.guardarOficialAduanero(oficialAduanero);
         return "redirect:/oficial_aduanero";
     }

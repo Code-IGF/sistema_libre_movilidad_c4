@@ -9,16 +9,23 @@
     <div class="container">
         <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-          <h1 class="text-center"> Registro de Oficiales</h1>
+          <h1 class="text-center"> Registro de Oficiales Aduaneros</h1>
           <div class="card-body">
             <form th:action="@{/oficial_aduanero}" th:object="${oficial_aduanero}" method="POST">
                 <div class="form-group">
                   <label>Nombre Del Oficial Aduanero: </label>
                   <input type="text" name="nombreOficialAduanero" th:field="*{nombreOficialAduanero}" class="form-control" placeholder="Ingrese su nombre: " required>
 
+                  <div class="alert alert-warning d-flex align-items-center" role="alert" th:if="${#fields.hasErrors('nombreOficialAduanero')}"
+                  th:errors="*{nombreOficialAduanero}">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                    <div>
+                      An example warning alert with an icon
+                    </div>
+                  </div>
                   
-
                 </div>
+                <label style="color:#FF0000"  th:text="${error}" class="col-md-10"></label>
                 <div class="box-footer">
                   <button class="btn btn-succes">Guardar</button>
                 </div>
