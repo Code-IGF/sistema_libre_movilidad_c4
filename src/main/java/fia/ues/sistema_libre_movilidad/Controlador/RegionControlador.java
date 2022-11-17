@@ -24,6 +24,9 @@ public class RegionControlador {
 @Autowired
 private RegionServicio servicio;
 
+@Autowired
+private UsuarioServicio usuarioServicio;
+
 @GetMapping("/regiones")
 public String index(Model modelo){
     modelo.addAttribute("regiones", servicio.listarRegiones());
@@ -33,16 +36,18 @@ public String index(Model modelo){
 @GetMapping("/regiones/nuevo")
 public String create(Model modelo){
     Region region = new Region();
+    List<Usuario> listaUsuarios= usuarioServicio.listarUsuarios();
     modelo.addAttribute("region",region);
+    modelo.addAttribute("usuarios", listaUsuarios);
     return "region/crear_region";
 }
 @PostMapping("/regiones")
-public String store(@Valid @ModelAttribute("region") Region region, BindingResult result, Model model){
+public String store(@Valid@ModelAttribute("region") Region region, BindingResult result, Model model){
     if (result.hasErrors()){
         model.addAttribute("region", region);
-        return "region/crear_region";
-    }
-    servicio.guardarRegion(region);
+    return "region/crear_region";
+}
+servicio.guardarRegion(region);
     return "redirect:/regiones";
     
 }
