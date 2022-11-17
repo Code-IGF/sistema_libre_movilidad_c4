@@ -54,7 +54,7 @@ public class EmpresaTransporteControlador {
         for (EmpresaTransporte em: empresaTransporteLista) {
             if(em.getNombre()==empresaTransporte.getNombre()){
                 model.addAttribute("empresa_transporte",empresaTransporte);
-                error="Usuario ya asignado";
+                error="Nombre ya asignado";
                 model.addAttribute("error", error);
                 return "redirect:/empresas_transporte";
             }
@@ -86,7 +86,7 @@ public class EmpresaTransporteControlador {
         for (EmpresaTransporte em: empresaTransporteLista) {
             if(em.getNombre()==empresaTransporte.getNombre()){
                 modelo.addAttribute("empresa_transporte",empresaTransporte);
-                error="Usuario ya asignado";
+                error="Nombre ya asignado";
                 modelo.addAttribute("error", error);
                 return "redirect:/empresas_transporte";
             }
