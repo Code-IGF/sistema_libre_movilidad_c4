@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.thymeleaf.engine.AttributeName;
 
+import aj.org.objectweb.asm.Attribute;
 import fia.ues.sistema_libre_movilidad.Entidad.EmpresaTransporte;
 import fia.ues.sistema_libre_movilidad.Servicio.EmpresaTransporteServicio;
 import fia.ues.sistema_libre_movilidad.Servicio.UsuarioServicio;
@@ -40,9 +42,28 @@ public class EmpresaTransporteControlador {
 
     @PostMapping("/empresas_transporte")
     public String store(@Valid @ModelAttribute("empresa_transporte") EmpresaTransporte empresaTransporte, BindingResult result, Model model){
+        List<EmpresaTransporte> empresaTransporteLista = servicio.listarEmpresasTransporte();
+        String error="";
+        String errorNombre="";
+
         if (result.hasErrors()){
+            model.addAttribute("empresa_transporte",empresaTransporte);
             servicio.guardarEmpresaTransporte(empresaTransporte);
             return "redirect:/empresas_transporte";
+        }
+        for (EmpresaTransporte em: empresaTransporteLista) {
+            if(em.getNombre()==empresaTransporte.getNombre()){
+                model.addAttribute("empresa_transporte",empresaTransporte);
+                error="Nombre ya asignado";
+                model.addAttribute("error", error);
+                return "redirect:/empresas_transporte";
+            }
+            if(em.getNombre().equals(empresaTransporte.getNombre())){
+                model.addAttribute("empresa_transporte",empresaTransporte);
+                errorNombre="Nombre ocupado";
+                model.addAttribute("errorNombre", errorNombre);
+                return "redirect:/empresas_transporte"; 
+            }
         }
         servicio.guardarEmpresaTransporte(empresaTransporte);
         return "redirect:/empresas_transporte";
@@ -60,7 +81,16 @@ public class EmpresaTransporteControlador {
         EmpresaTransporte empresaTransporteExistente = servicio.obtenerEmpresaTransporteporId(id);
         empresaTransporteExistente.setId(id);
         empresaTransporteExistente.setNombre(empresaTransporte.getNombre());
-     
+        List<EmpresaTransporte> empresaTransporteLista = servicio.listarEmpresasTransporte();
+        String error="";
+        for (EmpresaTransporte em: empresaTransporteLista) {
+            if(em.getNombre()==empresaTransporte.getNombre()){
+                modelo.addAttribute("empresa_transporte",empresaTransporte);
+                error="Nombre ya asignado";
+                modelo.addAttribute("error", error);
+                return "redirect:/empresas_transporte";
+            }
+        }
         servicio.actualizarEmpresaTransporte(empresaTransporteExistente);
         return "redirect:/empresas_transporte";
     }
