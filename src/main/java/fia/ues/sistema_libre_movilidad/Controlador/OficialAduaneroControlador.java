@@ -51,9 +51,13 @@ public class OficialAduaneroControlador {
 
         if(result.hasErrors()){
             model.addAttribute("oficial_aduanero", oficialAduanero);
-            return "redirect:/oficial_aduanero";
+            return "oficial_aduanero/create";
         }
 
+        if(oficialAduanero.getNombreOficialAduanero().equals(" ")){
+            model.addAttribute("oficial_aduanero", oficialAduanero);
+            return "oficial_aduanero/create";
+        }
         /*for (OficialAduanero e : oficialAduanerosLista) {
             if(e.getNombreOficialAduanero()==""||e.getNombreOficialAduanero()==" "){
                 model.addAttribute("oficial_aduanero", oficialAduanero);
@@ -75,11 +79,21 @@ public class OficialAduaneroControlador {
 
     @PostMapping("/oficial_aduanero/{id}")
     public String update(@PathVariable Long id, @ModelAttribute("oficial_aduanero") OficialAduanero oficialAduanero,
-    Model modelo){
+    BindingResult result, Model model){
         OficialAduanero empresaTransporteExistente = servicio.obtenerOficialAduaneroporId(id);
         empresaTransporteExistente.setId(id);
         empresaTransporteExistente.setNombreOficialAduanero(oficialAduanero.getNombreOficialAduanero());
      
+        if(result.hasErrors()){
+            model.addAttribute("oficial_aduanero", oficialAduanero);
+            return "oficial_aduanero/create";
+        }
+
+        if(oficialAduanero.getNombreOficialAduanero().equals(" ")){
+            model.addAttribute("oficial_aduanero", oficialAduanero);
+            return "oficial_aduanero/create";
+        }
+
         servicio.actualizarOficialAduanero(empresaTransporteExistente);
         return "redirect:/oficial_aduanero";
     }
