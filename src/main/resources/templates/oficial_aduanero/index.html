@@ -44,8 +44,8 @@
                                   th:href="@{/oficial_aduanero/editar/{id}(id=${oficial_aduanero.id})}"
                                   class="btn btn-sm btn-primary"><i class="fas fa-pencil-alt"></i></a>
                               <!--En este boton se elimina el registro-->
-                              <a class="btn btn-sm btn-danger" th:href="@{/oficial_aduanero/{id}(id=${oficial_aduanero.id})}">
-                                  <i class="fa fa-trash"></i>
+                              <a class="btn btn-sm btn-danger" th:href="@{/oficial_aduanero/{id}(id=${oficial_aduanero.id})}" onclick="return confirm('Usuario :D\n¿Estás seguro que deseas eliminar este registro?');">
+                                  <i class="fa fa-trash" aria-hidden="true"></i>
                               </a>                            
                           </td>
                         </tr>
