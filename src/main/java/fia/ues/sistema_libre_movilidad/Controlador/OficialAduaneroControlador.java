@@ -47,8 +47,7 @@ public class OficialAduaneroControlador {
     public String store(@Valid @ModelAttribute("oficial_aduanero") OficialAduanero oficialAduanero, BindingResult result, Model model){
         //List<OficialAduanero> oficialAduanerosLista = servicio.listarOficialAduanero();
         //List<Usuario> listaUsuarios=usuarioServicio.listarUsuarios();
-        //String error="";
-
+        
         if(result.hasErrors()){
             model.addAttribute("oficial_aduanero", oficialAduanero);
             return "oficial_aduanero/create";
