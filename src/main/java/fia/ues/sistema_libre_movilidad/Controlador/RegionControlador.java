@@ -42,36 +42,52 @@ public String create(Model modelo){
     return "region/crear_region";
 }
 @PostMapping("/regiones")
-public String store(@Valid@ModelAttribute("region") Region region, BindingResult result, Model model){
+public String store(@Valid @ModelAttribute("region") Region region, BindingResult result, Model model){
+  // List<Region> regionesLista = servicio.listarRegiones();
+  // List<Usuario> listaUsuarios=usuarioServicio.listarUsuarios();
+   // String error="";
+   // String errorNombre="";
+
     if (result.hasErrors()){
+            model.addAttribute("region", region);
+           // model.addAttribute("usuarios", listaUsuarios);
+            return "region/crear_region";
+    }
+
+    if(result.hasErrors()){
         model.addAttribute("region", region);
-    return "region/crear_region";
-}
-servicio.guardarRegion(region);
-    return "redirect:/regiones";
-    
-}
-@GetMapping("/regiones/editar/{id}")
-public String edit(@PathVariable Long id, Model modelo){
-    modelo.addAttribute("region", servicio.obtenerRegionPorId(id));
-    return "region/editar_region";
-}
+        return "region/create";
+    }
 
-@PostMapping("/regiones/{id}")
-public String update(@PathVariable Long id, @ModelAttribute("region") Region region,
-Model modelo){
-    Region regionExistente = servicio.obtenerRegionPorId(id);
-    regionExistente.setId(id);
-    regionExistente.setNombre(region.getNombre());
-    
-    servicio.actualizarRegion(regionExistente);
-    return "redirect:/regiones";
-}
+    if(region.getNombreRegion().equals(" ")){
+        model.addAttribute("region", region);
+        return "region/create";
+    }
+        servicio.guardarRegion(region);
+        return "redirect:/regiones";
+    }
 
-@GetMapping("/regiones/{id}")
-public String destroy(@PathVariable Long id){
-    servicio.eliminarRegion(id);
-    return "redirect:/regiones";
-}
+    @GetMapping("/regiones/editar/{id}")
+    public String edit(@PathVariable Long id, Model modelo){
+        modelo.addAttribute("region", servicio.obtenerRegionporId(id));
+        return "region/editar_region";
+    }
+
+    @PostMapping("/regiones/{id}")
+    public String update(@PathVariable Long id, @ModelAttribute("region") Region region,
+    Model modelo){
+        Region regionExistente = servicio.obtenerRegionporId(id);
+        regionExistente.setId(id);
+        regionExistente.setNombre(region.getNombre());
+
+        servicio.actualizarRegion(regionExistente);
+        return "redirect:/regiones";
+    }
+
+    @GetMapping("/regiones/{id}")
+    public String destroy(@PathVariable Long id){
+        servicio.eliminarRegion(id);
+        return "redirect:/regiones";
+    }
 }
 
