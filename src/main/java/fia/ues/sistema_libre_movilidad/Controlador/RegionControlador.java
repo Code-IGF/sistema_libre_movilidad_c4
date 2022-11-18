@@ -54,7 +54,7 @@ public String store(@Valid @ModelAttribute("region") Region region, BindingResul
             return "redirect:/regiones";
     }
 
-    for (Region r: regionLista){
+    for (Region r: regionesLista){
         if(r.getNombre()==region.getNombre()){
             model.addAttribute("region", region);
             error="Nombre ya asignado";
@@ -74,14 +74,14 @@ public String store(@Valid @ModelAttribute("region") Region region, BindingResul
 
     @GetMapping("/regiones/editar/{id}")
     public String edit(@PathVariable Long id, Model modelo){
-        modelo.addAttribute("region", servicio.obtenerRegionporId(id));
+        modelo.addAttribute("region", servicio.obtenerRegionPorId(id));
         return "region/editar_region";
     }
 
     @PostMapping("/regiones/{id}")
     public String update(@PathVariable Long id, @ModelAttribute("region") Region region,
     Model modelo){
-        Region regionExistente = servicio.obtenerRegionporId(id);
+        Region regionExistente = servicio.obtenerRegionPorId(id);
         regionExistente.setId(id);
         regionExistente.setNombre(region.getNombre());
 
