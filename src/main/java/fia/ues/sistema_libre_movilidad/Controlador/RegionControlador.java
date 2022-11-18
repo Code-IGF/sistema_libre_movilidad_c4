@@ -44,17 +44,17 @@ public String create(Model modelo){
 @PostMapping("/regiones")
 public String store(@Valid @ModelAttribute("region") Region region, BindingResult result, Model model){
      List<Region> regionesLista = servicio.listarRegiones();
-  // List<Usuario> listaUsuarios=usuarioServicio.listarUsuarios();
+    // List<Usuario> listaUsuarios=usuarioServicio.listarUsuarios();
      String error="";
      String errorNombre="";
 
     if (result.hasErrors()){
             model.addAttribute("region", region);
             servicio.guardarRegion(region);
-            return "redirect:/paises";
+            return "redirect:/regiones";
     }
 
-    for(Region r: regionLista){
+    for (Region r: regionLista){
         if(r.getNombre()==region.getNombre()){
             model.addAttribute("region", region);
             error="Nombre ya asignado";
