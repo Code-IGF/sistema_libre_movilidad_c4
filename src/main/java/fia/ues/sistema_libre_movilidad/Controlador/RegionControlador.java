@@ -43,25 +43,30 @@ public String create(Model modelo){
 }
 @PostMapping("/regiones")
 public String store(@Valid @ModelAttribute("region") Region region, BindingResult result, Model model){
-  // List<Region> regionesLista = servicio.listarRegiones();
+     List<Region> regionesLista = servicio.listarRegiones();
   // List<Usuario> listaUsuarios=usuarioServicio.listarUsuarios();
-   // String error="";
-   // String errorNombre="";
+     String error="";
+     String errorNombre="";
 
     if (result.hasErrors()){
             model.addAttribute("region", region);
-           // model.addAttribute("usuarios", listaUsuarios);
-            return "region/crear_region";
+            servicio.guardarRegion(region);
+            return "redirect:/paises";
     }
 
-    if(result.hasErrors()){
-        model.addAttribute("region", region);
-        return "region/create";
-    }
-
-    if(region.getNombreRegion().equals(" ")){
-        model.addAttribute("region", region);
-        return "region/create";
+    for(Region r: regionLista){
+        if(p.getNombre()==pais.getNombre()){
+            model.addAttribute("region", region);
+            error="Nombre ya asignado";
+            model.addAttribute("error",error);
+            return "redirect:/regiones";
+        }
+        if(p.getNombre().equals(pais.getNombre())){
+            model.addAttribute("region", region);
+            errorNombre="Nombre ocupado";
+            model.addAttribute("errorNombre", errorNombre);
+            return "redirect:/regiones";
+        }
     }
         servicio.guardarRegion(region);
         return "redirect:/regiones";
