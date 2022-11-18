@@ -17,6 +17,15 @@
                   <input type="text" name="region" th:field="*{region}" class="form-control" placeholder="Ingrese su region: " required>
                 </div>
 
+                <div class="form-group row">
+                  <label class="col-md-2" for="pais">Pais:</label> 
+                  <select th:field="*{Pais}" class="form-control form-control-sm col-md-6" id="pais"> 
+                    <option th:each="pais:${pais}"
+                      th:value="${pais.id}"
+                      th:text="${pais.id}">					
+                  </select>
+                </div>
+
                 <div class="box-footer">
                   <button class="btn btn-succes">Guardar</button>
                 </div>

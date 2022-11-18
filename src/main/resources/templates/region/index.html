@@ -27,11 +27,13 @@
           <tr>
             <th scope="col">Nombre</th>
             <th scope="col">Acciones</th>
+            <th scope="col">Pais</th>
           </tr>
         </thead>
         <tbody>
           <tr th:each="region: ${regiones}">
             <td th:text="${region.region}"></td>
+            <td th:text="${region.pais}">Pais</td>
             <td>
               <!--En este boton se llama al formulario de editar-->
               <a th:href="@{/region/editar/{id}(id=${region.id})}" class="btn btn-info">editar</a>
