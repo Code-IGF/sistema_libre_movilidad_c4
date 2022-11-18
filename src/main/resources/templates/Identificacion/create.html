@@ -15,36 +15,85 @@
                 <div class="form-group">
                   <label>Tipo: </label>
                   <input type="text" name="Tipo de Identificacion" th:field="*{tipo}" class="form-control" placeholder="Ingrese su tipo: " required>
+                  <div class="alert alert-warning d-flex align-items-center" role="alert" th:if="${#fields.hasErrors('tipo')}"
+                  th:errors="*{tipo}">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                    <div>
+                      An example warning alert with an icon
+                    </div>
+                  </div>
                 </div>
 
                 <div class="form-group">
                     <label>Numero Unico: </label>
                     <input type="text" name="Numero Unico" th:field="*{numeroUnico}" class="form-control" placeholder="Ingrese su numero unico: " required>
+                    <div class="alert alert-warning d-flex align-items-center" role="alert" th:if="${#fields.hasErrors('numeroUnico')}"
+                    th:errors="*{numeroUnico}">
+                      <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                      <div>
+                        An example warning alert with an icon
+                      </div>
+                    </div>
                   </div>
 
                   <div class="form-group">
                     <label>Pais de nacimiento: </label>
                     <input type="text" name="Pais" th:field="*{paisNacimiento}" class="form-control" placeholder="Ingrese su pais de nacimiento: " required>
+                    <div class="alert alert-warning d-flex align-items-center" role="alert" th:if="${#fields.hasErrors('paisNacimiento')}"
+                    th:errors="*{paisNacimiento}">
+                      <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                      <div>
+                        An example warning alert with an icon
+                      </div>
+                    </div>
                   </div>
 
                   <div class="form-group">
                     <label>Pais de residencia: </label>
                     <input type="text" name="Pais residencia" th:field="*{paisResidencia}" class="form-control" placeholder="Ingrese su pais de residencia: " required>
+                    <div class="alert alert-warning d-flex align-items-center" role="alert" th:if="${#fields.hasErrors('paisResidencia')}"
+                    th:errors="*{paisResidencia}">
+                      <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                      <div>
+                        An example warning alert with an icon
+                      </div>
+                    </div>
                   </div>
 
                   <div class="form-group">
                     <label>ocupacion: </label>
                     <input type="text" name="Ocupacion" th:field="*{ocupacion}" class="form-control" placeholder="Ingrese su ocupacion: " required>
+                    <div class="alert alert-warning d-flex align-items-center" role="alert" th:if="${#fields.hasErrors('ocupacion')}"
+                    th:errors="*{ocupacion}">
+                      <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                      <div>
+                        An example warning alert with an icon
+                      </div>
+                    </div>
                   </div>
 
                   <div class="form-group">
                     <label>Pais Emisor: </label>
                     <input type="text" name="Pais Emisor" th:field="*{paisEmisor}" class="form-control" placeholder="Ingrese su pais de Emision " required>
+                  <div class="alert alert-warning d-flex align-items-center" role="alert" th:if="${#fields.hasErrors('paisEmisor')}"
+                  th:errors="*{paisEmisor}">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                    <div>
+                      An example warning alert with an icon
+                    </div>
                   </div>
+                </div>
 
                   <div class="form-group">
                     <label>Fecha vencimiento: </label>
                     <input type="text" name="Fecha vencimiento" th:field="*{fechaVencimiento}" class="form-control" placeholder="Ingrese su fecha de vencimiento " required>
+                    <div class="alert alert-warning d-flex align-items-center" role="alert" th:if="${#fields.hasErrors('fechaVencimiento')}"
+                  th:errors="*{fechaVencimiento}">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                    <div>
+                      An example warning alert with an icon
+                    </div>
+                  </div>
                   </div>
            
                 <div class="box-footer">

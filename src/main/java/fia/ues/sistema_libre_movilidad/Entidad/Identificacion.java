@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "identificacion")
@@ -15,24 +16,31 @@ public class Identificacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_identificacion;
 
+    @NotEmpty
     @Column(name = "tipo", nullable = false, length = 30)
     private String tipo;
 
+    @NotEmpty
     @Column(name = "numero_unico", nullable = false, length = 50)
     private String numeroUnico;
 
+    @NotEmpty
     @Column(name = "pais_nacimiento", nullable = false, length = 30)
     private String paisNacimiento;
 
+    @NotEmpty
     @Column(name = "pais_residencia", nullable = false, length = 30)
     private String paisResidencia;
 
+    @NotEmpty
     @Column(name = "ocupacion", nullable = false, length = 30)
     private String ocupacion;
 
+    @NotEmpty
     @Column(name = "pais_emisor", nullable = false, length = 30)
     private String paisEmisor;
 
+    @NotEmpty
     @Column(name = "fecha_vencimiento", nullable = false, length = 30)
     private String fechaVencimiento;
 
