@@ -41,13 +41,37 @@ public class PaisControlador {
     }
     @PostMapping("/paises")
     public String store(@Valid@ModelAttribute("pais") Pais pais, BindingResult result, Model model){
+      
+        List<Pais> paisLista= servicio.listarPaises();
+        String error="";
+        String errorNombre="";
+
+       //List<Usuario> listaUsuario=usuarioServicio.listarUsuarios();
+        
         if (result.hasErrors()){
             model.addAttribute("pais", pais);
-        return "pais/crear_pais";
+            servicio.guardarPais(pais);
+            return "redirect:/paises";
     }
-    servicio.guardarPais(pais);
+        for(Pais p: paisLista){
+            if(p.getNombre()==pais.getNombre()){
+                model.addAttribute("pais", pais);
+                error="Nombre ya asignado";
+                model.addAttribute("error",error);
+                return "redirect:/paises";
+            }
+            if(p.getNombre().equals(pais.getNombre())){
+                model.addAttribute("pais", pais);
+                errorNombre="Nombre ocupado";
+                model.addAttribute("errorNombre", errorNombre);
+                return "redirect:/paises";
+            }
+        }
+        servicio.guardarPais(pais);
         return "redirect:/paises";
     }
+    
+    
 
     @GetMapping("/paises/editar/{id}")
     public String edit(@PathVariable Long id, Model modelo){
@@ -58,10 +82,11 @@ public class PaisControlador {
     @PostMapping("/paises/{id}")
     public String update(@PathVariable Long id, @ModelAttribute("pais") Pais pais,
     Model modelo){
+
         Pais paisExistente = servicio.obtenerPaisPorId(id);
         paisExistente.setId(id);
         paisExistente.setNombre(pais.getNombre());
-        
+
         servicio.actualizarPais(paisExistente);
         return "redirect:/paises";
     }
