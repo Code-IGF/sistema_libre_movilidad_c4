@@ -1,5 +1,7 @@
 package fia.ues.sistema_libre_movilidad.Controlador;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,7 +36,7 @@ public class UsuarioControlador {
 
 
     @PostMapping("/usuarios")
-    public String store( @ModelAttribute("Usuario") Usuario usuario, BindingResult result, Model model){
+    public String store(@Valid @ModelAttribute("usuario") Usuario usuario, BindingResult result, Model model){
         if(result.hasErrors()) {
             model.addAttribute("usuario", usuario);
             return "usuario/crear_usuario";
@@ -53,17 +55,20 @@ public class UsuarioControlador {
 
     @PostMapping("/usuarios/{id}")
     public String update(@PathVariable Long id, @ModelAttribute("usuario") Usuario usuario,
-    Model modelo){
+    BindingResult result, Model model){
         Usuario usuarioExistente = usuarioServicio.obtenerUsuarioPorId(id);
         usuarioExistente.setId(id);
         usuarioExistente.setCorreo(usuario.getCorreo());
         usuarioExistente.setContrasenia(usuario.getContrasenia());
-
+        if(result.hasErrors()) {
+            model.addAttribute("usuario", usuario);
+            return "usuario/crear_usuario";
+        }       
         usuarioServicio.actualizarUsuario(usuarioExistente);
         return "redirect:/usuarios";        
     }
 
-    
+
     @GetMapping("/usuarios/{id}")
     public String destroy(@PathVariable Long id){
         usuarioServicio.eliminarUsuario(id);

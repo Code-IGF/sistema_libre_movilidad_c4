@@ -36,18 +36,34 @@ public class ViajeroControlador {
     @GetMapping("/viajeros/nuevo")
     public String create(Model modelo){
         Viajero viajero = new Viajero();
+        List<Usuario> listaUsuarios=usuarioServicio.listarUsuarios();
         modelo.addAttribute("viajero", viajero);
+        modelo.addAttribute("usuarios", listaUsuarios);
         return "viajero/create";
     }
 
     @PostMapping("/viajeros")
     public String store(@Valid @ModelAttribute("viajero") Viajero viajero, BindingResult result, Model model){
         
+        List<Viajero> listaViajeros = viajeroServicio.listarViajeros();
+        List<Usuario> listaUsuarios=usuarioServicio.listarUsuarios();
+        String error = "";
+
         if(result.hasErrors()) {
             model.addAttribute("viajero", viajero);
             return "viajero/create";
         }
         
+        for (Viajero v : listaViajeros) {
+            if (v.getUsuario().getCorreo().equalsIgnoreCase(viajero.getUsuario().getCorreo())) {
+                model.addAttribute("viajero", viajero);
+                model.addAttribute("usuarios", listaUsuarios);
+                error="Usuario ya asignado";
+                model.addAttribute("error", error);
+                return "viajero/create";
+            }
+        }
+
         viajeroServicio.guardarViajero(viajero);
         return "redirect:/viajeros";
     }
