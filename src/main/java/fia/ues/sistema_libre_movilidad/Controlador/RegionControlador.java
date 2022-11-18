@@ -55,13 +55,13 @@ public String store(@Valid @ModelAttribute("region") Region region, BindingResul
     }
 
     for(Region r: regionLista){
-        if(p.getNombre()==pais.getNombre()){
+        if(r.getNombre()==region.getNombre()){
             model.addAttribute("region", region);
             error="Nombre ya asignado";
             model.addAttribute("error",error);
             return "redirect:/regiones";
         }
-        if(p.getNombre().equals(pais.getNombre())){
+        if(r.getNombre().equals(region.getNombre())){
             model.addAttribute("region", region);
             errorNombre="Nombre ocupado";
             model.addAttribute("errorNombre", errorNombre);
