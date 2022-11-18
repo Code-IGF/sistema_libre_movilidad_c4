@@ -13,17 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import fia.ues.sistema_libre_movilidad.Entidad.Pais;
 import fia.ues.sistema_libre_movilidad.Servicio.PaisServicio;
-import fia.ues.sistema_libre_movilidad.Servicio.UsuarioServicio;
-import fia.ues.sistema_libre_movilidad.Entidad.Usuario;
 
 @Controller
 public class PaisControlador {
         
     @Autowired
     private PaisServicio servicio;
-    
-    @Autowired
-    private UsuarioServicio usuarioServicio;
 
     @GetMapping({"/paises"})
     public String index(Model modelo){
@@ -34,9 +29,7 @@ public class PaisControlador {
     @GetMapping("/paises/nuevo")
     public String create(Model modelo){
         Pais pais = new Pais();
-        List<Usuario> listaUsuarios= usuarioServicio.listarUsuarios();
         modelo.addAttribute("pais",pais);
-        modelo.addAttribute("usuarios", listaUsuarios);
         return "pais/crear_pais";
     }
     @PostMapping("/paises")

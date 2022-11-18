@@ -5,8 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -21,18 +19,6 @@ private long id;
 @NotEmpty
 @Column(name = "nombre", nullable = false, length = 50)
 private String nombre;
-
-@OneToOne
-    @JoinColumn(name="id_usuario")
-    private Usuario usuario;
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
 
     public Long getId() {
         return id;
@@ -55,8 +41,7 @@ public Pais(long id, String nombre) {
     this.nombre = nombre;
 }
 
-public Pais( String nombre, Usuario usuario) {
-    this.usuario=usuario;
+public Pais( String nombre) {
     this.nombre = nombre;
 }
 

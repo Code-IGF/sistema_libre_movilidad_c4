@@ -10,22 +10,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.thymeleaf.engine.AttributeName;
 
-import aj.org.objectweb.asm.Attribute;
 import fia.ues.sistema_libre_movilidad.Entidad.EmpresaTransporte;
 import fia.ues.sistema_libre_movilidad.Servicio.EmpresaTransporteServicio;
-import fia.ues.sistema_libre_movilidad.Servicio.UsuarioServicio;
-import fia.ues.sistema_libre_movilidad.Entidad.Usuario;
 
 
 @Controller
 public class EmpresaTransporteControlador {
     @Autowired
     private EmpresaTransporteServicio servicio;
-
-    @Autowired
-    private UsuarioServicio usuarioServicio;
 
     @GetMapping({"/empresas_transporte"})
     public String index(Model modelo){
