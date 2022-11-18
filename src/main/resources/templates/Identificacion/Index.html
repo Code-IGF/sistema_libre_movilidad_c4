@@ -33,6 +33,7 @@
           <th scope="col">Pais Emisor</th>
           <th scope="col">Fecha vencimiento</th>
           <th scope="col">Acciones</th>
+          <th scope="col">Usuario</th>
         </tr>
       </thead>
       <tbody>
@@ -44,6 +45,7 @@
           <td th:text="${identificacion.ocupacion}">Ocupacion</td>
           <td th:text="${identificacion.paisEmisor}">Pais Emisor</td>
           <td th:text="${identificacion.fechaVencimiento}">Fecha vencimiento</td>
+          <td th:text="${estudiante.usuario.correo}">Email</td>
           <td>
 
             <!--En este boton se llama al formulario de editar-->
