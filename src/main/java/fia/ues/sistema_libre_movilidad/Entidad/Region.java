@@ -31,7 +31,8 @@ private String nombre;
         this.nombre=nombre;
     }
 
-    public Region (String nombre){
+    public Region (String nombre, Usuario usuario){
+       this.usuario=usuario;
         this.nombre=nombre;
     }
 
