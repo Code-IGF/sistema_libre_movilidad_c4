@@ -33,6 +33,7 @@
             <th scope="col">Fecha Nacimiento</th>
             <th scope="col">Sexo</th>
             <th scope="col">Teléfono</th>
+            <th scope="col">Usuario</th>
             <th scope="col">Acciones</th>
           </tr>
         </thead>
@@ -43,6 +44,7 @@
             <td th:text="${viajero.fechaNacimiento}"></td>
             <td th:text="${viajero.sexo}"></td>
             <td th:text="${viajero.telefono}"></td>
+            <td th:text="${viajero.usuario.correo}"></td>
             <td>
 
               <!--En este boton se llama al formulario de editar-->
