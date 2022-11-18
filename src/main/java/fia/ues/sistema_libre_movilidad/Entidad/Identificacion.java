@@ -5,11 +5,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "identificacion")
 public class Identificacion {
+
+
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,8 +40,12 @@ public class Identificacion {
     @Column(name = "fecha_vencimiento", nullable = false, length = 30)
     private String fechaVencimiento;
 
+    @OneToOne
+    @JoinColumn(name="id_usuario")
+    private Usuario usuario;
+
     public Identificacion(Long id_identificacion, String tipo, String numeroUnico, String paisNacimiento,
-            String paisResidencia, String ocupacion, String paisEmisor, String fechaVencimiento) {
+            String paisResidencia, String ocupacion, String paisEmisor, String fechaVencimiento, Usuario usuario) {
         this.id_identificacion = id_identificacion;
         this.tipo = tipo;
         this.numeroUnico = numeroUnico;
@@ -48,7 +56,7 @@ public class Identificacion {
         this.fechaVencimiento = fechaVencimiento;
     }
     public Identificacion(String tipo, String numeroUnico, String paisNacimiento,
-    String paisResidencia, String ocupacion, String paisEmisor, String fechaVencimiento) {;
+    String paisResidencia, String ocupacion, String paisEmisor, String fechaVencimiento, Usuario usuario) {;
         this.tipo = tipo;
         this.numeroUnico = numeroUnico;
         this.paisNacimiento = paisNacimiento;
