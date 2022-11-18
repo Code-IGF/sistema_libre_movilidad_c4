@@ -4,8 +4,7 @@
 <head th:replace="layout :: header">
     <meta charset="utf-8" />
     <title>Vista Inicial</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    
 </head>
 <title>Vista Inicial</title>
 </head>
@@ -14,65 +13,85 @@
     <!--Inicio de sidebar-->
     <nav th:replace="layout :: navegacion"></nav>
     <!--Inicio de area de trabajo-->
-    <div class="col py-3">
+
+    <div class="container-fluid py-3">
         <!--Trabaja en este espacio-->
-        <header class="container-fluid" style="background-color: skyblue">
-            <img width="265" height="100" />
-            <div style="display:inline-block; margin-left:60px;">
-                <h3 style="color:white">Prechequeo</h3>
-                <h4 style="color:white">Sistemas de Control de Migracion</h4>
+        <div style="background-color: skyblue">
+            <div class="row">
+                <div class="col-2">
+                    <img src="/img/sica.jpg" class="img-fluid"/>
+                </div>
+                <div class="col-10 d-flex align-items-center">
+                    <div>
+                        <h3 style="color:white">Prechequeo</h3>
+                        <h4 style="color:white">Sistemas de Control de Migracion</h4>
+                    </div>
+                </div>
             </div>
-        </header>
-        <table>
-            <tr>
-                <td>
-                    <div
-                        style="width:300px; height:150px; padding:15px; border-radius:10px; background: #EB1212; font-size:16px; font-family:Baskerville Old Face; text-align:justify; overflow:auto; color: #fff; margin:10px;">
-                        <div style="font-size:20px; padding:4px; text-align:center;">Prechequo Vigentes</div>
-                        <br> Entradas: 0 <br> Salidas
+        </div>
+        <div class="row pt-4">
+            <div class="col">
+                <div class="card text-white bg-danger mb-3">
+                    <div class="card-header">Prechequo Vigentes</div>
+                    <div class="card-body">
+                        <p>Entradas: 0</p>
+                        <p>Salidas: 0</p>
                     </div>
-                </td>
-                <td>
-                    <div
-                        style="width:300px; height:150px; padding:15px; border-radius:10px; background: skyblue; font-size:16px; font-family:Baskerville Old Face; text-align:justify; overflow:auto; color: #fff; margin:10px;">
-                        <div style="font-size:20    px; padding:5px; text-align:center;">Prechequeos Historicos</div>
-                        <br> Entradas: 0 <br> Salidas : 0
+                  </div>
+            </div>
+            <div class="col">
+                <div class="card text-white bg-primary mb-3">
+                    <div class="card-header">Prechequeos Historicos</div>
+                    <div class="card-body">
+                        <p>Entradas: 0</p>
+                        <p>Salidas: 0</p>
                     </div>
-                </td>
-            </tr>
-        </table>
+                  </div>
+            </div>
+        </div>
+
         <section>
-            <table cellpadding="10 " BORDER="1" ALIGN="center" style="width: 50%" MARGIN="5%">
+            <table class="table table-striped">
                 <thead>
                     <tr>
-                        <table style="width:100%;">
-                            <td
-                                style="color:White;background-color:#4090CB;border-top-width:0px;border-left-width:0px;">
-                                Movimiento </th>
-                            <td
-                                style="color:White;background-color:#4090CB;border-top-width:0px;border-left-width:0px;">
-                                Fecha Viaje</th>
-                            <td
-                                style="color:White;background-color:#4090CB;border-top-width:0px;border-left-width:0px;">
-                                Documento Numero</th>
-                            <td
-                                style="color:White;background-color:#4090CB;border-top-width:0px;border-left-width:0px;">
-                                Nombres</th>
-                            <td
-                                style="color:White;background-color:#4090CB;border-top-width:0px;border-left-width:0px;">
-                                Apellidos</th>
-                            <td
-                                style="color:White;background-color:#4090CB;border-top-width:0px;border-left-width:0px;">
-                                Nacionalidad</th>
-                            <td
-                                style="color:White;background-color:#4090CB;border-top-width:0px;border-left-width:0px;">
-                                Pais origen</th>
-                            <td
-                                style="color:White;background-color:#4090CB;border-top-width:0px;border-left-width:0px;">
-                                Pais Destino</th>
+                        <th
+                            style="color:White;background-color:#4090CB;border-top-width:0px;border-left-width:0px;">
+                            Movimiento </th>
+                        <th
+                            style="color:White;background-color:#4090CB;border-top-width:0px;border-left-width:0px;">
+                            Fecha Viaje</th>
+                        <th
+                            style="color:White;background-color:#4090CB;border-top-width:0px;border-left-width:0px;">
+                            Documento Numero</th>
+                        <th
+                            style="color:White;background-color:#4090CB;border-top-width:0px;border-left-width:0px;">
+                            Nombres</th>
+                        <th
+                            style="color:White;background-color:#4090CB;border-top-width:0px;border-left-width:0px;">
+                            Apellidos</th>
+                        <th
+                            style="color:White;background-color:#4090CB;border-top-width:0px;border-left-width:0px;">
+                            Nacionalidad</th>
+                        <th
+                            style="color:White;background-color:#4090CB;border-top-width:0px;border-left-width:0px;">
+                            Pais origen</th>
+                        <th
+                            style="color:White;background-color:#4090CB;border-top-width:0px;border-left-width:0px;">
+                            Pais Destino</th>
                     </tr>
-
                 </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
             </table>
         </section>
     </div>
@@ -80,11 +99,12 @@
     </div>
     </div>
     <!--Fin de sidebar-->
-    <footer class="navbar navbar-fixed-bottom">
+    <footer class="fixed-bottom">
 
         <h6 align="center">Equipo 4 IGF115 x PRN315</h6>
 
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 
 </html>

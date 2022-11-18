@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name = "region")
+@Table(name = "regiones")
 public class Region {
 
 @Id
@@ -26,12 +26,17 @@ private String nombre;
     @JoinColumn(name="id_usuario")
     private Usuario usuario;
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Region (Long id, String nombre){
+        this.id=id;
+        this.nombre=nombre;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public Region (String nombre){
+        this.nombre=nombre;
+    }
+
+    public Region() {
+
     }
 
     public Long getId() {
@@ -50,19 +55,13 @@ private String nombre;
         this.nombre=nombre;
     }
 
-public Region(long id, String nombre) {
-    this.id = id;
-    this.nombre = nombre;
-}
+    public Usuario getUsuario() {
+        return usuario;
+    }
 
-public Region( String nombre, Usuario usuario) {
-    this.usuario=usuario;
-    this.nombre = nombre;
-}
-
-public Region(){
-
-}
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 
 }
 

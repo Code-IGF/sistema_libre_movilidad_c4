@@ -25,8 +25,8 @@ public class RegionServicioImpl  implements RegionServicio{
     }
 
     @Override
-    public Region obtenerRegionPorId(Long Id) {
-        return repositorio.findById(Id).get();
+    public Region obtenerRegionPorId(Long id) {
+        return repositorio.findById(id).get();
     }
 
     @Override
