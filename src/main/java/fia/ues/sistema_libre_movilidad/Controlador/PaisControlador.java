@@ -45,6 +45,7 @@ public class PaisControlador {
         List<Pais> paisLista= servicio.listarPaises();
         String error="";
         String errorNombre="";
+
        //List<Usuario> listaUsuario=usuarioServicio.listarUsuarios();
         
         if (result.hasErrors()){
@@ -86,18 +87,6 @@ public class PaisControlador {
         paisExistente.setId(id);
         paisExistente.setNombre(pais.getNombre());
 
-        List<Pais> paisLista= servicio.listarPaises();
-        String error="";
-
-        for(Pais p: paisLista){
-
-            if(p.getNombre()==pais.getNombre()){
-                modelo.addAttribute("pais", pais);
-                error="Nombre ya asignado";
-                modelo.addAttribute("error", error);
-                return "redirect:/paises";
-            }
-        }
         servicio.actualizarPais(paisExistente);
         return "redirect:/paises";
     }
