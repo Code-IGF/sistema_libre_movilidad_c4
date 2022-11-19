@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <title>Nuevo viajero</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="container mt-4" th:fragment="crearViajero">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+        <h1 class="text-center">Registro de viajero</h1>
+        <div class="card-body">
+          <form th:action="@{/registro/viajeros}" th:object="${viajero}" method="POST">
+            <div class="form-group">
+              <label>Nombre:</label>
+              <input type="text" name="nombre" th:field="*{nombre}" class="form-control"
+                placeholder="Ingrese su nombre: " required>
+              <div class="alert alert-warning d-flex align-items-center" role="alert"
+                th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:">
+                  <use xlink:href="#exclamation-triangle-fill" />
+                </svg>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Apellido:</label>
+              <input type="text" name="apellido" th:field="*{apellido}" class="form-control"
+                placeholder="Ingrese su apellido: " required>
+              <div class="alert alert-warning d-flex align-items-center" role="alert"
+                th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:">
+                  <use xlink:href="#exclamation-triangle-fill" />
+                </svg>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Fecha de Nacimiento:</label>
+              <input type="date" name="fechanacimiento" th:field="*{fechaNacimiento}" class="form-control" required>
+              <div class="alert alert-warning d-flex align-items-center" role="alert"
+                th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:">
+                  <use xlink:href="#exclamation-triangle-fill" />
+                </svg>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>sexo: </label>
+              <select name="sexo" th:field="*{sexo}" class="form-control" required>
+                <option value="M" selected>Masculino</option>
+                <option value="F">Femenino</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Telefono: </label>
+              <input type="text" name="telefono" th:field="*{telefono}" class="form-control"
+                placeholder="Ingrese su telefono: " required>
+              <div class="alert alert-warning d-flex align-items-center" role="alert"
+                th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:">
+                  <use xlink:href="#exclamation-triangle-fill" />
+                </svg>
+              </div>
+            </div>
+
+            <!--<div class="form-group row">
+              <label class="col-md-2" for="usuario">Usuario:</label> 
+              <select th:field="*{usuario}" class="form-control form-control-sm col-md-6" id="usuario"> 
+                <option th:each="usuario:${usuarios}"
+                  th:value="${usuario.id}"
+                  th:text="${usuario.correo}">					
+              </select>
+            </div>-->
+            <div class="form-group row">
+            <label class="col-md-2" for="usuario">Usuario:</label>
+            <select th:field="*{usuario}" class="form-control form-control-sm col-md-6" id="usuario"> 
+              <option
+                th:value="${usuario.id}"
+                th:text="${usuario.correo}">					
+            </select>
+            <label style="color:#FF0000"  th:text="${error}" class="col-md-10"></label>
+
+            <div class="box-footer">
+              <button class="btn btn-primary" type="submit">
+                Guardar
+              </button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+
+</html>
