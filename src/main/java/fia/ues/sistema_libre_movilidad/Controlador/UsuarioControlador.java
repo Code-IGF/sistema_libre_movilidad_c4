@@ -26,6 +26,11 @@ public class UsuarioControlador {
         modelo.addAttribute("usuarios", usuarioServicio.listarUsuarios());
         return "usuario/index";
     }
+    @GetMapping({"/perfil"})
+    public String perfil(Model modelo){
+        modelo.addAttribute("usuarios", usuarioServicio.listarUsuarios());
+        return "usuario/index";
+    }
 
 
     @GetMapping("/usuarios/nuevo")

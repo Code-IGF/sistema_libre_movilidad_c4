@@ -92,6 +92,22 @@ public class ViajeroControlador {
         usuarioServicio.guardarUsuario(usuario);
         return "redirect:/usuarioViajero/nuevo";
     }
+    //Método para registrar viajero despues de registrar usuario
+    @PostMapping("/registro/viajeros")
+    public String registrarViajero(@Valid @ModelAttribute("viajero") Viajero viajero,
+    @Valid  @ModelAttribute("usuario") Usuario usuario, BindingResult result, Model model){
+        
+        if(result.hasErrors()) {
+            model.addAttribute("usuario", usuario);
+            model.addAttribute("viajero", viajero);
+            return "Auth/registrarViajero";
+        }
+        
+        viajeroServicio.guardarViajero(viajero);
+        usuarioServicio.guardarUsuario(usuario);
+        return "redirect:/login";
+    }
+
 
     @GetMapping("/viajeros/editar/{id}")
     public String edit(@PathVariable Long id, Model modelo){

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesión</title>
+    <title>Registrar Cuenta</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
@@ -17,17 +17,17 @@
                     <!-- Login -->
                     <div class="col-12 col-md-6 p-3 bg-white">
                         <h2 class="fw-bold text-center p-4">Registrar Usuario</h2>
-                        <form th:action="@{/registro}" th:object="${usuario}" method="POST" id="registro-form">
-                            <div class="mb-4 mx-3">
+                        <form class="mx-3" th:action="@{/registro}" th:object="${usuario}" method="POST" id="registro-form">
+                            <div class="mb-4">
                                 <label for="email" class="form-label">Correo Electronico</label>
                                 <input type="email" class="form-control" th:field="*{correo}" placeholder="Ingrese su correo: " required>
                             </div>
-                            <div class="alert alert-warning text-center mx-3" role="alert" th:if="${registroError}" >
+                            <div class="alert alert-warning text-center" role="alert" th:if="${registroError}" >
                                 Ya existe una cuenta con este correo
                             </div>
                             <div class="row">
                                 <div class="col-12 col-md-6 ">
-                                    <div class="mb-4 mx-3">
+                                    <div class="mb-4">
                                         <label for="passwbgord" class="form-label">Contraseña</label>
                                         <input type="password" name="contrasenia" th:field="*{contrasenia}" id="pass1" aria-describedby="pass1Feedback"
                                         class="form-control" placeholder="Ingrese su contraseña: " required>
@@ -37,19 +37,19 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6">
-                                    <div class="mb-4 mx-3">
+                                    <div class="mb-4">
                                         <label for="passwbgord" class="form-label">Confirme contraseña</label>
                                         <input type="password" name="contrasenia2"  class="form-control" placeholder="Confirme su contraseña: " required>
                                     </div>
                                 </div>
                             </div>
-                            <div class="d-grid mb-4 mx-3"> 
-                                <button type="submit    " class="btn btn-primary" id="btn-registrar">Registrar Usuario</button>
+                            <div class="d-grid mb-4"> 
+                                <button type="submit" class="btn btn-primary" id="btn-registrar">Registrar Usuario</button>
                             </div>
-                            <div class="alert alert-warning text-center mx-3" role="alert" id="alert-null" hidden>
+                            <div class="alert alert-warning text-center" role="alert" id="alert-null" hidden>
                                 Ingrese su correo y confirme se contraseña
                             </div>
-                            <div class="d-grid mb-4 mx-3"> 
+                            <div class="d-grid mb-4"> 
                                 <a href="iniciarSesion" class="btn btn-outline-primary">Iniciar Sesión</a>
                             </div>
                         </form>

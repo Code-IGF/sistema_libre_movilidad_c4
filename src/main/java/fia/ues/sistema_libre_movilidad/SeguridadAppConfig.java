@@ -41,7 +41,7 @@ public class SeguridadAppConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-        .antMatchers("/","/public/**", "/registro/**","/resources/**","/resources/public/**")
+        .antMatchers("/","/public/**", "/registro/**","/registro/viajeros","/resources/**","/resources/public/**")
         .permitAll().anyRequest().authenticated()
         .and().formLogin()
         .loginPage("/iniciarSesion")

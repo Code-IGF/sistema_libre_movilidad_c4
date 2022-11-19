@@ -3,6 +3,7 @@ package fia.ues.sistema_libre_movilidad.Controlador;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,34 +20,40 @@ import fia.ues.sistema_libre_movilidad.Servicio.UsuarioServicio;
 public class LoginController {
     @Autowired
     private UsuarioServicio usuarioServicio;
+    @Autowired
+	public BCryptPasswordEncoder encoder;
 
     @GetMapping("/iniciarSesion")
     public String loginPage(){
-        return "login";
+        return "Auth/login";
     }
 
     @GetMapping("/registro")
     public String registroPage(Model modelo){
         Usuario usuario = new Usuario();
         modelo.addAttribute("usuario", usuario);
-        return "register";
+        return "Auth/register";
     }
+    //Función de registro
     @PostMapping("/registro")
     public String store(@Valid @ModelAttribute("usuario") Usuario usuario, BindingResult result, Model model){
         if(result.hasErrors()) {
             model.addAttribute("usuario", usuario);
-            return "register";
+            return "Auth/register";
         }
         try{
+            //Encriptando contraseña
+            usuario.setContrasenia(encoder.encode(usuario.getContrasenia()));
+            Usuario user=usuarioServicio.guardarUsuario(usuario);
             Viajero viajero = new Viajero();
             model.addAttribute("viajero", viajero);
-            Usuario user=usuarioServicio.guardarUsuario(usuario);
             model.addAttribute("usuario", user);
-            return "viajero/create";
+            //Ver ViajeroControlador para ver como continúa este proceso
+            return "Auth/registrarViajero";
         }
         catch(Exception ex){
             model.addAttribute("registroError", true);
-            return "register";
+            return "Auth/register";
         }
     }
 
@@ -54,12 +61,12 @@ public class LoginController {
     @RequestMapping("/login-failed")
     public String loginError(Model model) {
         model.addAttribute("loginError", true);
-        return "login";
+        return "Auth/login";
     }
     // Logout
     @RequestMapping("/finalizarSesion")
     public String logout(Model model) {
         model.addAttribute("logout", true);
-        return "login";
+        return "Auth/login";
     }
 }
