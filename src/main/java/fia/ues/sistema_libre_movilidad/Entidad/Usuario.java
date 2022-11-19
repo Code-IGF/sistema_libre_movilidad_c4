@@ -21,7 +21,7 @@ public class Usuario {
     private String correo;
 
     @NotEmpty
-    @Column(name = "contrasenia", nullable = false, length = 50)
+    @Column(name = "contrasenia", nullable = false)
     private String contrasenia;
 
     public Usuario() {        

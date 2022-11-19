@@ -1,13 +1,33 @@
 package fia.ues.sistema_libre_movilidad;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import fia.ues.sistema_libre_movilidad.Entidad.Usuario;
+import fia.ues.sistema_libre_movilidad.Repositorio.UsuarioRepositorio;
 
 @SpringBootTest
 class SistemaLibreMovilidadApplicationTests {
 
+	@Autowired
+    private UsuarioRepositorio repositorio;
+
+	@Autowired
+	public BCryptPasswordEncoder encoder;
+
 	@Test
-	void contextLoads() {
+	void crearUsuarioTest() {
+		Usuario usuario = new Usuario();
+		usuario.setCorreo("user2@user.com");
+		usuario.setContrasenia(encoder.encode("1234"));
+		Usuario userReturn=repositorio.save(usuario);
+
+		assertTrue(userReturn.getContrasenia().equalsIgnoreCase(usuario.getContrasenia()));
+
 	}
 
 }
