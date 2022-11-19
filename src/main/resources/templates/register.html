@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+<body class="alert-info">
+    <div class="container">
+        <div class="row vh-100 justify-content-center align-items-center mx-2">
+            <div class="col">
+                <div class="row align-items-center justify-content-center shadow bg-white rounded" id="cuadro_login">
+                   
+                    <!-- Login -->
+                    <div class="col-12 col-md-6 p-3 bg-white">
+                        <h2 class="fw-bold text-center p-4">Registrar Usuario</h2>
+                        <form th:action="@{/registro}" th:object="${usuario}" method="POST" id="registro-form">
+                            <div class="mb-4 mx-3">
+                                <label for="email" class="form-label">Correo Electronico</label>
+                                <input type="email" class="form-control" th:field="*{correo}" placeholder="Ingrese su correo: " required>
+                            </div>
+                            <div class="alert alert-warning text-center mx-3" role="alert" th:if="${registroError}" >
+                                Ya existe una cuenta con este correo
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-md-6 ">
+                                    <div class="mb-4 mx-3">
+                                        <label for="passwbgord" class="form-label">Contraseña</label>
+                                        <input type="password" name="contrasenia" th:field="*{contrasenia}" id="pass1" aria-describedby="pass1Feedback"
+                                        class="form-control" placeholder="Ingrese su contraseña: " required>
+                                        <div id="pass1Feedback" class="invalid-feedback">
+                                            Las contraseñas deben ser iguales!
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="mb-4 mx-3">
+                                        <label for="passwbgord" class="form-label">Confirme contraseña</label>
+                                        <input type="password" name="contrasenia2"  class="form-control" placeholder="Confirme su contraseña: " required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-grid mb-4 mx-3"> 
+                                <button type="submit    " class="btn btn-primary" id="btn-registrar">Registrar Usuario</button>
+                            </div>
+                            <div class="alert alert-warning text-center mx-3" role="alert" id="alert-null" hidden>
+                                Ingrese su correo y confirme se contraseña
+                            </div>
+                            <div class="d-grid mb-4 mx-3"> 
+                                <a href="iniciarSesion" class="btn btn-outline-primary">Iniciar Sesión</a>
+                            </div>
+                        </form>
+                    </div>
+                     <!-- Imagen -->
+                     <div class="col-6 bg d-none d-md-block bg-light">
+                        <div>
+                            <img src="/resources/img/id-card-animate.svg" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script th:inline="javascript">
+        $("#registro-form").submit(function(e){
+            e.preventDefault();
+            pass1=$("#registro-form").find('[name=contrasenia]').val();
+            pass2=$("#registro-form").find('[name=contrasenia2]').val();
+            if (pass1!==pass2){
+                $("#pass1").addClass("was-validated is-invalid")
+                return
+            }
+            else{
+                this.submit();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -22,25 +22,29 @@
                     <div class="col-12 col-md-6 bg-white p-3">
                         <h2 class="fw-bold text-center p-4">Iniciar Sesión</h2>
                         <form th:action="@{/AuthorizeLogin}" th:object="${user}" method="POST">
-                            <div class="mb-4">
+                            <div class="mb-4 mx-3">
                                 <label for="email" class="form-label">Usuario o Correo Electronico</label>
                                 <input type="text" class="form-control" name="username">
-                            <div class="mb-4">
+                            </div>
+                            <div class="mb-4 mx-3">
                                 <label for="passwbgord" class="form-label">Contraseña</label>
                                 <input type="password" class="form-control" name="password">
                             </div>
-                            <div class="mb-4 form-check">
+                            <div class="mb-4 mx-3 form-check">
                                 <input type="checkbox" name="connected" class="form-check-input">
                                 <label for="connected" class="form-check-label">No cerrar sesión</label>
                             </div>
-                            <div class="d-grid mb-4"> 
-                                <input type="submit" value="Iniciar sesión"/>
+                            <div class="d-grid mb-4 mx-3"> 
+                                <input type="submit" class="btn btn-primary" value="Iniciar sesión"/>
                             </div>
-                            <div class="alert alert-warning text-center" role="alert" th:if="${loginError}" >
+                            <div class="alert alert-warning text-center mx-3" role="alert" th:if="${loginError}" >
                                 Usuario o Contraseña incorrectos
                             </div>
-                            <div class="alert alert-success text-center" role="alert" th:if="${logout}" >
+                            <div class="alert alert-success text-center mx-3" role="alert" th:if="${logout}" >
                                 Ha cerrado sesión correctamente.
+                            </div>
+                            <div class="d-grid mb-4 mx-3"> 
+                                <a href="registro" class="btn btn-outline-primary">Crear Cuenta</a>
                             </div>
     
                         </form>

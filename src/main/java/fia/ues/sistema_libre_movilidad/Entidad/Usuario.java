@@ -17,7 +17,7 @@ public class Usuario {
     private Long id;
 
     @NotEmpty
-    @Column(name = "correo", nullable = false, length = 50)
+    @Column(name = "correo", unique = true ,nullable = false, length = 50)
     private String correo;
 
     @NotEmpty

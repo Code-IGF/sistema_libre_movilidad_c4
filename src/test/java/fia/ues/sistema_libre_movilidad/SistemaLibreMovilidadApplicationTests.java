@@ -22,7 +22,7 @@ class SistemaLibreMovilidadApplicationTests {
 	@Test
 	void crearUsuarioTest() {
 		Usuario usuario = new Usuario();
-		usuario.setCorreo("user2@user.com");
+		usuario.setCorreo("user@user.com");
 		usuario.setContrasenia(encoder.encode("1234"));
 		Usuario userReturn=repositorio.save(usuario);
 
