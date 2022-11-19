@@ -105,7 +105,7 @@ public class ViajeroControlador {
         
         viajeroServicio.guardarViajero(viajero);
         usuarioServicio.guardarUsuario(usuario);
-        return "redirect:/login";
+        return "redirect:/";
     }
 
 

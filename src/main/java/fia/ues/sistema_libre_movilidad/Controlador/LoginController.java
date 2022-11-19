@@ -23,7 +23,7 @@ public class LoginController {
     @Autowired
 	public BCryptPasswordEncoder encoder;
 
-    @GetMapping("/iniciarSesion")
+    @GetMapping("/")
     public String loginPage(){
         return "Auth/login";
     }
