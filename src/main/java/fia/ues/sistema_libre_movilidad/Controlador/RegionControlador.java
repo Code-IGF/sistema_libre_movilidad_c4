@@ -42,36 +42,57 @@ public String create(Model modelo){
     return "region/crear_region";
 }
 @PostMapping("/regiones")
-public String store(@Valid@ModelAttribute("region") Region region, BindingResult result, Model model){
+public String store(@Valid @ModelAttribute("region") Region region, BindingResult result, Model model){
+     List<Region> regionesLista = servicio.listarRegiones();
+    // List<Usuario> listaUsuarios=usuarioServicio.listarUsuarios();
+     String error="";
+     String errorNombre="";
+
     if (result.hasErrors()){
-        model.addAttribute("region", region);
-    return "region/crear_region";
-}
-servicio.guardarRegion(region);
-    return "redirect:/regiones";
-    
-}
-@GetMapping("/regiones/editar/{id}")
-public String edit(@PathVariable Long id, Model modelo){
-    modelo.addAttribute("region", servicio.obtenerRegionPorId(id));
-    return "region/editar_region";
-}
+            model.addAttribute("region", region);
+            servicio.guardarRegion(region);
+            return "redirect:/regiones";
+    }
 
-@PostMapping("/regiones/{id}")
-public String update(@PathVariable Long id, @ModelAttribute("region") Region region,
-Model modelo){
-    Region regionExistente = servicio.obtenerRegionPorId(id);
-    regionExistente.setId(id);
-    regionExistente.setNombre(region.getNombre());
-    
-    servicio.actualizarRegion(regionExistente);
-    return "redirect:/regiones";
-}
+    for (Region r: regionesLista){
+        if(r.getNombre()==region.getNombre()){
+            model.addAttribute("region", region);
+            error="Nombre ya asignado";
+            model.addAttribute("error",error);
+            return "redirect:/regiones";
+        }
+        if(r.getNombre().equals(region.getNombre())){
+            model.addAttribute("region", region);
+            errorNombre="Nombre ocupado";
+            model.addAttribute("errorNombre", errorNombre);
+            return "redirect:/regiones";
+        }
+    }
+        servicio.guardarRegion(region);
+        return "redirect:/regiones";
+    }
 
-@GetMapping("/regiones/{id}")
-public String destroy(@PathVariable Long id){
-    servicio.eliminarRegion(id);
-    return "redirect:/regiones";
-}
+    @GetMapping("/regiones/editar/{id}")
+    public String edit(@PathVariable Long id, Model modelo){
+        modelo.addAttribute("region", servicio.obtenerRegionPorId(id));
+        return "region/editar_region";
+    }
+
+    @PostMapping("/regiones/{id}")
+    public String update(@PathVariable Long id, @ModelAttribute("region") Region region,
+    Model modelo){
+        Region regionExistente = servicio.obtenerRegionPorId(id);
+        regionExistente.setId(id);
+        regionExistente.setNombre(region.getNombre());
+
+        servicio.actualizarRegion(regionExistente);
+        return "redirect:/regiones";
+    }
+
+    @GetMapping("/regiones/{id}")
+    public String destroy(@PathVariable Long id){
+        servicio.eliminarRegion(id);
+        return "redirect:/regiones";
+    }
 }
 

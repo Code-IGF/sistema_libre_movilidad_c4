@@ -1,6 +1,5 @@
 package fia.ues.sistema_libre_movilidad.Controlador;
 
-import java.util.List; 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;

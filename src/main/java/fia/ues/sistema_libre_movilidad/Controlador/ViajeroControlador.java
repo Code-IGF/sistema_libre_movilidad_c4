@@ -33,14 +33,15 @@ public class ViajeroControlador {
         return "viajero/index"; 
     }
 
-    @GetMapping("/viajeros/nuevo")
+    /*@GetMapping("/viajeros/nuevo")
     public String create(Model modelo){
         Viajero viajero = new Viajero();
         List<Usuario> listaUsuarios=usuarioServicio.listarUsuarios();
+        
         modelo.addAttribute("viajero", viajero);
-        modelo.addAttribute("usuarios", listaUsuarios);
+        //modelo.addAttribute("usuarios", listaUsuarios);
         return "viajero/create";
-    }
+    }*/
 
     @PostMapping("/viajeros")
     public String store(@Valid @ModelAttribute("viajero") Viajero viajero, BindingResult result, Model model){

@@ -1,6 +1,5 @@
 package fia.ues.sistema_libre_movilidad.Entidad;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
