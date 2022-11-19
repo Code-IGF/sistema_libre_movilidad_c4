@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import fia.ues.sistema_libre_movilidad.Entidad.Usuario;
+import fia.ues.sistema_libre_movilidad.Entidad.Viajero;
 import fia.ues.sistema_libre_movilidad.Servicio.UsuarioServicio;
 
 @Controller
@@ -41,8 +42,11 @@ public class UsuarioControlador {
             model.addAttribute("usuario", usuario);
             return "usuario/crear_usuario";
         }
-        usuarioServicio.guardarUsuario(usuario);
-        return "redirect:/usuarios";
+        Viajero viajero = new Viajero();
+        model.addAttribute("viajero", viajero);
+        Usuario user=usuarioServicio.guardarUsuario(usuario);
+        model.addAttribute("usuario", user);
+        return "viajero/create";
     }
 
 
