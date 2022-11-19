@@ -44,7 +44,7 @@ public class SeguridadAppConfig extends WebSecurityConfigurerAdapter{
         .antMatchers("/","/public/**", "/registro/**","/registro/viajeros","/resources/**","/resources/public/**")
         .permitAll().anyRequest().authenticated()
         .and().formLogin()
-        .loginPage("/iniciarSesion")
+        .loginPage("/")
         .failureUrl("/login-failed")
         .loginProcessingUrl("/AuthorizeLogin")
         .defaultSuccessUrl("/home")
