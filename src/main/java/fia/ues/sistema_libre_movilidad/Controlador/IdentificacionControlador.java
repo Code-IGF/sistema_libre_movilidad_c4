@@ -3,10 +3,9 @@ package fia.ues.sistema_libre_movilidad.Controlador;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-<<<<<<< HEAD
+
 import org.springframework.security.core.Authentication;
-=======
->>>>>>> 33371b3b902f29f900c2b7e10cf11c80010e477d
+
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

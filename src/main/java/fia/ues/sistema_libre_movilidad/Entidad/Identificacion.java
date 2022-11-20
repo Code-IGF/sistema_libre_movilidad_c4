@@ -8,10 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-<<<<<<< HEAD
-=======
 import javax.persistence.OneToOne;
->>>>>>> 33371b3b902f29f900c2b7e10cf11c80010e477d
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -61,7 +58,7 @@ public class Identificacion {
 
 
     public Identificacion(Long id_identificacion, String tipo, String numeroUnico, String paisNacimiento,
-            String paisResidencia, String ocupacion, String paisEmisor, String fechaVencimiento,
+            String paisResidencia, String ocupacion, Pais paisEmisor, String fechaVencimiento,
             Usuario usuario) {
 
         this.id_identificacion = id_identificacion;
@@ -75,12 +72,8 @@ public class Identificacion {
         this.usuario=usuario;
     }
     public Identificacion(String tipo, String numeroUnico, String paisNacimiento,
-<<<<<<< HEAD
-    String paisResidencia, String ocupacion, String paisEmisor, String fechaVencimiento,
+    String paisResidencia, String ocupacion, Pais paisEmisor, String fechaVencimiento,
     Usuario usuario) {;
-=======
-    String paisResidencia, String ocupacion, Pais paisEmisor, String fechaVencimiento) {;
->>>>>>> 33371b3b902f29f900c2b7e10cf11c80010e477d
         this.tipo = tipo;
         this.numeroUnico = numeroUnico;
         this.paisNacimiento = paisNacimiento;
@@ -143,14 +136,14 @@ public class Identificacion {
     public void setFechaVencimiento(String fechaVencimiento) {
         this.fechaVencimiento = fechaVencimiento;
     }
-<<<<<<< HEAD
+
     public Usuario getUsuario() {
         return usuario;
     }
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-=======
+
 
     public Usuario getUsuarioId() {
         return usuarioId;
@@ -159,5 +152,4 @@ public class Identificacion {
         this.usuarioId = usuarioId;
     }
 
->>>>>>> 33371b3b902f29f900c2b7e10cf11c80010e477d
 }
