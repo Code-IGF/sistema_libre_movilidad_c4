@@ -32,6 +32,7 @@
             <th scope="col">Pais Origen</th>
             <th scope="col">Pais Destino</th>
             <th scope="col">Motivo</th>
+            <th scope="col">frontera</th>
             <th scope="col">Acciones</th>
           </tr>
         </thead>
@@ -42,6 +43,7 @@
             <td th:text="${solicitud.paisOrigen}">paisOrigen</td>
             <td th:text="${solicitud.paisDestino}">paisDestino</td>
             <td th:text="${solicitud.motivo}">motivo</td>
+            <td th:text="${solicitud.frontera.nombre}">motivo</td>
             <td>
 
               <!--En este boton se llama al formulario de editar-->
