@@ -25,7 +25,7 @@ public class UsuarioDetallesServicio implements UserDetailsService{
         Usuario user=repositorio.findByCorreo(username);
         
         List<GrantedAuthority> roles = new ArrayList<>();
-        roles.add(new SimpleGrantedAuthority("Admin"));
+        roles.add(new SimpleGrantedAuthority(user.getRol()));
 
         UserDetails userDetails = new User(user.getCorreo(), user.getContrasenia(), roles);
         return userDetails;

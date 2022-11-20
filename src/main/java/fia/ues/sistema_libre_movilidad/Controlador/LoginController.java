@@ -44,8 +44,8 @@ public class LoginController {
         try{
             //Encriptando contraseña
             usuario.setContrasenia(encoder.encode(usuario.getContrasenia()));
-            Usuario user=usuarioServicio.guardarUsuario(usuario);
-            model.addAttribute("usuario", user);
+            usuario.setRol("Viajero");
+            usuarioServicio.guardarUsuario(usuario);
             //Ver ViajeroControlador para ver como continúa este proceso
             return "redirect:/";
         }
