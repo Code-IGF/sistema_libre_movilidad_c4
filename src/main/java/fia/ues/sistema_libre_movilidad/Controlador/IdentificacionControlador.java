@@ -3,6 +3,8 @@ package fia.ues.sistema_libre_movilidad.Controlador;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,13 +14,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import fia.ues.sistema_libre_movilidad.Entidad.Identificacion;
+import fia.ues.sistema_libre_movilidad.Entidad.Usuario;
 import fia.ues.sistema_libre_movilidad.Servicio.IdentificacionServicio;
+import fia.ues.sistema_libre_movilidad.Servicio.UsuarioServicio;
 
 @Controller
 public class IdentificacionControlador {
     
     @Autowired
     private IdentificacionServicio servicio;
+
+    @Autowired UsuarioServicio usuarioServicio;
 
 
     @GetMapping({"/identificacion"})
@@ -30,19 +36,23 @@ public class IdentificacionControlador {
     @GetMapping("/identificacion/nuevo")
     public String create(Model modelo){
         Identificacion identificacion = new Identificacion();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Usuario usuario=usuarioServicio.obtenerUsuarioPorEmail(auth.getName());
+
+        modelo.addAttribute("usuario", usuario);
         modelo.addAttribute("identificacion", identificacion);
         return "identificacion/create";
     }
 
     @PostMapping("/identificacion")
-    public String store(@Valid @ModelAttribute("identificacion") Identificacion identificacion, BindingResult result, Model model){
+    public String store(@Valid @ModelAttribute("identificacion") Identificacion identificacion, 
+    BindingResult result, Model model){
         String error="";
         String errorEmail="";
         if (result.hasErrors()){
                 model.addAttribute("identificacion", identificacion);
                 return "identificacion/create";
         }
-        
         servicio.guardarIdentificacion(identificacion);
         return "redirect:/identificacion";
     }

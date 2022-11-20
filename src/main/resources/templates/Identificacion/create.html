@@ -86,7 +86,7 @@
 
                   <div class="form-group">
                     <label>Fecha vencimiento: </label>
-                    <input type="text" name="Fecha vencimiento" th:field="*{fechaVencimiento}" class="form-control" placeholder="Ingrese su fecha de vencimiento " required>
+                    <input type="date" name="Fecha vencimiento" th:field="*{fechaVencimiento}" class="form-control" placeholder="Ingrese su fecha de vencimiento " required>
                     <div class="alert alert-warning d-flex align-items-center" role="alert" th:if="${#fields.hasErrors('fechaVencimiento')}"
                   th:errors="*{fechaVencimiento}">
                     <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
@@ -96,6 +96,14 @@
                   </div>
                   </div>
            
+                  <div class="form-group row">
+                    <label class="col-md-2" for="usuario">Usuario:</label>
+                    <select th:field="*{usuario}" class="form-control form-control-sm col-md-6" id="usuario"> 
+                      <option
+                        th:value="${usuario.id}"
+                        th:text="${usuario.nombre}">					
+                  </select>
+                  </div>
                 <div class="box-footer">
                   <button class="btn btn-succes">Guardar</button>
                 </div>

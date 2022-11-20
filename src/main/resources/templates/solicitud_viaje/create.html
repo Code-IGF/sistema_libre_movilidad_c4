@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-          <h1 class="text-center">Registro de pais</h1>
+          <h1 class="text-center">Registro de solicitud</h1>
           <div class="card-body">
             <form th:action="@{/solicitudes_viaje}" th:object="${solicitud}" method="POST">
               <div class="form-group">
@@ -31,6 +31,23 @@
               <div class="form-group">
                 <label>Motivo: </label>
                 <input type="text" name="motivo" th:field="*{motivo}" class="form-control" placeholder="Ingrese el motivo: " required>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-2" for="usuario">Usuario:</label>
+                <select th:field="*{usuario}" class="form-control form-control-sm col-md-6" id="usuario"> 
+                  <option
+                    th:value="${usuario.id}"
+                    th:text="${usuario.nombre}">					
+                </select>
+              </div>
+              
+              <div class="form-group row">
+                <label class="col-md-3" for="usuario">frontera:</label> 
+                <select th:field="*{frontera}" class="form-control form-control-sm col-md-6" id="frontera"> 
+                  <option th:each="frontera:${fronteras}"
+                    th:value="${frontera.id}"
+                    th:text="${frontera.nombre}">					
+                </select>
               </div>
               <div class="box-footer">
                 <button class="btn btn-succes">Guardar</button>

@@ -2,9 +2,12 @@ package fia.ues.sistema_libre_movilidad.Entidad;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -44,8 +47,14 @@ public class Identificacion {
     @Column(name = "fecha_vencimiento", nullable = false, length = 30)
     private String fechaVencimiento;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="id_usuario")
+    private Usuario usuario;
+
+
     public Identificacion(Long id_identificacion, String tipo, String numeroUnico, String paisNacimiento,
-            String paisResidencia, String ocupacion, String paisEmisor, String fechaVencimiento) {
+            String paisResidencia, String ocupacion, String paisEmisor, String fechaVencimiento,
+            Usuario usuario) {
         this.id_identificacion = id_identificacion;
         this.tipo = tipo;
         this.numeroUnico = numeroUnico;
@@ -54,9 +63,11 @@ public class Identificacion {
         this.ocupacion = ocupacion;
         this.paisEmisor = paisEmisor;
         this.fechaVencimiento = fechaVencimiento;
+        this.usuario=usuario;
     }
     public Identificacion(String tipo, String numeroUnico, String paisNacimiento,
-    String paisResidencia, String ocupacion, String paisEmisor, String fechaVencimiento) {;
+    String paisResidencia, String ocupacion, String paisEmisor, String fechaVencimiento,
+    Usuario usuario) {;
         this.tipo = tipo;
         this.numeroUnico = numeroUnico;
         this.paisNacimiento = paisNacimiento;
@@ -64,6 +75,7 @@ public class Identificacion {
         this.ocupacion = ocupacion;
         this.paisEmisor = paisEmisor;
         this.fechaVencimiento = fechaVencimiento;
+        this.usuario=usuario;
     }
 
     public Identificacion(){
@@ -118,5 +130,10 @@ public class Identificacion {
     public void setFechaVencimiento(String fechaVencimiento) {
         this.fechaVencimiento = fechaVencimiento;
     }
-
+    public Usuario getUsuario() {
+        return usuario;
+    }
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 }
