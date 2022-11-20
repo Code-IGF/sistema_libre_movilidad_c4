@@ -43,6 +43,9 @@ public class Usuario {
     @NotEmpty
     @Column(name = "contrasenia", nullable = false)
     private String contrasenia;
+    
+    @Column(name = "rol", nullable = false, length = 14)
+    private String rol;
 
     public Usuario() {        
     }
@@ -56,6 +59,19 @@ public class Usuario {
         this.telefono = telefono;
         this.correo = correo;
         this.contrasenia = contrasenia;
+    }
+    public Usuario(Long id, String nombre, String apellido, 
+        String fechaNacimiento, String sexo, String telefono, 
+        String correo, String contrasenia, String rol) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.fechaNacimiento = fechaNacimiento;
+        this.sexo = sexo;
+        this.telefono = telefono;
+        this.correo = correo;
+        this.contrasenia = contrasenia;
+        this.rol=rol;
     }
     
 
@@ -120,6 +136,13 @@ public class Usuario {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public void setRol(String rol){
+        this.rol = rol;
+    }
+    public String getRol(){
+        return rol;
     }
 
 }
