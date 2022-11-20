@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Nuevo pais</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+          <h1 class="text-center">Registro de pais</h1>
+          <div class="card-body">
+            <form th:action="@{/solicitudes_viaje}" th:object="${solicitud}" method="POST">
+              <div class="form-group">
+                <label>fecha: </label>
+                <input type="date" name="fechaSolicitud" th:field="*{fechaSolicitud}" class="form-control" placeholder="Ingrese la fecha: " required>
+              </div>
+              <div class="form-group">
+                <label>Estado: </label>
+                <input type="text" name="estado" th:field="*{estado}" class="form-control" placeholder="Ingrese el estado: " required>
+              </div>
+              <div class="form-group">
+                <label>Pais de origen: </label>
+                <input type="text" name="paisOrigen" th:field="*{paisOrigen}" class="form-control" placeholder="Ingrese el pais de origen: " required>
+              </div>
+              <div class="form-group">
+                <label>Pais de Destino: </label>
+                <input type="text" name="paisDestino" th:field="*{paisDestino}" class="form-control" placeholder="Ingrese el pais de Destino: " required>
+              </div>
+              <div class="form-group">
+                <label>Motivo: </label>
+                <input type="text" name="motivo" th:field="*{motivo}" class="form-control" placeholder="Ingrese el motivo: " required>
+              </div>
+              <div class="box-footer">
+                <button class="btn btn-succes">Guardar</button>
+              </div>
+          </form>
+          
+        </div>
+      </div> 
+
+      </div>
+  </div>
+
+</body>
+</html>

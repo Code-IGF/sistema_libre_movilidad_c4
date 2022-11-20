@@ -63,7 +63,7 @@ public class SolicitudViajeControlador {
         SolicitudViaje solicitudExistente = servicio.obtenerSolicitudPorId(id);
         solicitudExistente.setIdSolicitudViaje(id);
         solicitudExistente.setEstado(solicitudViaje.getEstado());
-        solicitudExistente.setFechaSolicitud(solicitudViaje.getEstado());
+        solicitudExistente.setFechaSolicitud(solicitudViaje.getFechaSolicitud());
         solicitudExistente.setMotivo(solicitudViaje.getMotivo());
         solicitudExistente.setPaisDestino(solicitudViaje.getPaisDestino());
         solicitudExistente.setPaisOrigen(solicitudViaje.getPaisOrigen());
