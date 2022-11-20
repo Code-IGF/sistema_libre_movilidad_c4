@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import fia.ues.sistema_libre_movilidad.Entidad.Identificacion;
 import fia.ues.sistema_libre_movilidad.Entidad.Usuario;
 import fia.ues.sistema_libre_movilidad.Servicio.IdentificacionServicio;
+import fia.ues.sistema_libre_movilidad.Servicio.PaisServicio;
 import fia.ues.sistema_libre_movilidad.Servicio.UsuarioServicio;
 
 @Controller
@@ -25,6 +26,9 @@ public class IdentificacionControlador {
 
     @Autowired
     private UsuarioServicio usuarioServicio;
+
+    @Autowired
+    private PaisServicio paisServicio;
 
     @GetMapping({"/identificacion"})
     public String index(Model modelo){
@@ -44,6 +48,7 @@ public class IdentificacionControlador {
     public String createUserIdentification(Model modelo){
         Identificacion identificacion = new Identificacion();
         modelo.addAttribute("identificacion", identificacion);
+        modelo.addAttribute("paises", paisServicio.listarPaises());
         return "usuario/nuevaIdentificacion";
     }
     @PostMapping("/perfil/identificaciones/nueva")

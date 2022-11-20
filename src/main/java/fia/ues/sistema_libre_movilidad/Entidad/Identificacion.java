@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -39,19 +40,19 @@ public class Identificacion {
     private String ocupacion;
 
     @NotEmpty
-    @Column(name = "pais_emisor", nullable = false, length = 30)
-    private String paisEmisor;
-
-    @NotEmpty
     @Column(name = "fecha_vencimiento", nullable = false, length = 30)
     private String fechaVencimiento;
+
+    @OneToOne
+    @JoinColumn(name="pais_emisor", nullable = false)
+    private Pais paisEmisor;
 
     @ManyToOne
     @JoinColumn(name="usuario_id", nullable=false)
     private Usuario usuarioId;
 
     public Identificacion(Long id_identificacion, String tipo, String numeroUnico, String paisNacimiento,
-            String paisResidencia, String ocupacion, String paisEmisor, String fechaVencimiento) {
+            String paisResidencia, String ocupacion, Pais paisEmisor, String fechaVencimiento) {
         this.id_identificacion = id_identificacion;
         this.tipo = tipo;
         this.numeroUnico = numeroUnico;
@@ -62,7 +63,7 @@ public class Identificacion {
         this.fechaVencimiento = fechaVencimiento;
     }
     public Identificacion(String tipo, String numeroUnico, String paisNacimiento,
-    String paisResidencia, String ocupacion, String paisEmisor, String fechaVencimiento) {;
+    String paisResidencia, String ocupacion, Pais paisEmisor, String fechaVencimiento) {;
         this.tipo = tipo;
         this.numeroUnico = numeroUnico;
         this.paisNacimiento = paisNacimiento;
@@ -112,10 +113,10 @@ public class Identificacion {
     public void setOcupacion(String ocupacion) {
         this.ocupacion = ocupacion;
     } 
-    public String getPaisEmisor() {
+    public Pais getPaisEmisor() {
         return paisEmisor;
     }
-    public void setPaisEmisor(String paisEmisor) {
+    public void setPaisEmisor(Pais paisEmisor) {
         this.paisEmisor = paisEmisor;
     }
     public String getFechaVencimiento() {
