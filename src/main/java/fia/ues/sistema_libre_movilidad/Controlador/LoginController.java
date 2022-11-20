@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import fia.ues.sistema_libre_movilidad.Entidad.Usuario;
-import fia.ues.sistema_libre_movilidad.Entidad.Viajero;
 import fia.ues.sistema_libre_movilidad.Servicio.UsuarioServicio;
 
 @Controller
@@ -31,6 +30,7 @@ public class LoginController {
     @GetMapping("/registro")
     public String registroPage(Model modelo){
         Usuario usuario = new Usuario();
+        System.out.println(usuario);
         modelo.addAttribute("usuario", usuario);
         return "Auth/register";
     }
@@ -45,11 +45,9 @@ public class LoginController {
             //Encriptando contraseña
             usuario.setContrasenia(encoder.encode(usuario.getContrasenia()));
             Usuario user=usuarioServicio.guardarUsuario(usuario);
-            Viajero viajero = new Viajero();
-            model.addAttribute("viajero", viajero);
             model.addAttribute("usuario", user);
             //Ver ViajeroControlador para ver como continúa este proceso
-            return "Auth/registrarViajero";
+            return "redirect:/";
         }
         catch(Exception ex){
             model.addAttribute("registroError", true);
