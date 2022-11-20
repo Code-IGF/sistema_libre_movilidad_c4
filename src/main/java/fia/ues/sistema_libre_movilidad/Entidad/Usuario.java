@@ -17,11 +17,11 @@ public class Usuario {
     private Long id;
 
     @NotEmpty
-    @Column(name = "correo", nullable = false, length = 50)
+    @Column(name = "correo", unique = true ,nullable = false, length = 50)
     private String correo;
 
     @NotEmpty
-    @Column(name = "contrasenia", nullable = false, length = 50)
+    @Column(name = "contrasenia", nullable = false)
     private String contrasenia;
 
     public Usuario() {        
