@@ -11,14 +11,65 @@
 <body class="alert-info">
     <div class="container">
         <div class="row vh-100 justify-content-center align-items-center mx-2">
-            <div class="col">
-                <div class="row align-items-center justify-content-center shadow bg-white rounded" id="cuadro_login">
+            
+                <div class="row align-items-center justify-content-center shadow bg-light rounded my-2 g-0" id="cuadro_login">
                    
                     <!-- Login -->
                     <div class="col-12 col-md-6 p-3 bg-white">
-                        <h2 class="fw-bold text-center p-4">Registrar Usuario</h2>
+                        <h2 class="fw-bold text-center ">Registrar Usuario</h2>
                         <form class="mx-3" th:action="@{/registro}" th:object="${usuario}" method="POST" id="registro-form">
-                            <div class="mb-4">
+                            <div class="row">
+                                <div class="col-12 col-md-6 ">
+                                    <div class="mb-3">
+                                        <label for="nombres" class="form-label">Nombre</label>
+                                        <input type="text" name="nombres" th:field="*{nombre}" class="form-control"
+                                            placeholder="Ingrese su nombre: " required>
+                                        <div class="alert alert-warning d-flex align-items-center" role="alert"
+                                            th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">
+                                            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:">
+                                            <use xlink:href="#exclamation-triangle-fill" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="mb-3">
+                                        <label for="apellido" class="form-label">Apellido</label>
+                                        <input type="text" name="apellido" th:field="*{apellido}" class="form-control"
+                                            placeholder="Ingrese su apellido: " required>
+                                        <div class="alert alert-warning d-flex align-items-center" role="alert"
+                                            th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}">
+                                            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:">
+                                            <use xlink:href="#exclamation-triangle-fill" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col-12 col-md-6">
+                                        <label for="fechanacimiento" class="form-label">Fecha de Nacimiento</label>
+                                        <input type="date" name="fechanacimiento" th:field="*{fechaNacimiento}" class="form-control" required>
+                                        <div class="alert alert-warning d-flex align-items-center" role="alert"
+                                            th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}">
+                                            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:">
+                                            <use xlink:href="#exclamation-triangle-fill" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="sexo" class="form-label">Sexo</label>
+                                            <select name="sexo" th:field="*{sexo}" class="form-control" required>
+                                              <option value="M" selected>Masculino</option>
+                                              <option value="F">Femenino</option>
+                                            </select>
+                                          </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
                                 <label for="email" class="form-label">Correo Electronico</label>
                                 <input type="email" class="form-control" th:field="*{correo}" placeholder="Ingrese su correo: " required>
                             </div>
@@ -27,7 +78,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-12 col-md-6 ">
-                                    <div class="mb-4">
+                                    <div class="mb-3">
                                         <label for="passwbgord" class="form-label">Contraseña</label>
                                         <input type="password" name="contrasenia" th:field="*{contrasenia}" id="pass1" aria-describedby="pass1Feedback"
                                         class="form-control" placeholder="Ingrese su contraseña: " required>
@@ -37,20 +88,24 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6">
-                                    <div class="mb-4">
+                                    <div class="mb-3">
                                         <label for="passwbgord" class="form-label">Confirme contraseña</label>
                                         <input type="password" name="contrasenia2"  class="form-control" placeholder="Confirme su contraseña: " required>
                                     </div>
                                 </div>
                             </div>
-                            <div class="d-grid mb-4"> 
+                            <div class="mb-3">
+                                <label for="telefono" class="form-label">Número de Teléfono</label>
+                                <input type="tel" class="form-control" th:field="*{telefono}" placeholder="Ingrese su número de Teléfono: " required>
+                            </div>
+                            <div class="d-grid mb-3"> 
                                 <button type="submit" class="btn btn-primary" id="btn-registrar">Registrar Usuario</button>
                             </div>
                             <div class="alert alert-warning text-center" role="alert" id="alert-null" hidden>
                                 Ingrese su correo y confirme se contraseña
                             </div>
-                            <div class="d-grid mb-4"> 
-                                <a href="iniciarSesion" class="btn btn-outline-primary">Iniciar Sesión</a>
+                            <div class="d-grid mb-3"> 
+                                <a href="/" class="btn btn-outline-primary">Iniciar Sesión</a>
                             </div>
                         </form>
                     </div>
@@ -61,7 +116,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            
         </div>
     </div>
     <script th:inline="javascript">
