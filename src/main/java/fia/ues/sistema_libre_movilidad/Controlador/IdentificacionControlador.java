@@ -26,6 +26,26 @@ public class IdentificacionControlador {
         modelo.addAttribute("identificacion", servicio.listarIdentificacion());
         return "identificacion/index";
     } 
+    @GetMapping({"/perfil/identificaciones"})
+    public String userIdentifications(Model modelo){
+        modelo.addAttribute("identificacion", servicio.listarIdentificacion());
+        return "usuario/identificaciones";
+    }
+    @GetMapping("/perfil/identificaciones/nueva")
+    public String createUserIdentification(Model modelo){
+        Identificacion identificacion = new Identificacion();
+        modelo.addAttribute("identificacion", identificacion);
+        return "usuario/nuevaIdentificacion";
+    }
+    @PostMapping("/perfil/identificaciones/nueva")
+    public String storeUserIdentificacion(@Valid @ModelAttribute("identificacion") Identificacion identificacion, BindingResult result, Model model){
+        if (result.hasErrors()){
+                model.addAttribute("identificacion", identificacion);
+                return "usuario/nuevaIdentificacion";
+        }
+        servicio.guardarIdentificacion(identificacion);
+        return "/perfil/identificaciones";
+    } 
 
     @GetMapping("/identificacion/nuevo")
     public String create(Model modelo){

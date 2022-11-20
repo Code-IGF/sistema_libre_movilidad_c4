@@ -39,5 +39,10 @@ public class UsuarioServicioImpl implements UsuarioServicio{
         repositorio.deleteById(Id);
         
     }
+
+    @Override
+    public Usuario buscarPorEmail(String email){
+        return repositorio.findByCorreo(email);
+    }
     
 }
