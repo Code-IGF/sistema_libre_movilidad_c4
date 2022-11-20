@@ -33,7 +33,7 @@ public class PaisControlador {
         return "pais/crear_pais";
     }
     @PostMapping("/paises")
-    public String store(@Valid@ModelAttribute("pais") Pais pais, BindingResult result, Model model){
+    public String store(@Valid @ModelAttribute("pais") Pais pais, BindingResult result, Model model){
       
         List<Pais> paisLista= servicio.listarPaises();
         String error="";
@@ -43,8 +43,7 @@ public class PaisControlador {
         
         if (result.hasErrors()){
             model.addAttribute("pais", pais);
-            servicio.guardarPais(pais);
-            return "redirect:/paises";
+            return "pais/crear_pais";
     }
         for(Pais p: paisLista){
             if(p.getNombre()==pais.getNombre()){

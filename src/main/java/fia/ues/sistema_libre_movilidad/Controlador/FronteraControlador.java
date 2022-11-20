@@ -1,5 +1,7 @@
 package fia.ues.sistema_libre_movilidad.Controlador;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +14,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import fia.ues.sistema_libre_movilidad.Entidad.Frontera;
+import fia.ues.sistema_libre_movilidad.Entidad.Pais;
 import fia.ues.sistema_libre_movilidad.Servicio.FronteraServicio;
+import fia.ues.sistema_libre_movilidad.Servicio.PaisServicio;
 
 @Controller
 public class FronteraControlador {
     
     @Autowired
     private FronteraServicio servicio;
+
+    @Autowired
+    private PaisServicio paisServicio;
 
     @GetMapping({"/fronteras"})
     public String index(Model modelo){
@@ -29,6 +36,8 @@ public class FronteraControlador {
     @GetMapping("/fronteras/nuevo")
     public String create(Model modelo){
         Frontera frontera = new Frontera();
+        List<Pais> paises = paisServicio.listarPaises();
+        modelo.addAttribute("paises", paises);
         modelo.addAttribute("frontera", frontera);
         return "frontera/crear_frontera";
     }
@@ -51,6 +60,8 @@ public class FronteraControlador {
 
     @GetMapping("/fronteras/editar/{id}")
     public String edit(@PathVariable Long id, Model modelo){
+        List<Pais> paises = paisServicio.listarPaises();
+        modelo.addAttribute("paises", paises);
         modelo.addAttribute("frontera", servicio.obtenerFronteraPorId(id));
         return "frontera/editar_frontera";
     }
@@ -61,7 +72,7 @@ public class FronteraControlador {
         Frontera fronteraExistente = servicio.obtenerFronteraPorId(id);
         fronteraExistente.setId(id);
         fronteraExistente.setNombre(frontera.getNombre());
-        
+        fronteraExistente.setPais(frontera.getPais());
         if(result.hasErrors()){
             model.addAttribute("frontera", frontera);
             return "frontera/editar_frontera";

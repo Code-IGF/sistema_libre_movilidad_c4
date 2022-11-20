@@ -32,12 +32,14 @@
             <thead class="thead-light">
               <tr>
                 <th scope="col">Nombre</th>
+                <th scope="col">Pais</th>
                 <th scope="col">Acciones</th>
               </tr>
             </thead>
             <tbody>
               <tr th:each="frontera: ${fronteras}">
                 <td th:text="${frontera.nombre}">Nombre</td>
+                <td th:text="${frontera.pais.nombre}">Nombre</td>
                 <td>
 
                   <!--En este boton se llama al formulario de editar-->

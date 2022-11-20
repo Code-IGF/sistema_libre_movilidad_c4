@@ -4,12 +4,7 @@
 <head th:replace="layout :: header">
   <meta charset="utf-8" />
   <title>Territorio</title>
-  <link 
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-    crossorigin="anonymous"
-    />
+
 </head>
 
 <body>
@@ -33,12 +28,14 @@
         <thead class="thead-light">
           <tr>
             <th scope="col">Nombre</th>
+            <th scope="col">Pais</th>
             <th scope="col">Acciones</th>
           </tr>
         </thead>
         <tbody>
           <tr th:each="region: ${regiones}">
             <td th:text="${region.nombre}">Nombre</td>
+            <td th:text="${region.pais.nombre}">Nombre</td>
             <td>
 
               <!--En este boton se llama al formulario de editar-->

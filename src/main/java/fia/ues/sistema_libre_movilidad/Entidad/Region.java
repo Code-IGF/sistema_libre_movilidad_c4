@@ -2,13 +2,17 @@ package fia.ues.sistema_libre_movilidad.Entidad;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.annotations.CollectionId;
 
 @Entity
 @Table(name = "regiones")
@@ -22,18 +26,27 @@ private long id;
 @Column(name = "nombre", nullable = false, length = 50)
 private String nombre;
 
-@OneToOne
-    @JoinColumn(name="id_usuario")
-    private Usuario usuario;
+@ManyToOne(fetch = FetchType.LAZY)
+@JoinColumn(name="id_pais")
+private Pais pais;
 
-    public Region (Long id, String nombre){
+    public Pais getPais() {
+    return pais;
+}
+
+public void setPais(Pais pais) {
+    this.pais = pais;
+}
+
+    public Region (Long id, String nombre, Pais pais){
         this.id=id;
         this.nombre=nombre;
+        this.pais=pais;
     }
 
-    public Region (String nombre, Usuario usuario){
-       this.usuario=usuario;
+    public Region (String nombre, Usuario usuario, Pais pais){
         this.nombre=nombre;
+        this.pais=pais;
     }
 
     public Region() {
@@ -54,14 +67,6 @@ private String nombre;
 
     public void setNombre(String nombre){
         this.nombre=nombre;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
     }
 
 }

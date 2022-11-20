@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import fia.ues.sistema_libre_movilidad.Entidad.Pais;
 import fia.ues.sistema_libre_movilidad.Entidad.Region;
 import fia.ues.sistema_libre_movilidad.Entidad.Usuario;
+import fia.ues.sistema_libre_movilidad.Servicio.PaisServicio;
 import fia.ues.sistema_libre_movilidad.Servicio.RegionServicio;
 import fia.ues.sistema_libre_movilidad.Servicio.UsuarioServicio;
 
@@ -25,7 +27,7 @@ public class RegionControlador {
 private RegionServicio servicio;
 
 @Autowired
-private UsuarioServicio usuarioServicio;
+private PaisServicio paisServicio;
 
 @GetMapping("/regiones")
 public String index(Model modelo){
@@ -36,9 +38,9 @@ public String index(Model modelo){
 @GetMapping("/regiones/nuevo")
 public String create(Model modelo){
     Region region = new Region();
-    List<Usuario> listaUsuarios= usuarioServicio.listarUsuarios();
+    List<Pais> paises=paisServicio.listarPaises();
     modelo.addAttribute("region",region);
-    modelo.addAttribute("usuarios", listaUsuarios);
+    modelo.addAttribute("paises", paises);
     return "region/crear_region";
 }
 @PostMapping("/regiones")
@@ -74,6 +76,8 @@ public String store(@Valid @ModelAttribute("region") Region region, BindingResul
 
     @GetMapping("/regiones/editar/{id}")
     public String edit(@PathVariable Long id, Model modelo){
+        List<Pais> paises=paisServicio.listarPaises();
+        modelo.addAttribute("paises", paises);
         modelo.addAttribute("region", servicio.obtenerRegionPorId(id));
         return "region/editar_region";
     }
@@ -84,7 +88,7 @@ public String store(@Valid @ModelAttribute("region") Region region, BindingResul
         Region regionExistente = servicio.obtenerRegionPorId(id);
         regionExistente.setId(id);
         regionExistente.setNombre(region.getNombre());
-
+        regionExistente.setPais(region.getPais());
         servicio.actualizarRegion(regionExistente);
         return "redirect:/regiones";
     }
