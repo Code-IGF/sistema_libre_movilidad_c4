@@ -17,4 +17,6 @@ public interface UsuarioServicio {
     public void eliminarUsuario(Long Id); 
 
     public Usuario obtenerUsuarioPorEmail(String correo);
+    
+    public Usuario buscarPorEmail(String email);
 }

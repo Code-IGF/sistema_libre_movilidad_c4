@@ -8,6 +8,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+<<<<<<< HEAD
+=======
+import javax.persistence.OneToOne;
+>>>>>>> 33371b3b902f29f900c2b7e10cf11c80010e477d
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -40,13 +44,17 @@ public class Identificacion {
     private String ocupacion;
 
     @NotEmpty
-    @Column(name = "pais_emisor", nullable = false, length = 30)
-    private String paisEmisor;
-
-    @NotEmpty
     @Column(name = "fecha_vencimiento", nullable = false, length = 30)
     private String fechaVencimiento;
 
+    @OneToOne
+    @JoinColumn(name="pais_emisor", nullable = false)
+    private Pais paisEmisor;
+
+    @ManyToOne
+    @JoinColumn(name="usuario_id", nullable=false)
+    private Usuario usuarioId;
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="id_usuario")
     private Usuario usuario;
@@ -55,6 +63,7 @@ public class Identificacion {
     public Identificacion(Long id_identificacion, String tipo, String numeroUnico, String paisNacimiento,
             String paisResidencia, String ocupacion, String paisEmisor, String fechaVencimiento,
             Usuario usuario) {
+
         this.id_identificacion = id_identificacion;
         this.tipo = tipo;
         this.numeroUnico = numeroUnico;
@@ -66,8 +75,12 @@ public class Identificacion {
         this.usuario=usuario;
     }
     public Identificacion(String tipo, String numeroUnico, String paisNacimiento,
+<<<<<<< HEAD
     String paisResidencia, String ocupacion, String paisEmisor, String fechaVencimiento,
     Usuario usuario) {;
+=======
+    String paisResidencia, String ocupacion, Pais paisEmisor, String fechaVencimiento) {;
+>>>>>>> 33371b3b902f29f900c2b7e10cf11c80010e477d
         this.tipo = tipo;
         this.numeroUnico = numeroUnico;
         this.paisNacimiento = paisNacimiento;
@@ -118,10 +131,10 @@ public class Identificacion {
     public void setOcupacion(String ocupacion) {
         this.ocupacion = ocupacion;
     } 
-    public String getPaisEmisor() {
+    public Pais getPaisEmisor() {
         return paisEmisor;
     }
-    public void setPaisEmisor(String paisEmisor) {
+    public void setPaisEmisor(Pais paisEmisor) {
         this.paisEmisor = paisEmisor;
     }
     public String getFechaVencimiento() {
@@ -130,10 +143,21 @@ public class Identificacion {
     public void setFechaVencimiento(String fechaVencimiento) {
         this.fechaVencimiento = fechaVencimiento;
     }
+<<<<<<< HEAD
     public Usuario getUsuario() {
         return usuario;
     }
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+=======
+
+    public Usuario getUsuarioId() {
+        return usuarioId;
+    }
+    public void setUsuarioId(Usuario usuarioId) {
+        this.usuarioId = usuarioId;
+    }
+
+>>>>>>> 33371b3b902f29f900c2b7e10cf11c80010e477d
 }

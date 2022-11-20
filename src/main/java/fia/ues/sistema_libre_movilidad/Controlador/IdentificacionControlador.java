@@ -3,7 +3,10 @@ package fia.ues.sistema_libre_movilidad.Controlador;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+<<<<<<< HEAD
 import org.springframework.security.core.Authentication;
+=======
+>>>>>>> 33371b3b902f29f900c2b7e10cf11c80010e477d
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import fia.ues.sistema_libre_movilidad.Entidad.Identificacion;
 import fia.ues.sistema_libre_movilidad.Entidad.Usuario;
 import fia.ues.sistema_libre_movilidad.Servicio.IdentificacionServicio;
+import fia.ues.sistema_libre_movilidad.Servicio.PaisServicio;
 import fia.ues.sistema_libre_movilidad.Servicio.UsuarioServicio;
 
 @Controller
@@ -24,13 +28,44 @@ public class IdentificacionControlador {
     @Autowired
     private IdentificacionServicio servicio;
 
-    @Autowired UsuarioServicio usuarioServicio;
+    @Autowired
+    private UsuarioServicio usuarioServicio;
 
+    @Autowired
+    private PaisServicio paisServicio;
 
     @GetMapping({"/identificacion"})
     public String index(Model modelo){
         modelo.addAttribute("identificacion", servicio.listarIdentificacion());
         return "identificacion/index";
+    }
+    //Views para el perfil de usuario 
+    @GetMapping({"/perfil/identificaciones"})
+    public String userIdentifications(Model modelo){
+        String userEmail =SecurityContextHolder.getContext().getAuthentication().getName();
+        Long id_usuario = usuarioServicio.buscarPorEmail(userEmail).getId();
+        modelo.addAttribute("identificaciones", servicio.listarIdentificacionByUsuarioId(id_usuario));
+        return "usuario/identificaciones";
+        //System.out.println(id_usuario);
+    }
+    @GetMapping("/perfil/identificaciones/nueva")
+    public String createUserIdentification(Model modelo){
+        Identificacion identificacion = new Identificacion();
+        modelo.addAttribute("identificacion", identificacion);
+        modelo.addAttribute("paises", paisServicio.listarPaises());
+        return "usuario/nuevaIdentificacion";
+    }
+    @PostMapping("/perfil/identificaciones/nueva")
+    public String storeUserIdentificacion(@Valid @ModelAttribute("identificacion") Identificacion identificacion, BindingResult result, Model model){
+        if (result.hasErrors()){
+                model.addAttribute("identificacion", identificacion);
+                return "usuario/nuevaIdentificacion";
+        }
+        String userEmail =SecurityContextHolder.getContext().getAuthentication().getName();
+        Usuario usuario = usuarioServicio.buscarPorEmail(userEmail);
+        identificacion.setUsuarioId(usuario);
+        servicio.guardarIdentificacion(identificacion);
+        return "redirect:/perfil/identificaciones";
     } 
 
     @GetMapping("/identificacion/nuevo")

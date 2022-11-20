@@ -3,6 +3,8 @@ package fia.ues.sistema_libre_movilidad.Controlador;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,8 +30,11 @@ public class UsuarioControlador {
     }
     @GetMapping({"/perfil"})
     public String perfil(Model modelo){
-        modelo.addAttribute("usuarios", usuarioServicio.listarUsuarios());
-        return "usuario/index";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String email = auth.getName();
+        Usuario usuario = usuarioServicio.buscarPorEmail(email);
+        modelo.addAttribute("usuario", usuario);
+        return "usuario/perfil";
     }
 
 
