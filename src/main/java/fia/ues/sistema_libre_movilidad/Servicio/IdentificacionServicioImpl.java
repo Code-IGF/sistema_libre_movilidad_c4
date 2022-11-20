@@ -42,6 +42,11 @@ public class IdentificacionServicioImpl implements IdentificacionServicio{
         return repositorio.findById(id_identificacion).get();
     }
 
+    @Override
+    public List<Identificacion> listarIdentificacionByUsuarioId(Long usuarioId) {
+        return repositorio.findByUsuarioId_Id(usuarioId);
+    }
+
    
 
     

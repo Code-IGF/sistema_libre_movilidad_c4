@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -43,6 +45,10 @@ public class Identificacion {
     @NotEmpty
     @Column(name = "fecha_vencimiento", nullable = false, length = 30)
     private String fechaVencimiento;
+
+    @ManyToOne
+    @JoinColumn(name="usuario_id", nullable=false)
+    private Usuario usuarioId;
 
     public Identificacion(Long id_identificacion, String tipo, String numeroUnico, String paisNacimiento,
             String paisResidencia, String ocupacion, String paisEmisor, String fechaVencimiento) {
@@ -117,6 +123,13 @@ public class Identificacion {
     }
     public void setFechaVencimiento(String fechaVencimiento) {
         this.fechaVencimiento = fechaVencimiento;
+    }
+
+    public Usuario getUsuarioId() {
+        return usuarioId;
+    }
+    public void setUsuarioId(Usuario usuarioId) {
+        this.usuarioId = usuarioId;
     }
 
 }
