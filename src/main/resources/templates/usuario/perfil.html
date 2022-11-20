@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="layout :: header">
+    <meta charset="utf-8" />
+    <title>Perfil</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    </head>
+    <body>
+        <nav th:replace="layout :: navegacion">
+            <!--Herencia de navbar-->
+        </nav>
+        <div class="col py-3">
+            <!--inicio area de trabajo-->
+            <div class="container">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#">Perfil de Usuario</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/perfil/identificaciones">identificaciones</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/perfil/identificaciones/nueva">Registrar identificaciones</a>
+                </li>
+            </ul>
+            <div class="card rounded-0">
+                <!--Datos de usuario-->
+                <div class="alert alert-primary rounded-0" role="alert">
+                    <div class="row">
+                        <div class="col text-start">
+                            Datos del usuario
+                        </div>
+                        <div class="col d-flex justify-content-end">
+                            <div class="form-check form-switch">
+                                <label>Habilitar Edición</label>
+                                <input class="form-check-input" type="checkbox" role="switch" id="hablitar-edicion">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row m-2">
+                    <div class="col-12 col-md-3">
+                        <img src="https://cdn.pixabay.com/photo/2012/04/13/21/07/user-33638_960_720.png" class="rounded-circle img-fluid" alt="Avatar" />
+                    </div>
+                    <div class="col-12 col-md-9">
+                        <form class="mx-3" th:object="${usuario}" method="POST" id="registro-form">
+                            <fieldset disabled id="setDataUser">
+                                <div class="row">
+                                    <div class="col-12 col-md-6 ">
+                                        <div class="mb-3">
+                                            <label for="nombres" class="form-label">Nombre</label>
+                                            <input type="text" name="nombres" th:field="*{nombre}" class="form-control"
+                                                placeholder="Ingrese su nombre: " required>
+                                            <div class="alert alert-warning d-flex align-items-center" role="alert"
+                                                th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">
+                                                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:">
+                                                <use xlink:href="#exclamation-triangle-fill" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="mb-3">
+                                            <label for="apellido" class="form-label">Apellido</label>
+                                            <input type="text" name="apellido" th:field="*{apellido}" class="form-control"
+                                                placeholder="Ingrese su apellido: " required>
+                                            <div class="alert alert-warning d-flex align-items-center" role="alert"
+                                                th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}">
+                                                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:">
+                                                <use xlink:href="#exclamation-triangle-fill" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="row">
+                                        <div class="col-12 col-md-6">
+                                            <label for="fechanacimiento" class="form-label">Fecha de Nacimiento</label>
+                                            <input type="date" name="fechanacimiento" th:field="*{fechaNacimiento}" class="form-control" required>
+                                            <div class="alert alert-warning d-flex align-items-center" role="alert"
+                                                th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}">
+                                                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:">
+                                                <use xlink:href="#exclamation-triangle-fill" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group">
+                                                <label for="sexo" class="form-label">Sexo</label>
+                                                <select name="sexo" th:field="*{sexo}" class="form-control" required>
+                                                <option value="M" selected>Masculino</option>
+                                                <option value="F">Femenino</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="telefono" class="form-label">Número de Teléfono</label>
+                                    <input type="tel" class="form-control" th:field="*{telefono}" placeholder="Ingrese su número de Teléfono: " required>
+                                </div>
+                                <div class="d-grid mb-3"> 
+                                    <button type="submit" class="btn btn-primary" id="btn-registrar">Actualizar información</button>
+                                </div>
+                                <div class="alert alert-warning text-center" role="alert" id="alert-null" hidden>
+                                    Ingrese su correo y confirme se contraseña
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+                <div class="alert alert-primary rounded-0" role="alert">
+                    <div class="row">
+                        <div class="col text-start">
+                            Datos de incio de sesión
+                        </div>
+                        <div class="col d-flex justify-content-end">
+                            <div class="form-check form-switch">
+                                <label>Habilitar Edición</label>
+                                <input class="form-check-input" type="checkbox" role="switch" id="hablitar-login-edicion">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Datos de incio de sesión-->
+                <form class="mx-3" th:object="${usuario}" method="POST" id="login-data-form">
+                    <fieldset disabled id="setLoginDataUser">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Correo Electronico</label>
+                            <input type="email" class="form-control" th:field="*{correo}" placeholder="Ingrese su correo: " required>
+                        </div>
+                        <div class="alert alert-warning text-center" role="alert" th:if="${registroError}" >
+                            Ya existe una cuenta con este correo
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-6 ">
+                                <div class="mb-3">
+                                    <label for="passwbgord" class="form-label">Contraseña</label>
+                                    <input type="password" name="contrasenia" th:field="*{contrasenia}" id="pass1" aria-describedby="pass1Feedback"
+                                    class="form-control" placeholder="Ingrese su contraseña: " required>
+                                    <div id="pass1Feedback" class="invalid-feedback">
+                                        Las contraseñas deben ser iguales!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="mb-3">
+                                    <label for="passwbgord" class="form-label">Confirme contraseña</label>
+                                    <input type="password" name="contrasenia2"  class="form-control" placeholder="Confirme su contraseña: " required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-grid mb-3"> 
+                            <button type="submit" class="btn btn-primary" id="btn-actualiar-login">Actualizar información</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    <!--Fin area de trabajo-->
+    <script th:inline="javascript">
+        $("#hablitar-edicion").change(function(e){
+            if($("#hablitar-edicion").is(":checked")){
+                $("#setDataUser").removeAttr("disabled");
+            }
+            else{
+                $("#setDataUser").attr("disabled","true");
+            }
+            
+        });
+        $("#hablitar-login-edicion").change(function(e){
+            if($("#hablitar-login-edicion").is(":checked")){
+                $("#setLoginDataUser").removeAttr("disabled");
+            }
+            else{
+                $("#setLoginDataUser").attr("disabled","true");
+            }
+            
+        });
+    </script>
+    </body>
+
+</html>
