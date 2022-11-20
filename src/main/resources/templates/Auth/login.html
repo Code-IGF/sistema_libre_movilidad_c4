@@ -11,15 +11,15 @@
     <div class="container">
         <div class="row vh-100 justify-content-center align-items-center">
             <div class="col">
-                <div class="row align-items-center justify-content-center shadow rounded bg-light" id="cuadro_login">
+                <div class="row align-items-center justify-content-center shadow rounded bg-white" id="cuadro_login">
                     <!-- Imagen -->
-                    <div class="col-6 bg d-none d-md-block">
+                    <div class="col-6 bg d-none d-md-block bg-light">
                         <div>
                             <img src="/resources/img/departing-animate.svg" alt="">
                         </div>
                     </div>
                     <!-- Login -->
-                    <div class="col-12 col-md-6 bg-white p-3">
+                    <div class="col-12 col-md-6 p-3">
                         <h2 class="fw-bold text-center p-4">Iniciar Sesión</h2>
                         <form th:action="@{/AuthorizeLogin}" th:object="${user}" method="POST">
                             <div class="mb-4 mx-3">
