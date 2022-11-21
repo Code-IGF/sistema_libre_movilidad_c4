@@ -30,6 +30,7 @@
             </div>
         </div>
         <!--En este boton se llama al formulario de crear-->
+    </div>
       <a th:href="@{/solicitudes_viaje/nuevo}" class="btn btn-sm btn-primary">
         <i class="fas fa-plus-circle mr-1 text-white"></i>
       <span class="text-white">Agregar Solicitud</span>            
@@ -39,8 +40,8 @@
                 <div class="card text-white bg-danger mb-3">
                     <div class="card-header">Prechequo Vigentes</div>
                     <div class="card-body">
-                        <p>Entradas: 0</p>
-                        <p>Salidas: 0</p>
+                        <p>Entradas: <label th:text="${contador}"></label></p>
+                        <p>Salidas: <label th:text="${contadorRevisado}"></label></p>
                     </div>
                   </div>
             </div>
@@ -67,16 +68,10 @@
                             Fecha Viaje</th>
                         <th
                             style="color:White;background-color:#4090CB;border-top-width:0px;border-left-width:0px;">
-                            Documento Numero</th>
+                            estado</th>
                         <th
                             style="color:White;background-color:#4090CB;border-top-width:0px;border-left-width:0px;">
-                            Nombres</th>
-                        <th
-                            style="color:White;background-color:#4090CB;border-top-width:0px;border-left-width:0px;">
-                            Apellidos</th>
-                        <th
-                            style="color:White;background-color:#4090CB;border-top-width:0px;border-left-width:0px;">
-                            Nacionalidad</th>
+                            frontera</th>
                         <th
                             style="color:White;background-color:#4090CB;border-top-width:0px;border-left-width:0px;">
                             Pais origen</th>
@@ -86,17 +81,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    <tr th:each="solicitud: ${solicitudes}">
+                      <td th:text="${solicitud.motivo}">motivo</td>
+                      <td th:text="${solicitud.fechaSolicitud}">Fecha Solicitud</td>
+                      <td th:text="${solicitud.estado}">estado</td>
+                      <td th:text="${solicitud.frontera.nombre}">frontera</td>
+                      <td th:text="${solicitud.paisOrigen}">paisOrigen</td>
+                      <td th:text="${solicitud.paisDestino}">paisDestino</td>
                     </tr>
-                </tbody>
+                  </tbody>
             </table>
         </section>
     </div>

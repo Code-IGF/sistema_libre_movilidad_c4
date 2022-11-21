@@ -99,7 +99,7 @@ public class SolicitudViajeControlador {
         return "solicitud_viaje/edit";
     }
 
-    @PostMapping("/solicitudes/{id}")
+    @PostMapping("/solicitudesUpdate/{id}")
     public String update(@PathVariable Long id, @ModelAttribute("solicitud") SolicitudViaje solicitudViaje,
     Model modelo){
 
@@ -155,7 +155,7 @@ public class SolicitudViajeControlador {
         List<Frontera> fronteras = fronteraServicio.listarFronteras();
         model.addAttribute("fronteras", fronteras);
         model.addAttribute("solicitudForm", new SolicitudForm());
-        return "solicitud_viaje/index";
+        return "solicitud/solicitudform";
     }
 
     @RequestMapping(value = "/solicitudSave", method = RequestMethod.POST)
@@ -167,7 +167,7 @@ public class SolicitudViajeControlador {
 
         SolicitudViaje savedSolicitud = servicio.saveOrUpdateSolicitudForm(solicitudForm);
 
-        return "redirect:/solicitudes_viaje" + savedSolicitud.getIdSolicitudViaje();
+        return "redirect:/solicitudes_viaje";
     }
 
     @RequestMapping("/product/delete/{id}")

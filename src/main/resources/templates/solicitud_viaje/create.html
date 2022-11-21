@@ -11,7 +11,7 @@
         <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
           <h1 class="text-center">Registro de solicitud</h1>
           <div class="card-body">
-            <form th:action="@{/solicitudes_viaje}" th:object="${solicitud}" method="POST">
+            <form th:action="@{/solicitudSave}" th:object="${solicitud}" method="POST">
               <div class="form-group">
                 <label>fecha: </label>
                 <input type="date" name="fechaSolicitud" th:field="*{fechaSolicitud}" class="form-control" placeholder="Ingrese la fecha: " required>

@@ -16,7 +16,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.core.Queue;
 
+import fia.ues.sistema_libre_movilidad.Entidad.Frontera;
+import fia.ues.sistema_libre_movilidad.Entidad.Pais;
 import fia.ues.sistema_libre_movilidad.Entidad.Usuario;
+import fia.ues.sistema_libre_movilidad.Repositorio.FronteraRepositorio;
+import fia.ues.sistema_libre_movilidad.Repositorio.PaisRepositorio;
 import fia.ues.sistema_libre_movilidad.Repositorio.UsuarioRepositorio;
 import fia.ues.sistema_libre_movilidad.listener.SolicitudMessageListener;
 
@@ -38,6 +42,12 @@ public class SistemaLibreMovilidadApplication extends SpringBootServletInitializ
 
 	@Autowired
 	UsuarioRepositorio repositorio;
+
+	@Autowired
+	PaisRepositorio paisRepositorio;
+
+	@Autowired
+	FronteraRepositorio fronteraRepositorio;
 
 	@Bean
 	Queue queue() 
@@ -74,5 +84,21 @@ public class SistemaLibreMovilidadApplication extends SpringBootServletInitializ
 	public void run(String... args) throws Exception {
 		Usuario usuario1 = new Usuario("Admin","AdminApellido","12-2-1989","M", "79898989","admin@gmail.com", encoder.encode("1234"),"Administrador");
 		repositorio.save(usuario1);
+
+
+		Pais pais1= new Pais("El Salvador");
+		paisRepositorio.save(pais1);
+		Pais pais2= new Pais("Guatemala");
+		paisRepositorio.save(pais2);
+		Pais pais3= new Pais("Honduras");
+		paisRepositorio.save(pais3);
+		Pais pais4= new Pais("Nicaragua");
+		paisRepositorio.save(pais4);
+
+
+		Frontera frontera1=new Frontera("El Poi",pais1);
+		fronteraRepositorio.save(frontera1);
+
+
 	}
 }
