@@ -19,8 +19,11 @@
       <h1>Lista de identificaciones</h1>
     </div>
 
-    <!--En este boton se llama al formulario de crear-->
-    <a class="btn btn-info">Nuevo</a>
+     <!--En este boton se llama al formulario de crear-->
+     <a th:href="@{/identificacion/nuevo}" class="btn btn-sm btn-primary">
+      <i class="fas fa-plus-circle mr-1 text-white"></i>
+    <span class="text-white">Agregar Solicitud</span>            
+    </a>
 
     <table class="table">
       <thead class="thead-light">
@@ -32,11 +35,12 @@
           <th scope="col">Ocupacion</th>
           <th scope="col">Pais Emisor</th>
           <th scope="col">Fecha vencimiento</th>
+          <th scope="col">Usuario</th>
           <th scope="col">Acciones</th>
         </tr>
       </thead>
       <tbody>
-        <tr th:each="identificacion: ${identificaciones}">
+        <tr th:each="identificacion: ${identificacion}">
           <td th:text="${identificacion.tipo}">Tipo</td>
           <td th:text="${identificacion.numeroUnico}">Numero Unico</td>
           <td th:text="${identificacion.paisNacimiento}">Pais Nacimiento</td>
@@ -44,13 +48,20 @@
           <td th:text="${identificacion.ocupacion}">Ocupacion</td>
           <td th:text="${identificacion.paisEmisor}">Pais Emisor</td>
           <td th:text="${identificacion.fechaVencimiento}">Fecha vencimiento</td>
+          <td th:text="${identificacion.usuario.nombre}">Usuario</td>
           <td>
 
             <!--En este boton se llama al formulario de editar-->
-            <a class="btn btn-info">editar</a>
-
-            <!--En este boton se elimina el registro-->
-            <a class="btn btn-danger">eliminar</a>
+            <a
+            th:href="@{/identificacion/editar/{id}(id=${identificacion.id_identificacion})}" class="btn btn-sm btn-primary">
+            <i class="fas fa-pencil-alt"></i> 
+          </a>
+          
+          <!--En este boton se elimina el registro-->
+          <a
+            th:href="@{/identificacion/{id}(id=${identificacion.id_identificacion})}" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro que deseas eliminar el registro?');">
+              <i class="fa fa-trash" aria-hidden="true"></i>                    
+          </a>
 
           </td>
         </tr>

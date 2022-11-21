@@ -59,12 +59,6 @@ public class Usuario {
     @OneToMany(fetch= FetchType.LAZY, mappedBy="usuario", cascade=CascadeType.ALL)
     private List<SolicitudViaje> solicitudes;
 
-    @OneToMany(fetch= FetchType.LAZY, mappedBy="usuario", cascade=CascadeType.ALL)
-    private List<Identificacion> identificaciones;
-
-    @OneToMany(fetch= FetchType.LAZY, mappedBy="usuario", cascade=CascadeType.ALL)
-    private List<SolicitudViaje> solicitudes;
-
     public Usuario() {        
     }
 
