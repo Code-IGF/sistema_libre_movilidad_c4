@@ -60,7 +60,6 @@ public class Identificacion {
     public Identificacion(Long id_identificacion, String tipo, String numeroUnico, String paisNacimiento,
             String paisResidencia, String ocupacion, Pais paisEmisor, String fechaVencimiento,
             Usuario usuario) {
-
         this.id_identificacion = id_identificacion;
         this.tipo = tipo;
         this.numeroUnico = numeroUnico;

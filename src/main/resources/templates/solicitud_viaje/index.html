@@ -18,7 +18,7 @@
       </div>
 
       <!--En este boton se llama al formulario de crear-->
-      <a th:href="@{/solicitudes_viaje/nuevo}" class="btn btn-sm btn-primary">
+      <a th:href="@{/solicitud/new}" class="btn btn-sm btn-primary">
         <i class="fas fa-plus-circle mr-1 text-white"></i>
       <span class="text-white">Agregar Solicitud</span>            
       </a>
@@ -32,7 +32,8 @@
             <th scope="col">Pais Origen</th>
             <th scope="col">Pais Destino</th>
             <th scope="col">Motivo</th>
-            <th scope="col">frontera</th>
+            <th scope="col">Enviado</th>
+            <th scope="col">Cantidad de envios</th>
             <th scope="col">Acciones</th>
           </tr>
         </thead>
@@ -43,22 +44,28 @@
             <td th:text="${solicitud.paisOrigen}">paisOrigen</td>
             <td th:text="${solicitud.paisDestino}">paisDestino</td>
             <td th:text="${solicitud.motivo}">motivo</td>
-            <td th:text="${solicitud.frontera.nombre}">motivo</td>
+            <td th:text="${solicitud.frontera.nombre}">frontera</td>
+            <td th:text="${solicitud.messageReceived}">motivo</td>
+            <td th:text="${solicitud.messageCount}">motivo</td>
             <td>
 
               <!--En este boton se llama al formulario de editar-->
               <a
-              th:href="@{/solicitudes_viaje/editar/{id}(id=${solicitud.idSolicitudViaje})}" class="btn btn-sm btn-primary">
+              th:href="@{/solicitud/edit/{id}/(id=${solicitud.idSolicitudViaje})}" class="btn btn-sm btn-primary">
               <i class="fas fa-pencil-alt"></i> 
             </a>
             
             <!--En este boton se elimina el registro-->
             <a
-              th:href="@{/solicitudes_viaje/{id}(id=${solicitud.idSolicitudViaje})}" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro que deseas eliminar el registro?');">
+              th:href="@{/product/delete/{id}/(id=${solicitud.idSolicitudViaje})}" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro que deseas eliminar el registro?');">
                 <i class="fa fa-trash" aria-hidden="true"></i>                    
             </a>
               
-
+                <!--En este boton se llama al formulario de editar-->
+                <a
+                th:href="@{/solicitud/indexSolicitud/{idSolicitudViaje}/(idSolicitudViaje = ${solicitud.idSolicitudViaje})}" class="btn btn-sm btn-primary">
+                  <i class="far fa-comment-alt"></i>
+                </a>
             </td>
           </tr>
         </tbody>

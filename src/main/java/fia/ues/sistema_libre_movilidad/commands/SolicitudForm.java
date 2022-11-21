@@ -1,50 +1,30 @@
-package fia.ues.sistema_libre_movilidad.Entidad;
+package fia.ues.sistema_libre_movilidad.commands;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import fia.ues.sistema_libre_movilidad.Entidad.Frontera;
+import fia.ues.sistema_libre_movilidad.Entidad.Usuario;
 
-@Entity
-@Table(name = "solicitud_viaje")
-public class SolicitudViaje {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class SolicitudForm {
+
     private Long idSolicitudViaje;
 
-    @Column(name = "fecha_solicitud", nullable = false, length = 50)
     private String fechaSolicitud;
 
-    @Column(name = "estado", nullable = false, length = 50)
     private String estado;
 
-    @Column(name = "pais_origen", nullable = false, length = 50)
     private String paisOrigen;
 
-    @Column(name = "pais_destino", nullable = false, length = 50)
     private String paisDestino;
 
-    @Column(name = "motivo", nullable = false, length = 50)
     private String motivo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="id_usuario")
     private Usuario usuario;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="id_frontera")
     private Frontera frontera;
 
     private boolean messageReceived;
     private Integer messageCount = 0;
-    
 
-    public SolicitudViaje(Long idSolicitudViaje, String fechaSolicitud, String estado, String paisOrigen,
+    public SolicitudForm(Long idSolicitudViaje, String fechaSolicitud, String estado, String paisOrigen,
             String paisDestino, String motivo, Usuario usuario, Frontera frontera) {
         this.idSolicitudViaje = idSolicitudViaje;
         this.fechaSolicitud = fechaSolicitud;
@@ -55,7 +35,7 @@ public class SolicitudViaje {
         this.usuario=usuario;
         this.frontera=frontera;
     }
-    public SolicitudViaje(String fechaSolicitud, String estado, String paisOrigen,
+    public SolicitudForm(String fechaSolicitud, String estado, String paisOrigen,
             String paisDestino, String motivo, Usuario usuario, Frontera frontera) {
         this.fechaSolicitud = fechaSolicitud;
         this.estado = estado;
@@ -66,7 +46,7 @@ public class SolicitudViaje {
         this.frontera=frontera;
     }
 
-    public SolicitudViaje() {
+    public SolicitudForm() {
     }
 
     public Long getIdSolicitudViaje() {
