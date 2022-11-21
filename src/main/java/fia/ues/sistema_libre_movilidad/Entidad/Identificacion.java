@@ -28,13 +28,13 @@ public class Identificacion {
     @Column(name = "numero_unico", nullable = false, length = 50)
     private String numeroUnico;
 
-    @NotEmpty
-    @Column(name = "pais_nacimiento", nullable = false, length = 30)
-    private String paisNacimiento;
+    @OneToOne
+    @JoinColumn(name = "pais_nacimiento", nullable = false)
+    private Pais paisNacimiento;
 
-    @NotEmpty
-    @Column(name = "pais_residencia", nullable = false, length = 30)
-    private String paisResidencia;
+    @OneToOne
+    @JoinColumn(name = "pais_residencia", nullable = false)
+    private Pais paisResidencia;
 
     @NotEmpty
     @Column(name = "ocupacion", nullable = false, length = 30)
@@ -47,18 +47,15 @@ public class Identificacion {
     @OneToOne
     @JoinColumn(name="pais_emisor", nullable = false)
     private Pais paisEmisor;
-
-    @ManyToOne
-    @JoinColumn(name="usuario_id", nullable=false)
-    private Usuario usuarioId;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="id_usuario")
     private Usuario usuario;
 
 
-    public Identificacion(Long id_identificacion, String tipo, String numeroUnico, String paisNacimiento,
-            String paisResidencia, String ocupacion, Pais paisEmisor, String fechaVencimiento,
+
+    public Identificacion(Long id_identificacion, String tipo, String numeroUnico, Pais paisNacimiento,
+            Pais paisResidencia, String ocupacion, Pais paisEmisor, String fechaVencimiento,
             Usuario usuario) {
         this.id_identificacion = id_identificacion;
         this.tipo = tipo;
@@ -70,8 +67,8 @@ public class Identificacion {
         this.fechaVencimiento = fechaVencimiento;
         this.usuario=usuario;
     }
-    public Identificacion(String tipo, String numeroUnico, String paisNacimiento,
-    String paisResidencia, String ocupacion, Pais paisEmisor, String fechaVencimiento,
+    public Identificacion(String tipo, String numeroUnico, Pais paisNacimiento,
+    Pais paisResidencia, String ocupacion, Pais paisEmisor, String fechaVencimiento,
     Usuario usuario) {;
         this.tipo = tipo;
         this.numeroUnico = numeroUnico;
@@ -105,16 +102,16 @@ public class Identificacion {
     public void setNumeroUnico(String numeroUnico) {
         this.numeroUnico = numeroUnico;
     }
-    public String getPaisNacimiento() {
+    public Pais getPaisNacimiento() {
         return paisNacimiento;
     }
-    public void setPaisNacimiento(String paisNacimiento) {
+    public void setPaisNacimiento(Pais paisNacimiento) {
         this.paisNacimiento = paisNacimiento;
     }
-    public String getPaisResidencia() {
+    public Pais getPaisResidencia() {
         return paisResidencia;
     }
-    public void setPaisResidencia(String paisResidencia) {
+    public void setPaisResidencia(Pais paisResidencia) {
         this.paisResidencia = paisResidencia;
     }
     public String getOcupacion() {
@@ -143,12 +140,5 @@ public class Identificacion {
         this.usuario = usuario;
     }
 
-
-    public Usuario getUsuarioId() {
-        return usuarioId;
-    }
-    public void setUsuarioId(Usuario usuarioId) {
-        this.usuarioId = usuarioId;
-    }
 
 }

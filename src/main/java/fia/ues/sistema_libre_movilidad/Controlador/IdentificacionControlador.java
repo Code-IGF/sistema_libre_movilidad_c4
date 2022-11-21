@@ -65,7 +65,7 @@ public class IdentificacionControlador {
         }
         String userEmail =SecurityContextHolder.getContext().getAuthentication().getName();
         Usuario usuario = usuarioServicio.buscarPorEmail(userEmail);
-        identificacion.setUsuarioId(usuario);
+        identificacion.setUsuario(usuario);
         servicio.guardarIdentificacion(identificacion);
         return "redirect:/perfil/identificaciones";
     } 
