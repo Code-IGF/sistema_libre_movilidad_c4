@@ -42,6 +42,7 @@ public class SolicitudViaje {
 
     private boolean messageReceived;
     private Integer messageCount = 0;
+    
 
     public SolicitudViaje(Long idSolicitudViaje, String fechaSolicitud, String estado, String paisOrigen,
             String paisDestino, String motivo, Usuario usuario, Frontera frontera) {
