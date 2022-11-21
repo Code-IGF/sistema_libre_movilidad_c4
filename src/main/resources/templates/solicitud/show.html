@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Core Online Tutorial - Show Product</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link href="../../static/css/spring-core.css"
+          th:href="@{css/spring-core.css}" rel="stylesheet" media="screen"/>
+</head>
+<body>
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-6">
+            <h2>Show Product</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Product Id:</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${solicitud.idSolicitudViaje}">solicitud id</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">fechaSolicitud:</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${solicitud.fechaSolicitud}">Description</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">estado:</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${solicitud.estado}">Price</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 sm-2 control-label">pais origen:</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${solicitud.paisOrigen}">Image</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 sm-2 control-label">Are Messages Sent:</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${solicitud.messageReceived}">Are Messages Sent</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 sm-2 control-label">Message Count:</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${solicitud.messageCount}">5</p>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-8">
+            <a th:href="@{/solicitud/indexSolicitud/{idSolicitudViaje}/(idSolicitudViaje = ${solicitud.idSolicitudViaje})}">
+                Send emails through queue listener</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
