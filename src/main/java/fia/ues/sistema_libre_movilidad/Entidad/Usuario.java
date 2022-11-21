@@ -85,7 +85,18 @@ public class Usuario {
         this.contrasenia = contrasenia;
         this.rol=rol;
     }
-    
+    public Usuario(String nombre, String apellido, 
+    String fechaNacimiento, String sexo, String telefono, 
+    String correo, String contrasenia, String rol) {
+    this.nombre = nombre;
+    this.apellido = apellido;
+    this.fechaNacimiento = fechaNacimiento;
+    this.sexo = sexo;
+    this.telefono = telefono;
+    this.correo = correo;
+    this.contrasenia = contrasenia;
+    this.rol=rol;
+    }
 
     public Long getId(){
         return id;

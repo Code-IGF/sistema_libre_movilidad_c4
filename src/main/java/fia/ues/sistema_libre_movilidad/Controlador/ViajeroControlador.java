@@ -5,10 +5,12 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
+import fia.ues.sistema_libre_movilidad.SeguridadPassword;
 import fia.ues.sistema_libre_movilidad.Entidad.Usuario;
 import fia.ues.sistema_libre_movilidad.Entidad.Viajero;
 import fia.ues.sistema_libre_movilidad.Servicio.UsuarioServicio;
@@ -26,6 +28,9 @@ public class ViajeroControlador {
 
     @Autowired
     private UsuarioServicio usuarioServicio;
+
+    @Autowired
+	public BCryptPasswordEncoder encoder;
 
     @GetMapping({"/viajeros"})
     public String index(Model model) {
@@ -104,6 +109,7 @@ public class ViajeroControlador {
         }
         
         viajeroServicio.guardarViajero(viajero);
+        usuario.setContrasenia(encoder.encode(usuario.getContrasenia()));
         usuarioServicio.guardarUsuario(usuario);
         return "redirect:/";
     }

@@ -5,18 +5,23 @@ import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.core.Queue;
 
+import fia.ues.sistema_libre_movilidad.Entidad.Usuario;
+import fia.ues.sistema_libre_movilidad.Repositorio.UsuarioRepositorio;
 import fia.ues.sistema_libre_movilidad.listener.SolicitudMessageListener;
 
 @SpringBootApplication
-public class SistemaLibreMovilidadApplication extends SpringBootServletInitializer {
+public class SistemaLibreMovilidadApplication extends SpringBootServletInitializer implements CommandLineRunner{
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
 		return builder.sources(SistemaLibreMovilidadApplication.class);
@@ -28,6 +33,12 @@ public class SistemaLibreMovilidadApplication extends SpringBootServletInitializ
 
 	public final static String SFG_MESSAGE_QUEUE = "sfg-message-queue";
 	
+	@Autowired
+	BCryptPasswordEncoder encoder;
+
+	@Autowired
+	UsuarioRepositorio repositorio;
+
 	@Bean
 	Queue queue() 
 	{
@@ -57,5 +68,11 @@ public class SistemaLibreMovilidadApplication extends SpringBootServletInitializ
 	@Bean
 	MessageListenerAdapter listenerAdapter(SolicitudMessageListener reciever){
 		return new MessageListenerAdapter(reciever, "receiveMessage");
+	}
+
+	@Override
+	public void run(String... args) throws Exception {
+		Usuario usuario1 = new Usuario("Admin","AdminApellido","12-2-1989","M", "79898989","admin@gmail.com", encoder.encode("1234"),"Administrador");
+		repositorio.save(usuario1);
 	}
 }

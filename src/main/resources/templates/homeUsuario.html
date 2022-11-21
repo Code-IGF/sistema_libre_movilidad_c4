@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<head th:replace="layoutUsuario :: header">
+    <meta charset="utf-8" />
+    <title>Vista Inicial</title>
+    
+</head>
+<title>Vista Inicial</title>
+</head>
+
+<body style="background-color: #E6E3E3;">
+    <!--Inicio de sidebar-->
+    <nav th:replace="layoutUsuario :: navegacion"></nav>
+    <!--Inicio de area de trabajo-->
+
+    <div class="container-fluid py-3">
+        <!--Trabaja en este espacio-->
+        <div style="background-color: skyblue">
+            <div class="row">
+                <div class="col-2">
+                    <img src="/img/sica.jpg" class="img-fluid"/>
+                </div>
+                <div class="col-10 d-flex align-items-center">
+                    <div>
+                        <h3 style="color:white">Prechequeo</h3>
+                        <h4 style="color:white">Sistemas de Control de Migracion</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--En este boton se llama al formulario de crear-->
+      <a th:href="@{/solicitudes_viaje/nuevo}" class="btn btn-sm btn-primary">
+        <i class="fas fa-plus-circle mr-1 text-white"></i>
+      <span class="text-white">Agregar Solicitud</span>            
+      </a>
+        <div class="row pt-4">
+            <div class="col">
+                <div class="card text-white bg-danger mb-3">
+                    <div class="card-header">Prechequo Vigentes</div>
+                    <div class="card-body">
+                        <p>Entradas: 0</p>
+                        <p>Salidas: 0</p>
+                    </div>
+                  </div>
+            </div>
+            <div class="col">
+                <div class="card text-white bg-primary mb-3">
+                    <div class="card-header">Prechequeos Historicos</div>
+                    <div class="card-body">
+                        <p>Entradas: 0</p>
+                        <p>Salidas: 0</p>
+                    </div>
+                  </div>
+            </div>
+        </div>
+
+        <section>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th
+                            style="color:White;background-color:#4090CB;border-top-width:0px;border-left-width:0px;">
+                            Movimiento </th>
+                        <th
+                            style="color:White;background-color:#4090CB;border-top-width:0px;border-left-width:0px;">
+                            Fecha Viaje</th>
+                        <th
+                            style="color:White;background-color:#4090CB;border-top-width:0px;border-left-width:0px;">
+                            Documento Numero</th>
+                        <th
+                            style="color:White;background-color:#4090CB;border-top-width:0px;border-left-width:0px;">
+                            Nombres</th>
+                        <th
+                            style="color:White;background-color:#4090CB;border-top-width:0px;border-left-width:0px;">
+                            Apellidos</th>
+                        <th
+                            style="color:White;background-color:#4090CB;border-top-width:0px;border-left-width:0px;">
+                            Nacionalidad</th>
+                        <th
+                            style="color:White;background-color:#4090CB;border-top-width:0px;border-left-width:0px;">
+                            Pais origen</th>
+                        <th
+                            style="color:White;background-color:#4090CB;border-top-width:0px;border-left-width:0px;">
+                            Pais Destino</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+    <!--Fin de area de trabajo-->
+    </div>
+    </div>
+    <!--Fin de sidebar-->
+    <footer class="fixed-bottom">
+
+        <h6 align="center">Equipo 4 IGF115 x PRN315</h6>
+
+    </footer>
+
+</body>
+
+</html>
