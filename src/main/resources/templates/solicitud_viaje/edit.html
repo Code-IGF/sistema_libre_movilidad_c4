@@ -17,8 +17,12 @@
                 <input type="date" name="fechaSolicitud" th:field="*{fechaSolicitud}" class="form-control" placeholder="Ingrese la fecha: " required>
               </div>
               <div class="form-group">
-                <label>Estado: </label>
-                <input type="text" name="estado" th:field="*{estado}" class="form-control" placeholder="Ingrese el estado: " required>
+                <label for="estado" class="form-label">Estado: </label>
+                    <select name="estado" th:field="*{estado}" class="form-select" required>
+                        <option value="En Espera" selected>En Espera</option>
+                        <option value="Aprobado">Aprobado</option>
+                        <option value="Rechazado">Rechazado</option>
+                    </select>
               </div>
               <div class="form-group">
                 <label>Pais de origen: </label>
