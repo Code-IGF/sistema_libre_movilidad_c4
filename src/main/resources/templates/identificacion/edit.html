@@ -13,8 +13,19 @@
           <div class="card-body">
             <form th:action="@{/identificacion/{id}(id=${identificacion.id_identificacion})}" th:object="${identificacion}" method="POST">
                 <div class="form-group">
-                  <label>Tipo: </label>
-                  <input type="text" name="tipo" th:field="*{tipo}" class="form-control" placeholder="Ingrese su tipo: " required>
+                    <label for="TipoIdentificacion" class="form-label">Tipo: </label>
+                    <select name="TipoIdentificacion" th:field="*{tipo}" class="form-select" required>
+                        <option value="Identidad" selected>Documento de Identificación Personal</option>
+                        <option value="Pasaporte">Pasaporte</option>
+                        <option value="Permiso Especial de Viaje">Permiso Especial de Viaje</option>
+                    </select>
+                    <div class="alert alert-warning d-flex align-items-center" role="alert" th:if="${#fields.hasErrors('tipo')}"
+                    th:errors="*{tipo}">
+                      <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                      <div>
+                        An example warning alert with an icon
+                      </div>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -22,26 +33,62 @@
                     <input type="text" name="numero_unico" th:field="*{numeroUnico}" class="form-control" placeholder="Ingrese su numero unico: " required>
                   </div>
 
-                  <div class="form-group">
-                    <label>Pais de nacimiento: </label>
-                    <input type="text" name="pais_nacimiento" th:field="*{paisNacimiento}" class="form-control" placeholder="Ingrese su pasi de nacimiento: " required>
-                  </div>
+                  <div class="col-12 col-md-6 mb-2">
+                    <div class="form-group">
+                        <label for="paisNacimiento" class="form-label">Pais Emisor: </label>
+                        <select th:field="*{paisNacimiento}" class="form-select" name="paisNacimiento" required> 
+                            <option th:each="pais:${paises}"
+                              th:value="${pais.id}"
+                              th:text="${pais.nombre}">					
+                          </select>
+                    </div>
+                </div>
 
                   
+                  <div class="col-12 col-md-6 mb-2">
+                    <div class="form-group">
+                        <label for="paisResidencia" class="form-label">Pais Residencia: </label>
+                        <select th:field="*{paisResidencia}" class="form-select" name="paisResidencia" required> 
+                            <option th:each="pais:${paises}"
+                              th:value="${pais.id}"
+                              th:text="${pais.nombre}">					
+                          </select>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 mb-2">
                   <div class="form-group">
-                    <label>Pais de residencia: </label>
-                    <input type="text" name="pais_residenci" th:field="*{paisResidencia}" class="form-control" placeholder="Ingrese su pais de residencia: " required>
+                      <label for="ocupacion" class="form-label">ocupacion: </label>
+                      <select name="ocupacion" th:field="*{ocupacion}" class="form-select" required>
+                          <option value="Transportista" selected>Transportista</option>
+                          <option value="Comerciante">Comerciante</option>
+                          <option value="Vendedor">Vendedor</option>
+                      </select>
+                      <div class="alert alert-warning d-flex align-items-center" role="alert" th:if="${#fields.hasErrors('ocupacion')}"
+                      th:errors="*{ocupacion}">
+                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                        <div>
+                          An example warning alert with an icon
+                        </div>
+                      </div>
                   </div>
+              </div>
 
                   <div class="form-group">
-                    <label>ocupacion: </label>
-                    <input type="text" name="ocupacion" th:field="*{ocupacion}" class="form-control" placeholder="Ingrese su ocupacion: " required>
-                  </div>
-
-                  <div class="form-group">
-                    <label>Pais Emisor: </label>
-                    <input type="text" name="pais_Emisor" th:field="*{paisEmisor}" class="form-control" placeholder="Ingrese su pais de Emision " required>
-                  </div>
+                    <label for="paisEmisor" class="form-label">Pais Emisor: </label>
+                    <select th:field="*{paisEmisor}" class="form-select" name="paisEmisor" required> 
+                        <option th:each="pais:${paises}"
+                          th:value="${pais.id}"
+                          th:text="${pais.nombre}">					
+                      </select>
+                    <div class="alert alert-warning d-flex align-items-center" role="alert" th:if="${#fields.hasErrors('paisEmisor')}"
+                    th:errors="*{paisEmisor}">
+                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                        <div>
+                        An example warning alert with an icon
+                        </div>
+                    </div>
+                </div>
 
                   <div class="form-group">
                     <label>Fecha vencimiento: </label>

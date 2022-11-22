@@ -96,7 +96,12 @@ public class IdentificacionControlador {
 
     @GetMapping("/identificacion/editar/{id}")
     public String edit(@PathVariable Long id, Model modelo){
+
         modelo.addAttribute("identificacion", servicio.obtenerIdentificacionporId(id));
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Usuario usuario=usuarioServicio.obtenerUsuarioPorEmail(auth.getName());
+        modelo.addAttribute("paises", paisServicio.listarPaises());
+        modelo.addAttribute("usuario", usuario);
         return "identificacion/edit";
     }
 

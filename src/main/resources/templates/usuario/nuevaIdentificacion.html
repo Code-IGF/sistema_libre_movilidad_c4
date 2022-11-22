@@ -116,7 +116,7 @@
                         </div>
                         <div class="col-12 col-md-6 mb-2">
                             <div class="form-group">
-                                <label for="paisEmisor" class="form-label">Pais Emisor: </label>
+                                <label for="paisNacimiento" class="form-label">Pais Emisor: </label>
                                 <select th:field="*{paisNacimiento}" class="form-select" name="paisNacimiento" required> 
                                     <option th:each="pais:${paises}"
                                       th:value="${pais.id}"

@@ -12,13 +12,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import fia.ues.sistema_libre_movilidad.Entidad.EmpresaTransporte;
+import fia.ues.sistema_libre_movilidad.Servicio.EmpresaTransporteImpl;
 import fia.ues.sistema_libre_movilidad.Servicio.EmpresaTransporteServicio;
 
 
 @Controller
 public class EmpresaTransporteControlador {
     @Autowired
-    private EmpresaTransporteServicio servicio;
+    private EmpresaTransporteImpl servicio;
 
     @GetMapping({"/empresas_transporte"})
     public String index(Model modelo){
@@ -75,15 +76,6 @@ public class EmpresaTransporteControlador {
         empresaTransporteExistente.setId(id);
         empresaTransporteExistente.setNombre(empresaTransporte.getNombre());
         List<EmpresaTransporte> empresaTransporteLista = servicio.listarEmpresasTransporte();
-        String error="";
-        for (EmpresaTransporte em: empresaTransporteLista) {
-            if(em.getNombre()==empresaTransporte.getNombre()){
-                modelo.addAttribute("empresa_transporte",empresaTransporte);
-                error="Nombre ya asignado";
-                modelo.addAttribute("error", error);
-                return "redirect:/empresas_transporte";
-            }
-        }
         servicio.actualizarEmpresaTransporte(empresaTransporteExistente);
         return "redirect:/empresas_transporte";
     }
