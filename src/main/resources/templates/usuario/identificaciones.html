@@ -7,13 +7,13 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
     </head>
     <body>
-        <nav th:replace="layout :: navegacion">
-            <!--Herencia de navbar-->
-        </nav>
         <div class="col py-3">
             <!--inicio area de trabajo-->
             <div class="container">
-
+              <div>
+                <a  class="nav-link active" href="#" th:href="@{/home}">Volver</a>
+            </div>
+            <h1></h1>
               <ul class="nav nav-tabs">
                 <li class="nav-item">
                   <a class="nav-link" href="/perfil">Perfil de Usuario</a>

@@ -116,6 +116,8 @@ public class SolicitudViajeControlador {
         Usuario usuario=usuarioServicio.obtenerUsuarioPorEmail(auth.getName());
         modelo.addAttribute("usuario", usuario);
         modelo.addAttribute("solicitud", servicio.obtenerSolicitudPorId(id));
+        List<Frontera> fronteras = fronteraServicio.listarFronteras();
+        modelo.addAttribute("fronteras", fronteras);
         return "solicitud_viaje/edit";
     }
 
@@ -132,7 +134,13 @@ public class SolicitudViajeControlador {
         solicitudExistente.setPaisOrigen(solicitudViaje.getPaisOrigen());
         solicitudExistente.setUsuario(solicitudViaje.getUsuario());
         servicio.actualizarSolicitudViaje(solicitudExistente);
-        return "redirect:/solicitudes_viaje";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Usuario usuario=usuarioServicio.obtenerUsuarioPorEmail(auth.getName());
+        if(usuario.getRol()=="Administrador"){
+            return "redirect:/solicitudes_viaje";
+        }else{
+            return "redirect:/solicitudesUsuario";
+        }
     }
 
     @GetMapping("/solicitudes/{id}")
@@ -145,7 +153,13 @@ public class SolicitudViajeControlador {
     @RequestMapping("/solicitud/indexSolicitud/{id}")
     public String indexProduct(@PathVariable String id){
         servicio.sendSolicitudMessage(id);
-        return "redirect:/solicitudes_viaje";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Usuario usuario=usuarioServicio.obtenerUsuarioPorEmail(auth.getName());
+        if(usuario.getRol()=="Administrador"){
+            return "redirect:/solicitudes_viaje";
+        }else{
+            return "redirect:/homeUsuario";
+        }
     }
 
     @RequestMapping("/")
@@ -199,7 +213,13 @@ public class SolicitudViajeControlador {
     @RequestMapping("/product/delete/{id}")
     public String delete(@PathVariable String id){
         servicio.eliminarSolicitudViaje(Long.valueOf(id));
-        return "redirect:/solicitudes_viaje";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Usuario usuario=usuarioServicio.obtenerUsuarioPorEmail(auth.getName());
+        if(usuario.getRol()=="Administrador"){
+            return "redirect:/solicitudes_viaje";
+        }else{
+            return "redirect:/solicitudesUsuario";
+        }
     }
 
     @RequestMapping("/solicitud/show/{id}")

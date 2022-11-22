@@ -102,6 +102,7 @@ public class IdentificacionControlador {
         Usuario usuario=usuarioServicio.obtenerUsuarioPorEmail(auth.getName());
         modelo.addAttribute("paises", paisServicio.listarPaises());
         modelo.addAttribute("usuario", usuario);
+        
         return "identificacion/edit";
     }
 
@@ -117,13 +118,13 @@ public class IdentificacionControlador {
         identificacionExistente.setOcupacion(identificacion.getOcupacion());
 
         servicio.actualizarIdentificacion(identificacionExistente);
-        return "redirect:/identificacion";
+        return "redirect:/perfil/identificaciones";
     }
 
     @GetMapping("/identificacion/{id}")
     public String destroy(@PathVariable Long id){
         servicio.eliminarIdentificacion(id);
-        return "redirect:/identificacion";
+        return "redirect:/perfil/identificaciones";
     }
 
 }
