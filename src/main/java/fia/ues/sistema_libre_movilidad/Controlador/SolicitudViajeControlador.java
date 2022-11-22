@@ -158,7 +158,7 @@ public class SolicitudViajeControlador {
         if(usuario.getRol()=="Administrador"){
             return "redirect:/solicitudes_viaje";
         }else{
-            return "redirect:/homeUsuario";
+            return "redirect:/home";
         }
     }
 
