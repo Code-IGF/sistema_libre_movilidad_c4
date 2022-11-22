@@ -31,7 +31,7 @@
         </div>
     </div>
         <!--En este boton se llama al formulario de crear-->
-      <a th:href="@{/solicitudes_viaje/nuevo}" class="btn btn-sm btn-primary">
+      <a th:href="@{/solicitud/new}" class="btn btn-sm btn-primary">
         <i class="fas fa-plus-circle mr-1 text-white"></i>
       <span class="text-white">Agregar Solicitud</span>            
       </a>
@@ -40,8 +40,8 @@
                 <div class="card text-white bg-danger mb-3">
                     <div class="card-header">Prechequo Vigentes</div>
                     <div class="card-body">
-                        <p>Entradas: <p th:text="${contador}"></p></p>
-                        <p>Salidas: </p>
+                        <p>Entradas: <label th:text="${contador}"></label></p>
+                        <p>Salidas: <label th:text="${contadorRevisado}"></label></p>
                     </div>
                   </div>
             </div>
@@ -78,6 +78,12 @@
                         <th
                             style="color:White;background-color:#4090CB;border-top-width:0px;border-left-width:0px;">
                             Pais Destino</th>
+                        <th
+                            style="color:White;background-color:#4090CB;border-top-width:0px;border-left-width:0px;">
+                            Enviado</th>
+                        <th
+                            style="color:White;background-color:#4090CB;border-top-width:0px;border-left-width:0px;">
+                            Enviar a cola</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -88,6 +94,14 @@
                       <td th:text="${solicitud.frontera.nombre}">frontera</td>
                       <td th:text="${solicitud.paisOrigen}">paisOrigen</td>
                       <td th:text="${solicitud.paisDestino}">paisDestino</td>
+                      <td th:text="${solicitud.isMessageReceived}">paisDestino</td>
+                        <td>
+                            <!--En este boton se llama al formulario de editar-->
+                            <a
+                            th:href="@{/solicitud/indexSolicitud/{idSolicitudViaje}/(idSolicitudViaje = ${solicitud.idSolicitudViaje})}" class="btn btn-sm btn-primary">
+                            <i class="far fa-comment-alt"></i>
+                            </a>
+                        </td>
                     </tr>
                   </tbody>
             </table>

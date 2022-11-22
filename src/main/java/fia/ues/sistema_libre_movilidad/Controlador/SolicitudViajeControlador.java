@@ -1,6 +1,7 @@
 package fia.ues.sistema_libre_movilidad.Controlador;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,9 +60,22 @@ public class SolicitudViajeControlador {
     }
 
     @GetMapping({"/solicitudes_viaje"})
-    public String listarEstudiantes(Model modelo){
-        modelo.addAttribute("solicitudes", servicio.listarSolicitudes());
+    public String listarSolicitudes(Model modelo){
+        List<SolicitudViaje> solicitudes=servicio.listarSolicitudes();
+        List<SolicitudViaje> soliTemp=new ArrayList<>();
+        for (SolicitudViaje sol : solicitudes) {
+            if(sol.isMessageReceived()==true){
+                soliTemp.add(sol);
+            }
+        }
+        modelo.addAttribute("solicitudes", soliTemp);
         return "solicitud_viaje/index";
+    }
+
+    @GetMapping({"/solicitudesUsuario"})
+    public String listarSolicitudesUsuario(Model modelo){
+        modelo.addAttribute("solicitudes", servicio.listarSolicitudes());
+        return "solicitud_viaje/indexUsuario";
     }
 
     @GetMapping("/solicitudes_viaje/nuevo")
@@ -74,6 +88,7 @@ public class SolicitudViajeControlador {
         SolicitudViaje solicitudViaje = new SolicitudViaje();
         modelo.addAttribute("solicitud",solicitudViaje);
         return "solicitud_viaje/create";
+        
     }
 
     @PostMapping("/solicitudes_viaje")
@@ -82,10 +97,15 @@ public class SolicitudViajeControlador {
         if (result.hasErrors()){
             model.addAttribute("solicitud", solicitudViaje);
             return "solicitud_viaje/create";
-    }
-
+        }
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Usuario usuario=usuarioServicio.obtenerUsuarioPorEmail(auth.getName());
         servicio.guardarSolicitudViaje(solicitudViaje);
-        return "redirect:/solicitudes_viaje";
+        if(usuario.getRol()=="Administrador"){
+            return "redirect:/solicitudes_viaje";
+        }else{
+            return "redirect:/solicitudesUsuario";
+        }
     }
     
     
@@ -167,12 +187,24 @@ public class SolicitudViajeControlador {
 
         SolicitudViaje savedSolicitud = servicio.saveOrUpdateSolicitudForm(solicitudForm);
 
-        return "redirect:/solicitudes_viaje";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Usuario usuario=usuarioServicio.obtenerUsuarioPorEmail(auth.getName());
+        if(usuario.getRol()=="Administrador"){
+            return "redirect:/solicitudes_viaje";
+        }else{
+            return "redirect:/solicitudesUsuario";
+        }
     }
 
     @RequestMapping("/product/delete/{id}")
     public String delete(@PathVariable String id){
         servicio.eliminarSolicitudViaje(Long.valueOf(id));
         return "redirect:/solicitudes_viaje";
+    }
+
+    @RequestMapping("/solicitud/show/{id}")
+    public String getSolicitud(@PathVariable String id, Model model){
+        model.addAttribute("product", servicio.obtenerSolicitudPorId(Long.valueOf(id)));
+        return "product/show";
     }
 }

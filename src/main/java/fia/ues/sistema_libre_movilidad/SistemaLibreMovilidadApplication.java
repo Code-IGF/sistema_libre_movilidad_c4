@@ -84,6 +84,8 @@ public class SistemaLibreMovilidadApplication extends SpringBootServletInitializ
 	public void run(String... args) throws Exception {
 		Usuario usuario1 = new Usuario("Admin","AdminApellido","12-2-1989","M", "79898989","admin@gmail.com", encoder.encode("1234"),"Administrador");
 		repositorio.save(usuario1);
+		Usuario usuario2 = new Usuario("User","AdminApellido","12-2-1989","M", "79898989","user@gmail.com", encoder.encode("1234"),"Viajero");
+		repositorio.save(usuario2);
 
 
 		Pais pais1= new Pais("El Salvador");
