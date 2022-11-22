@@ -7,9 +7,10 @@
     
 </head>
 <title>Vista Inicial</title>
+
 </head>
 
-<body style="background-color: #E6E3E3;">
+<body style="background-color: #E6E3E3;" onload="reload();">
     <!--Inicio de sidebar-->
     <nav th:replace="layoutUsuario :: navegacion"></nav>
     <!--Inicio de area de trabajo-->
@@ -98,12 +99,25 @@
                         <td>
                             <!--En este boton se llama al formulario de editar-->
                             <a
-                            th:href="@{/solicitud/indexSolicitud/{idSolicitudViaje}/(idSolicitudViaje = ${solicitud.idSolicitudViaje})}" class="btn btn-sm btn-primary">
+                            th:href="@{/solicitud/indexSolicitud/{idSolicitudViaje}/(idSolicitudViaje = ${solicitud.idSolicitudViaje})}" class="btn btn-sm btn-primary" onclick="reload();">
                             <i class="far fa-comment-alt"></i>
                             </a>
                         </td>
                     </tr>
-                  </tbody>
+                  </tbody>       
+                  <script>
+                    function reload(){
+                        $(document).ready(function(){
+                        //Cada 10 segundos (10000 milisegundos) se ejecutará la función refrescar
+                            setTimeout(refrescar, 5000);
+                        });
+                        if(document.URL.indexOf("#") == -1){
+                            location = '#';
+                            document.URL += '#';
+                            location.reload(true);
+                        }    
+                    }
+                  </script>
             </table>
         </section>
     </div>
