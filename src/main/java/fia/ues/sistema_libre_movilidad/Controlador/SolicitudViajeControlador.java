@@ -27,9 +27,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import fia.ues.sistema_libre_movilidad.SistemaLibreMovilidadApplication;
 import fia.ues.sistema_libre_movilidad.Entidad.Frontera;
+import fia.ues.sistema_libre_movilidad.Entidad.Identificacion;
+import fia.ues.sistema_libre_movilidad.Entidad.Pais;
 import fia.ues.sistema_libre_movilidad.Entidad.SolicitudViaje;
 import fia.ues.sistema_libre_movilidad.Entidad.Usuario;
 import fia.ues.sistema_libre_movilidad.Servicio.FronteraServicio;
+import fia.ues.sistema_libre_movilidad.Servicio.IdentificacionServicio;
 import fia.ues.sistema_libre_movilidad.Servicio.SolicitudViajeServicio;
 import fia.ues.sistema_libre_movilidad.Servicio.UsuarioServicio;
 import fia.ues.sistema_libre_movilidad.commands.SolicitudForm;
@@ -46,6 +49,9 @@ public class SolicitudViajeControlador {
     
     @Autowired
     private FronteraServicio fronteraServicio;
+
+    @Autowired
+    private IdentificacionServicio identificacionServicio;
 
     private SolicitudToSolicitudForm solicitudToSolicitudForm;
 
@@ -224,7 +230,37 @@ public class SolicitudViajeControlador {
 
     @RequestMapping("/solicitud/show/{id}")
     public String getSolicitud(@PathVariable String id, Model model){
-        model.addAttribute("product", servicio.obtenerSolicitudPorId(Long.valueOf(id)));
-        return "product/show";
+        model.addAttribute("solicitud", servicio.obtenerSolicitudPorId(Long.valueOf(id)));
+        Usuario usuario= usuarioServicio.obtenerUsuarioPorId(Long.parseLong(id));
+        List<Identificacion> identificaciones= identificacionServicio.listarIdentificacion();
+        List<Identificacion> ideUsuario=new ArrayList<>();
+        for (Identificacion identificacion : identificaciones) {
+            if(usuario.getId()==Long.parseLong(id)){
+                ideUsuario.add(identificacion);
+            }
+        }
+        model.addAttribute("identificaciones", ideUsuario);
+        return "solicitud_viaje/show";
+    }
+
+    @PostMapping("/solicitud/aprobar/{id}")
+    public String aprobar(@PathVariable Long id, @ModelAttribute("solicitud") SolicitudViaje solicitudViaje,
+    Model modelo){
+
+        SolicitudViaje solicitudExistente = servicio.obtenerSolicitudPorId(id);
+        solicitudExistente.setEstado("Aprobado");
+        servicio.actualizarSolicitudViaje(solicitudExistente);
+        return "redirect:/solicitudes_viaje";
+
+    }
+    @PostMapping("/solicitud/rechazar/{id}")
+    public String rechazar(@PathVariable Long id, @ModelAttribute("solicitud") SolicitudViaje solicitudViaje,
+    Model modelo){
+
+        SolicitudViaje solicitudExistente = servicio.obtenerSolicitudPorId(id);
+        solicitudExistente.setEstado("Rechazado");
+        servicio.actualizarSolicitudViaje(solicitudExistente);
+        return "redirect:/solicitudes_viaje";
+
     }
 }

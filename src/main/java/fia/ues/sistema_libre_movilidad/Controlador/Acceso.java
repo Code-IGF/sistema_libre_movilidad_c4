@@ -34,7 +34,8 @@ public class Acceso {
         modelo.addAttribute("usuario", auth);
         Usuario usuarioLogueado=usuarioServicio.buscarPorEmail(auth.getName());
         int contador=0;
-        int contadorRevisado=0;
+        int contadorApro=0;
+        int contadorRech=0;
         List<SolicitudViaje> solicitudes = solicitudViajeServicio.listarSolicitudes();
         List<SolicitudViaje> solicitudesUsuario = new ArrayList<>();
         for (SolicitudViaje solicitud : solicitudes) {
@@ -42,13 +43,17 @@ public class Acceso {
                 solicitudesUsuario.add(solicitud);
                 if(solicitud.getEstado().equals("En espera")){
                     contador++;
-                }else{
-                    contadorRevisado++;
+                }else if(solicitud.getEstado().equals("Aprobado")){
+                    contadorApro++;
+                }
+                if(solicitud.getEstado().equals("Rechazado")){
+                    contadorRech++;
                 }
             }
         }
         modelo.addAttribute("contador", contador);
-        modelo.addAttribute("contadorRevisado", contadorRevisado);
+        modelo.addAttribute("contadorApro", contadorApro);
+        modelo.addAttribute("contadorRech", contadorRech);
         modelo.addAttribute("solicitudes", solicitudesUsuario);
 
         if(usuarioLogueado.getRol().equals("Administrador")){

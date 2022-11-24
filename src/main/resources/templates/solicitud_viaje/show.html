@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: header">
+  <meta charset="utf-8" />
+  <title>Base</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+</head>
+
+<body>
+  <nav th:replace="layout :: navegacion"></nav>
+  <!--Inicio de area de trabajo-->
+  <div class="col py-3">
+    <div class="container">
+        <div class="row">
+            <h1>Identificaciones del solicitante</h1>
+          </div>
+        <table class="table mb-3 text-center">
+            <thead class="thead-light">
+              <tr class="table-primary">
+                <th scope="col">Tipo</th>
+                <th scope="col">Numero Unico</th>
+                <th scope="col">Pais nacimiento</th>
+                <th scope="col">Pais residencia</th>
+                <th scope="col">Ocupacion</th>
+                <th scope="col">Pais Emisor</th>
+                <th scope="col">Fecha vencimiento</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="identificacion: ${identificaciones}">
+                <td th:text="${identificacion.tipo}">Tipo</td>
+                <td th:text="${identificacion.numeroUnico}">Numero Unico</td>
+                <td th:text="${identificacion.paisNacimiento.nombre}">Pais Nacimiento</td>
+                <td th:text="${identificacion.paisResidencia.nombre}">Pais Residencia</td>
+                <td th:text="${identificacion.ocupacion}">Ocupacion</td>
+                <td th:text="${identificacion.paisEmisor.nombre}">Pais Emisor</td>
+                <td th:text="${identificacion.fechaVencimiento}">Fecha vencimiento</td>
+              </tr>
+            </tbody>
+          </table>
+
+      <div class="row">
+        <h1>Detalles de solicitud</h1>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-8">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Fecha:</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${solicitud.fechaSolicitud}">Product Id</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Pais Origen:</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${solicitud.paisOrigen}">Description</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Pais Destino:</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${solicitud.paisDestino}">Price</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 sm-2 control-label">Motivo:</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${solicitud.motivo}">Image</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 sm-2 control-label">frontera:</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${solicitud.frontera.nombre}">Are Messages Sent</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 sm-2 control-label">Estado:</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${solicitud.estado}">Image</p>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-8">
+            <form th:action="@{/solicitud/aprobar/{idSolicitudViaje}(idSolicitudViaje=${solicitud.idSolicitudViaje})}" th:object="${solicitud}" method="POST">
+                <div class="box-footer">
+                    <button class="btn btn-succes">
+                        <i class="fas fa-pencil-alt">Aprobar</i>
+                    </button>
+                </div>
+            </form>
+            <form th:action="@{/solicitud/rechazar/{idSolicitudViaje}(idSolicitudViaje=${solicitud.idSolicitudViaje})}" th:object="${solicitud}" method="POST">
+                <div class="box-footer">
+                    <button class="btn btn-succes">
+                        <i class="fas fa-pencil-alt">Rechazar</i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    </div>
+  </div>
+  <!--Fin de area de trabajo-->
+</body>
+
+</html>

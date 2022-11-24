@@ -50,17 +50,22 @@
             <td th:text="${solicitud.messageCount}">motivo</td>
             <td>
 
-              <!--En este boton se llama al formulario de editar-->
-              <a
-              th:href="@{/solicitudes_viaje/editar/{id}(id=${solicitud.idSolicitudViaje})}" class="btn btn-sm btn-primary">
-              <i class="fas fa-pencil-alt"></i> 
-            </a>
-            
-            <!--En este boton se elimina el registro-->
-            <a
-              th:href="@{/product/delete/{id}/(id=${solicitud.idSolicitudViaje})}" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro que deseas eliminar el registro?');">
-                <i class="fa fa-trash" aria-hidden="true"></i>                    
-            </a>
+                  <!--En este boton se llama al formulario de editar-->
+                  <a
+                  th:href="@{/solicitudes_viaje/editar/{id}(id=${solicitud.idSolicitudViaje})}" class="btn btn-sm btn-primary">
+                    <i class="fas fa-pencil-alt"></i> 
+                  </a>
+                
+                <!--En este boton se elimina el registro-->
+                <a
+                  th:href="@{/product/delete/{id}/(id=${solicitud.idSolicitudViaje})}" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro que deseas eliminar el registro?');">
+                    <i class="fa fa-trash" aria-hidden="true"></i>                    
+                </a>
+                <!--Boton para mostrar detalles-->
+                <a
+                  th:href="@{/solicitud/show/{id}/(id=${solicitud.idSolicitudViaje})}" class="btn btn-sm btn-info">
+                    <i class="fa fa-eye" aria-hidden="true"></i>                    
+                </a>
             </td>
           </tr>
         </tbody>

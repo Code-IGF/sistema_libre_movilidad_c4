@@ -41,8 +41,7 @@
                 <div class="card text-white bg-danger mb-3">
                     <div class="card-header">Prechequo Vigentes</div>
                     <div class="card-body">
-                        <p>Entradas: <label th:text="${contador}"></label></p>
-                        <p>Salidas: <label th:text="${contadorRevisado}"></label></p>
+                        <p>En espera: <label th:text="${contador}"></label></p>
                     </div>
                   </div>
             </div>
@@ -50,8 +49,8 @@
                 <div class="card text-white bg-primary mb-3">
                     <div class="card-header">Prechequeos Historicos</div>
                     <div class="card-body">
-                        <p>Entradas: 0</p>
-                        <p>Salidas: 0</p>
+                        <p>Aprobadas: <label th:text="${contadorApro}"></label></p>
+                        <p>Rechazadas: <label th:text="${contadorRech}"></label></p>
                     </div>
                   </div>
             </div>
