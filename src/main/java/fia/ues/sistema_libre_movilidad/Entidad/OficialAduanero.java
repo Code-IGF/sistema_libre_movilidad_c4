@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 //import javax.persistence.JoinColumn;
 //import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -19,29 +22,27 @@ public class OficialAduanero {
     
     private Long id;
 
-    @NotEmpty
-    @Column(name = "nombre_oficial_aduanero", nullable = false, length = 55)
-    private String nombreOficialAduanero;
+    @ManyToOne
+    @JoinColumn(name="pais", nullable = false)
+    private Pais pais;
+
+    @OneToOne
+    @JoinColumn(name="id_usuario")
+    private Usuario usuario;
     
     //constructor con dos parametros
-    public OficialAduanero(Long id, String nombreOficialAduanero) {
+    public OficialAduanero(Long id, Pais pais, Usuario usuario) {
         this.id = id;
-        this.nombreOficialAduanero = nombreOficialAduanero;
+        this.pais=pais;
+        this.usuario=usuario;
     }
     //constructor con un parametro
-    public OficialAduanero(String nombreOficialAduanero) {
-        this.nombreOficialAduanero = nombreOficialAduanero;
+    public OficialAduanero(Pais pais, Usuario usuario) {
+        this.pais=pais;
+        this.usuario =usuario;
     }
     //constructor vacio
     public OficialAduanero() {
-    }
-
-    public String getNombreOficialAduanero() {
-            return nombreOficialAduanero;
-    }
-
-    public void setNombreOficialAduanero(String nombreOficialAduanero) {
-        this.nombreOficialAduanero = nombreOficialAduanero;
     }
 
     public Long getId() {
@@ -49,5 +50,17 @@ public class OficialAduanero {
     }
     public void setId(Long id) {
         this.id = id;
+    }
+    public Pais getPais() {
+        return pais;
+    }
+    public void setPais(Pais pais) {
+        this.pais = pais;
+    }
+    public Usuario getUsuario() {
+        return usuario;
+    }
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

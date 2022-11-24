@@ -44,7 +44,7 @@ public class Identificacion {
     @Column(name = "fecha_vencimiento", nullable = false, length = 30)
     private String fechaVencimiento;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="pais_emisor", nullable = false)
     private Pais paisEmisor;
     

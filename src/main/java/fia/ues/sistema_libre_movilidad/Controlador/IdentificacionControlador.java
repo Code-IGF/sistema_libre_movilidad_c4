@@ -84,8 +84,6 @@ public class IdentificacionControlador {
     @PostMapping("/identificacion")
     public String store(@Valid @ModelAttribute("identificacion") Identificacion identificacion, 
     BindingResult result, Model model){
-        String error="";
-        String errorEmail="";
         if (result.hasErrors()){
                 model.addAttribute("identificacion", identificacion);
                 return "identificacion/create";

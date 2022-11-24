@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import fia.ues.sistema_libre_movilidad.Entidad.OficialAduanero;
 import fia.ues.sistema_libre_movilidad.Entidad.Usuario;
 import fia.ues.sistema_libre_movilidad.Servicio.OficialAduaneroServicio;
+import fia.ues.sistema_libre_movilidad.Servicio.PaisServicio;
 import fia.ues.sistema_libre_movilidad.Servicio.UsuarioServicio;
 
 @Controller
@@ -27,6 +29,13 @@ public class OficialAduaneroControlador {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
+    @Autowired
+    private PaisServicio paisServicio;
+    
+
+    @Autowired
+	public BCryptPasswordEncoder encoder;
+
     @GetMapping({"/oficial_aduanero"})
     public String index(Model modelo){
         modelo.addAttribute("oficiales_aduaneros", servicio.listarOficialAduanero());
@@ -36,15 +45,17 @@ public class OficialAduaneroControlador {
     @GetMapping("/oficial_aduanero/nuevo")
     public String create(Model modelo){
         OficialAduanero oficialAduanero = new OficialAduanero();
-        List<Usuario> listaUsuarios = usuarioServicio.listarUsuarios();
+        Usuario usuario = new Usuario();
+        System.out.println(paisServicio.listarPaises());
+        modelo.addAttribute("paises", paisServicio.listarPaises());
+        modelo.addAttribute("usuario", usuario);
         modelo.addAttribute("oficial_aduanero", oficialAduanero);
-        modelo.addAttribute("usuarios", listaUsuarios);
         return "oficial_aduanero/create";
     }
 
 
     @PostMapping("/oficial_aduanero")
-    public String store(@Valid @ModelAttribute("oficial_aduanero") OficialAduanero oficialAduanero, BindingResult result, Model model){
+    public String store(@Valid @ModelAttribute("oficial_aduanero") OficialAduanero oficialAduanero,BindingResult result, Model model){
         //List<OficialAduanero> oficialAduanerosLista = servicio.listarOficialAduanero();
         //List<Usuario> listaUsuarios=usuarioServicio.listarUsuarios();
         
@@ -52,11 +63,20 @@ public class OficialAduaneroControlador {
             model.addAttribute("oficial_aduanero", oficialAduanero);
             return "oficial_aduanero/create";
         }
-
-        if(oficialAduanero.getNombreOficialAduanero().equals(" ")){
-            model.addAttribute("oficial_aduanero", oficialAduanero);
-            return "oficial_aduanero/create";
+        /* try{
+            //Encriptando contraseña
+            usuario.setContrasenia(encoder.encode(usuario.getContrasenia()));
+            usuario.setRol("Viajero");
+            usuarioServicio.guardarUsuario(usuario);
+            //Ver ViajeroControlador para ver como continúa este proceso
+            return "redirect:/";
         }
+        catch(Exception ex){
+            model.addAttribute("registroError", true);
+            return "Auth/register";
+        } */
+
+        
         /*for (OficialAduanero e : oficialAduanerosLista) {
             if(e.getNombreOficialAduanero()==""||e.getNombreOficialAduanero()==" "){
                 model.addAttribute("oficial_aduanero", oficialAduanero);
@@ -81,17 +101,14 @@ public class OficialAduaneroControlador {
     BindingResult result, Model model){
         OficialAduanero empresaTransporteExistente = servicio.obtenerOficialAduaneroporId(id);
         empresaTransporteExistente.setId(id);
-        empresaTransporteExistente.setNombreOficialAduanero(oficialAduanero.getNombreOficialAduanero());
+        
      
         if(result.hasErrors()){
             model.addAttribute("oficial_aduanero", oficialAduanero);
             return "oficial_aduanero/create";
         }
 
-        if(oficialAduanero.getNombreOficialAduanero().equals(" ")){
-            model.addAttribute("oficial_aduanero", oficialAduanero);
-            return "oficial_aduanero/create";
-        }
+
 
         servicio.actualizarOficialAduanero(empresaTransporteExistente);
         return "redirect:/oficial_aduanero";

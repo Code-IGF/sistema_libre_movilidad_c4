@@ -7,28 +7,28 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
     </head>
     <body>
-        
+        <div th:if="${usuario.rol == 'Administrador'}">
+            <nav th:replace="layout :: navegacion"></nav>
+        </div>
+        <div th:if="${usuario.rol == 'Viajero'}">
+            <nav th:replace="layoutUsuario :: navegacion" th:if="${usuario.rol == 'Viajero'}"></nav>
+        </div>
         <div class="col py-3">
-            
             <!--inicio area de trabajo-->
-            <div class="container">
-                <div>
-                    <a  class="nav-link active" href="#" th:href="@{/home}">Volver</a>
-                </div>
-                <h1>
-
-                </h1>
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#">Perfil de Usuario</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/perfil/identificaciones">identificaciones</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/perfil/identificaciones/nueva">Registrar identificaciones</a>
-                </li>
-            </ul>
+        <div class="container">
+            <div th:if="${usuario.rol == 'Viajero'}">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Perfil de Usuario</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="/perfil/identificaciones">identificaciones</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/perfil/identificaciones/nueva">Registrar identificaciones</a>
+                    </li>
+                </ul>
+            </div>
             <div class="card rounded-0">
                 <!--Datos de usuario-->
                 <div class="alert alert-primary rounded-0" role="alert">

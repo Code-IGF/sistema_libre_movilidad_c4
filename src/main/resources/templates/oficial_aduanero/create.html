@@ -1,40 +1,128 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="utf-8">
-<title>Nuevo oficial aduanero</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-</head>
+  <head th:replace="layout :: header">
+    <meta charset="utf-8">
+    <title>Nuevo oficial aduanero</title>
+  </head>
 <body>
-    <div class="container">
-        <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-          <h1 class="text-center"> Registro de Oficiales Aduaneros</h1>
-          <div class="card-body">
-            <form th:action="@{/oficial_aduanero}" th:object="${oficial_aduanero}" method="POST">
-                <div class="form-group">
-                  <label>Nombre Del Oficial Aduanero: </label>
-                  <input type="text" name="nombreOficialAduanero" th:field="*{nombreOficialAduanero}" class="form-control" placeholder="Ingrese su nombre: " required>
-
-                  <div class="alert alert-warning d-flex align-items-center" role="alert" th:if="${#fields.hasErrors('nombreOficialAduanero')}"
-                  th:errors="*{nombreOficialAduanero}">
-                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                    <div>
-                      An example warning alert with an icon
-                    </div>
-                  </div>
-                  
-                </div>
-                <label style="color:#FF0000"  th:text="${error}" class="col-md-10"></label>
-                <div class="box-footer">
-                  <button class="btn btn-succes">Guardar</button>
-                </div>
-            </form>
-            
-          </div>
-        </div> 
-
+  <nav th:replace="layout :: navegacion"></nav>
+    <div class="container my-4">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/oficial_aduanero}">Lista de Oficiales</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Regitrar Oficiales</a>
+        </li>
+      </ul>
+      <div class="card rounded-0">
+        <div class="alert alert-primary rounded-0" role="alert">
+          Registro de Oficiales Aduaneros
         </div>
+        <form class="mx-3" th:action="@{/registro}" th:object="${usuario}" method="POST" id="registro-form">
+          <div class="row">
+              <div class="col-12 col-md-6 ">
+                  <div class="mb-3">
+                      <label for="nombres" class="form-label">Nombre</label>
+                      <input type="text" name="nombres" th:field="*{nombre}" class="form-control"
+                          placeholder="Ingrese su nombre: " required>
+                      <div class="alert alert-warning d-flex align-items-center" role="alert"
+                          th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">
+                          <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:">
+                          <use xlink:href="#exclamation-triangle-fill" />
+                          </svg>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-12 col-md-6">
+                  <div class="mb-3">
+                      <label for="apellido" class="form-label">Apellido</label>
+                      <input type="text" name="apellido" th:field="*{apellido}" class="form-control"
+                          placeholder="Ingrese su apellido: " required>
+                      <div class="alert alert-warning d-flex align-items-center" role="alert"
+                          th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}">
+                          <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:">
+                          <use xlink:href="#exclamation-triangle-fill" />
+                          </svg>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="mb-3">
+              <div class="row">
+                  <div class="col-12 col-md-6">
+                      <label for="fechanacimiento" class="form-label">Fecha de Nacimiento</label>
+                      <input type="date" name="fechanacimiento" th:field="*{fechaNacimiento}" class="form-control" required>
+                      <div class="alert alert-warning d-flex align-items-center" role="alert"
+                          th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}">
+                          <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:">
+                          <use xlink:href="#exclamation-triangle-fill" />
+                          </svg>
+                      </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                      <div class="form-group">
+                          <label for="sexo" class="form-label">Sexo</label>
+                          <select name="sexo" th:field="*{sexo}" class="form-control" required>
+                            <option value="M" selected>Masculino</option>
+                            <option value="F">Femenino</option>
+                          </select>
+                        </div>
+                  </div>
+              </div>
+          </div>
+          <div class="mb-3">
+              <label for="email" class="form-label">Correo Electronico</label>
+              <input type="email" class="form-control" th:field="*{correo}" placeholder="Ingrese su correo: " required>
+          </div>
+          <div class="alert alert-warning text-center" role="alert" th:if="${registroError}" >
+              Ya existe una cuenta con este correo
+          </div>
+          <div class="row">
+              <div class="col-12 col-md-6 ">
+                  <div class="mb-3">
+                      <label for="passwbgord" class="form-label">Contraseña</label>
+                      <input type="password" name="contrasenia" th:field="*{contrasenia}" id="pass1" aria-describedby="pass1Feedback"
+                      class="form-control" placeholder="Ingrese su contraseña: " required>
+                      <div id="pass1Feedback" class="invalid-feedback">
+                          Las contraseñas deben ser iguales!
+                      </div>
+                  </div>
+              </div>
+              <div class="col-12 col-md-6">
+                  <div class="mb-3">
+                      <label for="passwbgord" class="form-label">Confirme contraseña</label>
+                      <input type="password" name="contrasenia2"  class="form-control" placeholder="Confirme su contraseña: " required>
+                  </div>
+              </div>
+          </div>
+
+          <div class="mb-3">
+              <label for="telefono" class="form-label">Número de Teléfono</label>
+              <input type="tel" class="form-control" th:field="*{telefono}" placeholder="Ingrese su número de Teléfono: " required>
+          </div>
+
+          <!--Datos del oficial-->
+          <div class="row">
+            <div class="col-12 col-md-6 mb-3" th:object="${oficial_aduanero}">
+              <div class="form-group">
+                  <label for="paises" class="form-label">Seleccione el País: </label>
+                  <select th:field="*{pais}" class="form-select" name="paises" required> 
+                      <option th:each="pais_oficial:${paises}"
+                        th:value="${pais_oficial.id}"
+                        th:text="${pais_oficial.nombre}">					
+                  </select>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 mb-3">
+              <div class="d-grid mb-3"> 
+                <label for="paises" class="form-label text-white">Registrar </label>
+                <button type="submit" class="btn btn-primary" id="btn-registrar">Registrar Oficial</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
 
 </body>

@@ -18,9 +18,9 @@
     <div class="container-fluid py-3">
         <!--Trabaja en este espacio-->
         <div style="background-color: skyblue">
-            <div class="row">
+            <div class="row mb-4">
                 <div class="col-2">
-                    <img src="/img/sica.jpg" class="img-fluid"/>
+                    <img src="/resources/img/sica.jpg" class="img-fluid"/>
                 </div>
                 <div class="col-10 d-flex align-items-center">
                     <div>
@@ -30,12 +30,16 @@
                 </div>
             </div>
         </div>
-    </div>
+        
         <!--En este boton se llama al formulario de crear-->
-      <a th:href="@{/solicitud/new}" class="btn btn-sm btn-primary">
-        <i class="fas fa-plus-circle mr-1 text-white"></i>
-      <span class="text-white">Agregar Solicitud</span>            
-      </a>
+        <div class="text-end">
+            <a th:href="@{/solicitud/new}" class="btn btn-primary">
+                <i class="fas fa-plus-circle mr-1 text-white"></i>
+                <span class="text-white">Agregar Solicitud</span>            
+            </a>
+        </div>
+
+        <!--Tarjetas-->
         <div class="row pt-4">
             <div class="col">
                 <div class="card text-white bg-danger mb-3">
@@ -52,10 +56,11 @@
                         <p>Aprobadas: <label th:text="${contadorApro}"></label></p>
                         <p>Rechazadas: <label th:text="${contadorRech}"></label></p>
                     </div>
-                  </div>
+                </div>
             </div>
         </div>
 
+        <!--Tabla-->
         <section>
             <table class="table table-striped">
                 <thead>
@@ -103,26 +108,24 @@
                             </a>
                         </td>
                     </tr>
-                  </tbody>       
-                  <script>
-                    function reload(){
-                        $(document).ready(function(){
-                        //Cada 10 segundos (10000 milisegundos) se ejecutará la función refrescar
-                            setTimeout(refrescar, 5000);
-                        });
-                        if(document.URL.indexOf("#") == -1){
-                            location = '#';
-                            document.URL += '#';
-                            location.reload(true);
-                        }    
-                    }
-                  </script>
+                </tbody>       
+                    <script>
+                        function reload(){
+                            $(document).ready(function(){
+                            //Cada 10 segundos (10000 milisegundos) se ejecutará la función refrescar
+                                setTimeout(refrescar, 5000);
+                            });
+                            if(document.URL.indexOf("#") == -1){
+                                location = '#';
+                                document.URL += '#';
+                                location.reload(true);
+                            }    
+                        }
+                    </script>
             </table>
         </section>
     </div>
-    <!--Fin de area de trabajo-->
-    </div>
-    </div>
+   
     <!--Fin de sidebar-->
     <footer class="fixed-bottom">
 

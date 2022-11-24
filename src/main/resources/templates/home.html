@@ -19,7 +19,7 @@
         <div style="background-color: skyblue">
             <div class="row">
                 <div class="col-2">
-                    <img src="/img/sica.jpg" class="img-fluid"/>
+                    <img src="/resources/img/sica.jpg" class="img-fluid"/>
                 </div>
                 <div class="col-10 d-flex align-items-center">
                     <div>
@@ -30,13 +30,8 @@
             </div>
         </div>
         <!--En este boton se llama al formulario de crear-->
-    </div>
-      <!--En este boton se llama al formulario de crear-->
-      <a th:href="@{/solicitud/new}" class="btn btn-sm btn-primary">
-        <i class="fas fa-plus-circle mr-1 text-white"></i>
-      <span class="text-white">Agregar Solicitud</span>            
-      </a>
-        <div class="row pt-4">
+
+        <div class="row pt-3">
             <div class="col">
                 <div class="card text-white bg-danger mb-3">
                     <div class="card-header">Prechequo Vigentes</div>
@@ -44,7 +39,7 @@
                         <p>Entradas: <label th:text="${contador}"></label></p>
                         <p>Salidas: <label th:text="${contadorRevisado}"></label></p>
                     </div>
-                  </div>
+                    </div>
             </div>
             <div class="col">
                 <div class="card text-white bg-primary mb-3">
@@ -53,7 +48,7 @@
                         <p>Entradas: 0</p>
                         <p>Salidas: 0</p>
                     </div>
-                  </div>
+                    </div>
             </div>
         </div>
 
@@ -83,16 +78,19 @@
                 </thead>
                 <tbody>
                     <tr th:each="solicitud: ${solicitudes}">
-                      <td th:text="${solicitud.motivo}">motivo</td>
-                      <td th:text="${solicitud.fechaSolicitud}">Fecha Solicitud</td>
-                      <td th:text="${solicitud.estado}">estado</td>
-                      <td th:text="${solicitud.frontera.nombre}">frontera</td>
-                      <td th:text="${solicitud.paisOrigen}">paisOrigen</td>
-                      <td th:text="${solicitud.paisDestino}">paisDestino</td>
+                        <td th:text="${solicitud.motivo}">motivo</td>
+                        <td th:text="${solicitud.fechaSolicitud}">Fecha Solicitud</td>
+                        <td th:text="${solicitud.estado}">estado</td>
+                        <td th:text="${solicitud.frontera.nombre}">frontera</td>
+                        <td th:text="${solicitud.paisOrigen}">paisOrigen</td>
+                        <td th:text="${solicitud.paisDestino}">paisDestino</td>
                     </tr>
-                  </tbody>
+                    </tbody>
             </table>
         </section>
+
+    </div>
+
     </div>
     <!--Fin de area de trabajo-->
     </div>

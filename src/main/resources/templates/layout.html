@@ -21,14 +21,14 @@
   <body>
     <nav th:fragment="navegacion" class="navbar navbar-expand-lg navbar-dark bg-dark">  
       <div class="container">
-        <a class="navbar-brand" href="#">LibreC4</a>
+        <a class="navbar-brand" href="/home">LibreC4</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav px-3">
             <li class="nav-item">
-              <a  class="nav-link active" href="#" th:href="@{/home}">Home</a></li>
+              <a  class="nav-link active" href="#" th:href="@{/home}">Inicio</a></li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Empresas
@@ -38,27 +38,27 @@
                 <li><a class="dropdown-item" href="#" th:href="@{/medios_transporte}">Medios de transporte</a></li>
               </ul>
             </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Paises
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="#" th:href="@{/paises}">Paises</a></li>
+                <li><a class="dropdown-item" href="#" th:href="@{/regiones}">Regiones</a></li>
+                <li><a class="dropdown-item" href="#" th:href="@{/fronteras}">Fronteras</a></li>
+              </ul>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" th:href="@{/fronteras}">fronteras</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" th:href="@{/paises}">Paises</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" th:href="@{/regiones}">Regiones</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" th:href="@{/oficial_aduanero}">oficial_aduanero</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" th:href="@{/viajeros}">Viajeros</a>
-            </li>
-            <!-- <li class="nav-item">
-              <a class="nav-link" href="#" th:href="@{/identificacion}">Identificaciones</a>
-            </li> -->
-            <li class="nav-item">
-              <a class="nav-link" href="#" th:href="@{/usuarios}">Usuarios</a>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Administración de Usuarios
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="#" th:href="@{/oficial_aduanero}">Oficiales Aduaneros</a></li>
+                <li><a class="dropdown-item" href="#" th:href="@{/viajeros}">Viajeros</a></li>
+                <li><a class="dropdown-item" href="#" th:href="@{/usuarios}">Usuarios</a></li>
+              </ul>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#" th:href="@{/solicitudes_viaje}">Solicitudes</a>

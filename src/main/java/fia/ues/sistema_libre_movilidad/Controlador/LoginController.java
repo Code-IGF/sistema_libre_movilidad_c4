@@ -30,7 +30,6 @@ public class LoginController {
     @GetMapping("/registro")
     public String registroPage(Model modelo){
         Usuario usuario = new Usuario();
-        System.out.println(usuario);
         modelo.addAttribute("usuario", usuario);
         return "Auth/register";
     }
