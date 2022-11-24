@@ -55,7 +55,7 @@ public class OficialAduaneroControlador {
 
 
     @PostMapping("/oficial_aduanero")
-    public String store(@Valid @ModelAttribute("oficial_aduanero") OficialAduanero oficialAduanero,BindingResult result, Model model){
+    public String store(@Valid @ModelAttribute("oficial_aduanero") OficialAduanero oficialAduanero,@ModelAttribute("usuario") Usuario usuario,BindingResult result, Model model){
         //List<OficialAduanero> oficialAduanerosLista = servicio.listarOficialAduanero();
         //List<Usuario> listaUsuarios=usuarioServicio.listarUsuarios();
         
@@ -63,31 +63,20 @@ public class OficialAduaneroControlador {
             model.addAttribute("oficial_aduanero", oficialAduanero);
             return "oficial_aduanero/create";
         }
-        /* try{
+        try{
             //Encriptando contraseña
             usuario.setContrasenia(encoder.encode(usuario.getContrasenia()));
-            usuario.setRol("Viajero");
-            usuarioServicio.guardarUsuario(usuario);
+            usuario.setRol("Oficial");
+            usuario=usuarioServicio.guardarUsuario(usuario);
             //Ver ViajeroControlador para ver como continúa este proceso
-            return "redirect:/";
+            oficialAduanero.setUsuario(usuario);
+            servicio.guardarOficialAduanero(oficialAduanero);
+            return "redirect:/oficial_aduanero";
         }
         catch(Exception ex){
             model.addAttribute("registroError", true);
-            return "Auth/register";
-        } */
-
-        
-        /*for (OficialAduanero e : oficialAduanerosLista) {
-            if(e.getNombreOficialAduanero()==""||e.getNombreOficialAduanero()==" "){
-                model.addAttribute("oficial_aduanero", oficialAduanero);
-                error="El campo del nombre esta siendo enviado vacio";
-                model.addAttribute("error", error);
-                return "redirect:/oficial_aduanero";
-            }
-        }*/
-
-        servicio.guardarOficialAduanero(oficialAduanero);
-        return "redirect:/oficial_aduanero";
+            return "/oficial_aduanero/nuevo";
+        }
     }
 
     @GetMapping("/oficial_aduanero/editar/{id}")

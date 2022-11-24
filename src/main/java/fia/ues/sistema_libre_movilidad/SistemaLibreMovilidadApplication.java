@@ -17,10 +17,12 @@ import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.core.Queue;
 
 import fia.ues.sistema_libre_movilidad.Entidad.Frontera;
+import fia.ues.sistema_libre_movilidad.Entidad.OficialAduanero;
 import fia.ues.sistema_libre_movilidad.Entidad.Pais;
 import fia.ues.sistema_libre_movilidad.Entidad.SolicitudViaje;
 import fia.ues.sistema_libre_movilidad.Entidad.Usuario;
 import fia.ues.sistema_libre_movilidad.Repositorio.FronteraRepositorio;
+import fia.ues.sistema_libre_movilidad.Repositorio.OficialAduaneroRepositorio;
 import fia.ues.sistema_libre_movilidad.Repositorio.PaisRepositorio;
 import fia.ues.sistema_libre_movilidad.Repositorio.SolicitudViajeRepositorio;
 import fia.ues.sistema_libre_movilidad.Repositorio.UsuarioRepositorio;
@@ -50,6 +52,9 @@ public class SistemaLibreMovilidadApplication extends SpringBootServletInitializ
 
 	@Autowired
 	FronteraRepositorio fronteraRepositorio;
+
+	@Autowired
+	OficialAduaneroRepositorio oficialAduaneroRepositorio;
 
 	@Autowired
 	SolicitudViajeRepositorio solicitudViajeRepositorio;
@@ -91,6 +96,8 @@ public class SistemaLibreMovilidadApplication extends SpringBootServletInitializ
 		repositorio.save(usuario1);
 		Usuario usuario2 = new Usuario("User","AdminApellido","12-2-1989","M", "79898989","user@gmail.com", encoder.encode("1234"),"Viajero");
 		repositorio.save(usuario2);
+		Usuario usuario3 = new Usuario("oficial","oficia Apellido","12-2-1989","M", "79877989","oficial@gmail.com", encoder.encode("1234"),"Oficial");
+		repositorio.save(usuario3);
 
 
 		Pais pais1= new Pais("El Salvador");
@@ -102,6 +109,8 @@ public class SistemaLibreMovilidadApplication extends SpringBootServletInitializ
 		Pais pais4= new Pais("Nicaragua");
 		paisRepositorio.save(pais4);
 
+		OficialAduanero oficialAduanero = new OficialAduanero(pais1, usuario3);
+		oficialAduaneroRepositorio.save(oficialAduanero);
 
 		Frontera frontera1=new Frontera("El Poi",pais1);
 		fronteraRepositorio.save(frontera1);
