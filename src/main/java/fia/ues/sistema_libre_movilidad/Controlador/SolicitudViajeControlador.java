@@ -67,7 +67,11 @@ public class SolicitudViajeControlador {
 
     @GetMapping({"/solicitudes_viaje"})
     public String listarSolicitudes(Model modelo){
-        List<SolicitudViaje> solicitudes=servicio.listarSolicitudes();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String rol = auth.getAuthorities().toString();
+        System.out.println(rol);
+        if (rol.equals("[Administrador]")){
+            List<SolicitudViaje> solicitudes=servicio.listarSolicitudes();
         List<SolicitudViaje> soliTemp=new ArrayList<>();
         for (SolicitudViaje sol : solicitudes) {
             if(sol.isMessageReceived()==true){
@@ -76,6 +80,8 @@ public class SolicitudViajeControlador {
         }
         modelo.addAttribute("solicitudes", soliTemp);
         return "solicitud_viaje/index";
+        }
+        return "redirect:/home";
     }
 
     @GetMapping({"/solicitudesUsuario"})

@@ -87,17 +87,17 @@
                 </div>
             </form>
         </div>
-        <div class="col-sm-8">
+        <div class="col-sm-4">
             <form th:action="@{/solicitud/aprobar/{idSolicitudViaje}(idSolicitudViaje=${solicitud.idSolicitudViaje})}" th:object="${solicitud}" method="POST">
                 <div class="box-footer">
-                    <button class="btn btn-succes">
+                    <button class="btn btn-outline-success">
                         <i class="fas fa-pencil-alt">Aprobar</i>
                     </button>
                 </div>
             </form>
             <form th:action="@{/solicitud/rechazar/{idSolicitudViaje}(idSolicitudViaje=${solicitud.idSolicitudViaje})}" th:object="${solicitud}" method="POST">
                 <div class="box-footer">
-                    <button class="btn btn-succes">
+                    <button class="btn btn-outline-danger">
                         <i class="fas fa-pencil-alt">Rechazar</i>
                     </button>
                 </div>
