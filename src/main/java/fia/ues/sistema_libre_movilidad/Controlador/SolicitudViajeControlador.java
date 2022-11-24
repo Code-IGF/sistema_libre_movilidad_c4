@@ -33,6 +33,7 @@ import fia.ues.sistema_libre_movilidad.Entidad.SolicitudViaje;
 import fia.ues.sistema_libre_movilidad.Entidad.Usuario;
 import fia.ues.sistema_libre_movilidad.Servicio.FronteraServicio;
 import fia.ues.sistema_libre_movilidad.Servicio.IdentificacionServicio;
+import fia.ues.sistema_libre_movilidad.Servicio.PaisServicio;
 import fia.ues.sistema_libre_movilidad.Servicio.SolicitudViajeServicio;
 import fia.ues.sistema_libre_movilidad.Servicio.UsuarioServicio;
 import fia.ues.sistema_libre_movilidad.commands.SolicitudForm;
@@ -52,6 +53,9 @@ public class SolicitudViajeControlador {
 
     @Autowired
     private IdentificacionServicio identificacionServicio;
+
+    @Autowired
+    private PaisServicio paisServicio;
 
     private SolicitudToSolicitudForm solicitudToSolicitudForm;
 
@@ -199,6 +203,7 @@ public class SolicitudViajeControlador {
         Usuario usuario=usuarioServicio.obtenerUsuarioPorEmail(auth.getName());
         model.addAttribute("usuario", usuario);
         List<Frontera> fronteras = fronteraServicio.listarFronteras();
+        model.addAttribute("paises", paisServicio.listarPaises());
         model.addAttribute("fronteras", fronteras);
         model.addAttribute("solicitudForm", new SolicitudForm());
         return "solicitud/solicitudform";

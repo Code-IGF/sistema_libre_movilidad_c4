@@ -3,10 +3,21 @@
 <head>
 <meta charset="utf-8">
 <title>Nuevo pais</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
 </head>
 <body>
-    <div class="container">
+  <div th:if="${usuario.rol == 'Administrador'}">
+    <nav th:replace="layout :: navegacion"></nav>
+</div>
+<div th:if="${usuario.rol == 'Viajero'}">
+    <nav th:replace="layoutUsuario :: navegacion" th:if="${usuario.rol == 'Viajero'}"></nav>
+</div>
+    <div class="container my-4">
         <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
           <h1 class="text-center">Registro de solicitud</h1>
@@ -24,36 +35,50 @@
                     </select>
               </div>
               <div class="form-group">
-                <label>Pais de origen: </label>
-                <input type="text" name="paisOrigen" th:field="*{paisOrigen}" class="form-control" placeholder="Ingrese el pais de origen: " required>
+                <label for="paises" class="form-label">País de Destino: </label>
+                <select th:field="*{paisOrigen}" class="form-select" name="paises" required> 
+                    <option th:each="pais:${paises}"
+                      th:value="${pais.nombre}"
+                      th:text="${pais.nombre}">					
+                </select>
               </div>
               <div class="form-group">
-                <label>Pais de Destino: </label>
-                <input type="text" name="paisDestino" th:field="*{paisDestino}" class="form-control" placeholder="Ingrese el pais de Destino: " required>
+                <label for="paises" class="form-label">País de Destino: </label>
+                <select th:field="*{paisDestino}" class="form-select" name="paises" required> 
+                    <option th:each="pais:${paises}"
+                      th:value="${pais.nombre}"
+                      th:text="${pais.nombre}">					
+                </select>
               </div>
+
               <div class="form-group">
                 <label>Motivo: </label>
                 <input type="text" name="motivo" th:field="*{motivo}" class="form-control" placeholder="Ingrese el motivo: " required>
               </div>
-              <div class="form-group row">
+              <div class="form-group">
                 <label class="col-md-2" for="usuario">Usuario:</label>
-                <select th:field="*{usuario}" class="form-control form-control-sm col-md-6" id="usuario"> 
+                <select th:field="*{usuario}" class="form-select" id="usuario"> 
                   <option
                     th:value="${usuario.id}"
                     th:text="${usuario.nombre}">					
                 </select>
               </div>
               
-              <div class="form-group row">
+              <div class="form-group">
                 <label class="col-md-3" for="usuario">frontera:</label> 
-                <select th:field="*{frontera}" class="form-control form-control-sm col-md-6" id="frontera"> 
+                <select th:field="*{frontera}" class="form-select " id="frontera"> 
                   <option th:each="frontera:${fronteras}"
                     th:value="${frontera.id}"
                     th:text="${frontera.nombre}">					
                 </select>
               </div>
-              <div class="box-footer">
-                <button class="btn btn-succes">Guardar</button>
+              <div class="row text-center py-4">
+                <div class="col">
+                  <a href="/home" class="btn btn-outline-danger">Cancelar</a>
+                </div>
+                <div class="col">
+                  <button class="btn btn-outline-success">Guardar</button>
+                </div>
               </div>
           </form>
           
