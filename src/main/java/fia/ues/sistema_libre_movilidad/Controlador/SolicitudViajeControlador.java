@@ -139,6 +139,7 @@ public class SolicitudViajeControlador {
         solicitudExistente.setPaisDestino(solicitudViaje.getPaisDestino());
         solicitudExistente.setPaisOrigen(solicitudViaje.getPaisOrigen());
         solicitudExistente.setUsuario(solicitudViaje.getUsuario());
+        solicitudExistente.setFrontera(solicitudViaje.getFrontera());
         servicio.actualizarSolicitudViaje(solicitudExistente);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Usuario usuario=usuarioServicio.obtenerUsuarioPorEmail(auth.getName());
