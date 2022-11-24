@@ -34,13 +34,21 @@
           <table class="table">
             <thead class="thead-light">
                 <tr>
-                    <th scope="col">Nombre del oficial</th>
+                  <th scope="col">id</th>        
+                    <th scope="col">Nombres</th>
+                    <th scope="col">Apellidos</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Pais</th>
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="oficial_aduanero: ${oficiales_aduaneros}">
-                  <td th:text="${oficial_aduanero.nombreOficialAduanero}"></td>
+                  <td th:text="${oficial_aduanero.id}"></td>
+                  <td th:text="${oficial_aduanero.usuario.nombre}"></td>
+                  <td th:text="${oficial_aduanero.usuario.apellido}"></td>
+                  <td th:text="${oficial_aduanero.usuario.correo}"></td>
+                  <td th:text="${oficial_aduanero.pais.nombre}"></td>
                   <td>        
                       <!--En este boton se llama al formulario de editar-->
                       <a
